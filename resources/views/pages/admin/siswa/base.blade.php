@@ -75,7 +75,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  
+                  @foreach ($siswa as $item)
+                    <tr>
+                      <td></td>
+                      <td>{{ $item->nisn }}</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>  
+                  @endforeach
                 </tbody>
               </table>
             </div>

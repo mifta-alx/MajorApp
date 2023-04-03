@@ -2,7 +2,7 @@
 <nav class="bg-secondary-500 lg:px-[100px] px-4 py-2.5 relative">
   <div class="container flex flex-wrap items-center justify-between mx-auto">
     <a href="#" class="flex items-center">
-        <span class="self-center text-2xl md:text-3xl font-pjs-extrabold whitespace-nowrap tracking-wider text-white italic">Major.</span>
+        <span class="self-center text-2xl md:text-3xl font-pjs-extrabold whitespace-nowrap text-white italic">Major.</span>
     </a>
     <div class="flex md:order-2">
      <button type="button" class="text-white bg-black hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-3 md:mr-0">Login</button>
@@ -14,16 +14,16 @@
     <div class="hidden w-full md:block md:w-auto" id="navbar-default">
       <ul class="flex flex-col p-4 mt-4 border bg-gray-100 md:bg-transparent rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0  ">
         <li>
-          <a href="#" class="block py-2 pl-3 pr-4 text-black bg-gray-100 rounded md:bg-transparent md:text-slate-200 hover:text-white font-bold md:p-0" aria-current="page">Home</a>
+          <a href="#" class="block py-2 pl-3 pr-4 text-black bg-gray-100 rounded md:bg-transparent md:text-slate-200 hover:text-white font-pjs-semibold hover:font-pjs-bold md:p-0" aria-current="page">Home</a>
         </li>
         <li>
-          <a href="#" class="block py-2 pl-3 pr-4 text-black bg-gray-100 rounded md:bg-transparent md:text-slate-200 hover:text-white font-bold md:p-0" aria-current="page">About</a>
+          <a href="#" class="block py-2 pl-3 pr-4 text-black bg-gray-100 rounded md:bg-transparent md:text-slate-200 hover:text-white font-pjs-semibold hover:font-pjs-bold md:p-0" aria-current="page">About</a>
         </li>
         <li>
-          <a href="#" class="block py-2 pl-3 pr-4 text-black bg-gray-100 rounded md:bg-transparent md:text-slate-200 hover:text-white font-bold md:p-0" aria-current="page">Services</a>
+          <a href="#" class="block py-2 pl-3 pr-4 text-black bg-gray-100 rounded md:bg-transparent md:text-slate-200 hover:text-white font-pjs-semibold hover:font-pjs-bold md:p-0" aria-current="page">Services</a>
         </li>
         <li>
-          <a href="#" class="block py-2 pl-3 pr-4 text-black bg-gray-100 rounded md:bg-transparent md:text-slate-200 hover:text-white font-bold md:p-0" aria-current="page">Contact Us</a>
+          <a href="#" class="block py-2 pl-3 pr-4 text-black bg-gray-100 rounded md:bg-transparent md:text-slate-200 hover:text-white font-pjs-semibold hover:font-pjs-bold md:p-0" aria-current="page">Contact us</a>
         </li>
       </ul>
     </div>
