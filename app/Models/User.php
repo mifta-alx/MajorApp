@@ -19,12 +19,14 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'nama',
+        'uuid',
         'username',
         'email',
         'password',
-        'role'
+        'role_id'
     ];
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo(Role::class);
     }
     /**
@@ -36,11 +38,13 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
     /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
      */
-    
 }
