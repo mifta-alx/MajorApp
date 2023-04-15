@@ -1,3 +1,6 @@
+<h1>Major App</h1>
+<p>Repository ini merupakan repository sistem informasi penjurusan SMA menggunakan metode SAW. Sistem ini nantinya diharapkan dapat membantu siswa yang ingin masuk ke jenjang SMA dalam memilih jurusan, diharapkan juga siswa dapat merasa yakin akan jurusan yang ia pilih. Sistem informasi ini bernama "Major" yang artinya jurusan.</p>
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
