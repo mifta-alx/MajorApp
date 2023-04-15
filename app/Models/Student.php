@@ -12,6 +12,7 @@ class Student extends Model
         'nisn',
         'uuid',
         'student_name',
+        'gender',
         'birth_place',
         'birth_date',
         'npsn',

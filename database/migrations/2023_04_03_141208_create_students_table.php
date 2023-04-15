@@ -17,15 +17,15 @@ return new class extends Migration
             $table->string('nisn')->primary();
             $table->string('uuid');
             $table->string('student_name');
-            // $table->string('gender');
+            $table->string('gender');
             $table->string('birth_place');
             $table->string('birth_date');
             $table->string('npsn');
-            // $table->string('email');
-            // $table->string('phone');
+            $table->string('email');
+            $table->string('phone');
             $table->timestamps();
 
-            // $table->foreign('npsn')->references('npsn')->on('schools')->onDelete('no action');
+            $table->foreign('npsn')->references('npsn')->on('schools')->onDelete('no action');
         });
     }
 

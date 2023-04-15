@@ -98,102 +98,164 @@
                 <div class="">
                     @if ($currentStep == 1)
                         @csrf
-                        <div class="mb-4">
-                            <label for="text"
-                                class="block mb-2 text-sm font-medium text-gray-900 @error('nisn') text-red-700 @enderror">NISN</label>
-                            <input type="text"
-                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('nisn') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                                placeholder="NISN" name="nisn" value="{{ old('nisn') }}" wire:model='nisn'>
-                            @error('nisn')
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
+                        <div class="md:grid grid-cols-2 gap-4 mb-4">
+                            <div class="mb-4 md:mb-0">
+                                <label for="text"
+                                    class="block mb-2 text-sm font-medium text-gray-900 @error('nisn') text-red-700 @enderror">NISN</label>
+                                <input type="text"
+                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('nisn') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
+                                    placeholder="NISN" name="nisn" value="{{ old('nisn') }}" wire:model='nisn'>
+                                @error('nisn')
+                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="mb-4 md:mb-0">
+                                <label for="text"
+                                    class="block mb-2 text-sm font-medium text-gray-900 @error('student_name') text-red-700 @enderror">Nama
+                                    Siswa</label>
+                                <input type="text"
+                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('student_name') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
+                                    placeholder="Nama Siswa" name="student_name" value="{{ old('student_name') }}"
+                                    wire:model='student_name'>
+                                @error('student_name')
+                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
                         <div class="mb-4">
                             <label for="text"
-                                class="block mb-2 text-sm font-medium text-gray-900 @error('student_name') text-red-700 @enderror">Nama
-                                Siswa</label>
-                            <input type="text"
-                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('student_name') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                                placeholder="Nama Siswa" name="student_name" value="{{ old('student_name') }}"
-                                wire:model='student_name'>
-                            @error('student_name')
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="mb-4">
-                            <label for="text"
-                                class="block mb-2 text-sm font-medium text-gray-900 @error('birth_place') text-red-700 @enderror">Tempat
-                                Lahir</label>
-                            <input type="text"
-                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('birth_place') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                                placeholder="Tempat Lahir" name="birth_place" value="{{ old('birth_place') }}"
-                                wire:model='birth_place'>
-                            @error('birth_place')
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="mb-0">
-                            <div class="grid grid-cols-6 gap-4">
-                                <div class="col-span-4">
-                                    <label for="month"
-                                        class="block mb-2 text-sm font-medium text-gray-900 @error('month') text-red-700 @enderror">Bulan</label>
-                                    <select id="month" name="month" wire:model='month'
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('month') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
-                                        <option value="Januari" {{ old('month') == 'Januari' ? 'selected' : '' }}>
-                                            Januari
-                                        </option>
-                                        <option value="Februari" {{ old('month') == 'Februari' ? 'selected' : '' }}>
-                                            Februari</option>
-                                        <option value="Maret" {{ old('month') == 'Maret' ? 'selected' : '' }}>Maret
-                                        </option>
-                                        <option value="April" {{ old('month') == 'April' ? 'selected' : '' }}>April
-                                        </option>
-                                        <option value="Mei" {{ old('month') == 'Mei' ? 'selected' : '' }}>Mei
-                                        </option>
-                                        <option value="Juni" {{ old('month') == 'Juni' ? 'selected' : '' }}>Juni
-                                        </option>
-                                        <option value="Juli" {{ old('month') == 'Juli' ? 'selected' : '' }}>Juli
-                                        </option>
-                                        <option value="Agustus" {{ old('month') === 'Agustus' ? 'selected' : '' }}>
-                                            Agustus
-                                        </option>
-                                        <option value="September" {{ old('month') === 'September' ? 'selected' : '' }}>
-                                            September</option>
-                                        <option value="Oktober" {{ old('month') === 'Oktober' ? 'selected' : '' }}>
-                                            Oktober
-                                        </option>
-                                        <option value="November" {{ old('month') === 'November' ? 'selected' : '' }}>
-                                            November</option>
-                                        <option value="Desember" {{ old('month') === 'Desember' ? 'selected' : '' }}>
-                                            Desember</option>
-                                    </select>
+                                class="block mb-2 text-sm font-medium text-gray-900 @error('gender') text-red-700 @enderror">Jenis
+                                Kelamin</label>
+                            <div class="flex">
+                                <div class="flex items-center mr-4">
+                                    <input id="inline-radio" type="radio" value="Laki - laki" wire:model='gender'
+                                        name="inline-radio-group"
+                                        class="w-4 h-4 text-secondary-500 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-2">
+                                    <label for="inline-radio"
+                                        class="ml-2 text-sm font-medium text-gray-900 @error('gender') text-red-600 @enderror">Laki
+                                        -
+                                        laki</label>
                                 </div>
-                                <div>
-                                    <label for="text"
-                                        class="block mb-2 text-sm font-medium text-gray-900 @error('day') text-red-700 @enderror">Hari</label>
-                                    <input type="text"
-                                        class="shadow-sm bg-gray-50 text-center border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('day') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                                        placeholder="DD" name="day" value="{{ old('day') }}" wire:model='day'
-                                        autocomplete="off">
-                                </div>
-                                <div>
-                                    <label for="text"
-                                        class="block mb-2 text-sm font-medium text-gray-900 @error('year') text-red-700 @enderror">Tahun</label>
-                                    <input type="text"
-                                        class="shadow-sm bg-gray-50 text-center border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('year') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                                        placeholder="YYYY" name="year" value="{{ old('year') }}" wire:model='year'
-                                        autocomplete="off">
+                                <div class="flex items-center mr-4">
+                                    <input id="inline-2-radio" type="radio" value="Perempuan" wire:model='gender'
+                                        name="inline-radio-group"
+                                        class="w-4 h-4 text-secondary-600 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-2">
+                                    <label for="inline-2-radio"
+                                        class="ml-2 text-sm font-medium text-gray-900 @error('gender') text-red-600 @enderror">Perempuan</label>
                                 </div>
                             </div>
-                            @error('day')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @error('gender')
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                             @enderror
-                            @error('month')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                            @error('year')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
+                        </div>
+                        <div class="md:grid grid-cols-2 gap-4 mb-4">
+                            <div class="md:mb-0 mb-4">
+                                <label for="text"
+                                    class="block mb-2 text-sm font-medium text-gray-900 @error('birth_place') text-red-700 @enderror">Tempat
+                                    Lahir</label>
+                                <input type="text"
+                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('birth_place') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
+                                    placeholder="Tempat Lahir" name="birth_place" value="{{ old('birth_place') }}"
+                                    wire:model='birth_place'>
+                                @error('birth_place')
+                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="mb-0">
+                                <div class="grid md:grid-cols-6 grid-cols-4 gap-4">
+                                    <div class="md:col-span-4 col-span-2">
+                                        <label for="month"
+                                            class="block mb-2 text-sm font-medium text-gray-900 @error('month') text-red-700 @enderror">Bulan</label>
+                                        <select id="month" name="month" wire:model='month'
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('month') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
+                                            <option selected>Bulan</option>
+                                            <option value="Januari" {{ old('month') == 'Januari' ? 'selected' : '' }}>
+                                                Januari
+                                            </option>
+                                            <option value="Februari" {{ old('month') == 'Februari' ? 'selected' : '' }}>
+                                                Februari</option>
+                                            <option value="Maret" {{ old('month') == 'Maret' ? 'selected' : '' }}>Maret
+                                            </option>
+                                            <option value="April" {{ old('month') == 'April' ? 'selected' : '' }}>
+                                                April
+                                            </option>
+                                            <option value="Mei" {{ old('month') == 'Mei' ? 'selected' : '' }}>Mei
+                                            </option>
+                                            <option value="Juni" {{ old('month') == 'Juni' ? 'selected' : '' }}>Juni
+                                            </option>
+                                            <option value="Juli" {{ old('month') == 'Juli' ? 'selected' : '' }}>Juli
+                                            </option>
+                                            <option value="Agustus" {{ old('month') === 'Agustus' ? 'selected' : '' }}>
+                                                Agustus
+                                            </option>
+                                            <option value="September"
+                                                {{ old('month') === 'September' ? 'selected' : '' }}>
+                                                September</option>
+                                            <option value="Oktober"
+                                                {{ old('month') === 'Oktober' ? 'selected' : '' }}>
+                                                Oktober
+                                            </option>
+                                            <option value="November"
+                                                {{ old('month') === 'November' ? 'selected' : '' }}>
+                                                November</option>
+                                            <option value="Desember"
+                                                {{ old('month') === 'Desember' ? 'selected' : '' }}>
+                                                Desember</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="text"
+                                            class="block mb-2 text-sm font-medium text-gray-900 @error('day') text-red-700 @enderror">Hari</label>
+                                        <input type="text"
+                                            class="shadow-sm bg-gray-50 text-center border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('day') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
+                                            placeholder="DD" name="day" value="{{ old('day') }}"
+                                            wire:model='day' autocomplete="off">
+                                    </div>
+                                    <div>
+                                        <label for="text"
+                                            class="block mb-2 text-sm font-medium text-gray-900 @error('year') text-red-700 @enderror">Tahun</label>
+                                        <input type="text"
+                                            class="shadow-sm bg-gray-50 text-center border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('year') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
+                                            placeholder="YYYY" name="year" value="{{ old('year') }}"
+                                            wire:model='year' autocomplete="off">
+                                    </div>
+                                </div>
+                                @error('month')
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                                @error('day')
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                                @error('year')
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="md:grid grid-cols-2 gap-4">
+                            <div class="mdLmb-0 mb-4">
+                                <label for="text"
+                                    class="block mb-2 text-sm font-medium text-gray-900 @error('email') text-red-700 @enderror">Email</label>
+                                <input type="email"
+                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('email') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
+                                    placeholder="Email" name="email" value="{{ old('email') }}" wire:model='email'>
+                                @error('email')
+                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="md:mb-0 mb-4">
+                                <label for="text"
+                                    class="block mb-2 text-sm font-medium text-gray-900 @error('phone') text-red-700 @enderror">Nomor
+                                    Telepon</label>
+                                <input type="text"
+                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('phone') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
+                                    placeholder="Nomor Telepon" name="phone" value="{{ old('phone') }}"
+                                    wire:model='phone'>
+                                @error('phone')
+                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
                     @endif
                     {{-- STEP 2 --}}
@@ -258,28 +320,7 @@
                     {{-- STEP 3 --}}
                     @if ($currentStep == 3)
                         @csrf
-                        <div class="mb-4">
-                            <label for="text"
-                                class="block mb-2 text-sm font-medium text-gray-900 @error('email') text-red-700 @enderror">Email</label>
-                            <input type="email"
-                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('email') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                                placeholder="Email" name="email" value="{{ old('email') }}" wire:model='email'>
-                            @error('email')
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="mb-4">
-                            <label for="text"
-                                class="block mb-2 text-sm font-medium text-gray-900 @error('phone') text-red-700 @enderror">Nomor
-                                Telepon</label>
-                            <input type="text"
-                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('phone') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                                placeholder="Nomor Telepon" name="phone" value="{{ old('phone') }}"
-                                wire:model='phone'>
-                            @error('phone')
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
+                        
                     @endif
                 </div>
             </div>
@@ -295,7 +336,7 @@
                 @endif
                 @if ($currentStep == 1)
                     <button type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        class="text-white bg-secondary-700 hover:bg-secondary-800 focus:ring-4 focus:outline-none focus:ring-secondary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-secondary-600 dark:hover:bg-secondary-700 dark:focus:ring-secondary-800"
                         wire:click="increaseStep()">Next</button>
                 @endif
             </div>

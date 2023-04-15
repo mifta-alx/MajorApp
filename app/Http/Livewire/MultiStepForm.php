@@ -13,6 +13,7 @@ class MultiStepForm extends Component
     public $student_name;
     public $birth_place;
     public $birth_date;
+    public $gender;
     //birth_date
     public $day;
     public $month;
@@ -63,6 +64,9 @@ class MultiStepForm extends Component
             'day' => 'required|numeric|digits:2',
             'month' => 'required',
             'year' => 'required|numeric|digits:4',
+            'gender' => 'required',
+            'email' => 'required|email:dns|unique:students',
+            'phone' => 'required|numeric|min:11'
         ],[
             'nisn.required'=>'NISN tidak boleh kosong',
             'nisn.numeric'=>'NISN harus berisi angka',
@@ -77,16 +81,7 @@ class MultiStepForm extends Component
             'year.required' => 'Tahun tidak boleh kosong',
             'year.numeric' => 'Tahun harus berisi angka',
             'year.digits' => 'Tahun harus berisi 4 digit',
-        ]);
-     }elseif ($this->currentStep == 2) {
-        $this->validate([
-            'npsn' => 'required',
-        ]);
-     }elseif ($this->currentStep == 3) {
-        $this->validate([
-            'email' => 'required|email:dns|unique:students',
-            'phone' => 'required|numeric|min:11'
-        ],[
+            'gender.required' => 'Jenis kelamin tidak boleh kosong',
             'email.required' => 'Email tidak boleh kosong',
             'email.email' => 'Format email tidak sesuai',
             'email.unique' => 'Email sudah terdaftar',
@@ -94,6 +89,16 @@ class MultiStepForm extends Component
             'phone.numeric' => 'Nomor telepon harus angka',
             'phone.min' => 'Nomor telepon minimal 11 karakter',
         ]);
+     }elseif ($this->currentStep == 2) {
+        $this->validate([
+            'npsn' => 'required',
+        ]);
+     }elseif ($this->currentStep == 3) {
+        // $this->validate([
+            
+        // ],[
+            
+        // ]);
      }
     }
     public function save(){
@@ -105,8 +110,9 @@ class MultiStepForm extends Component
             'student_name' => $this->student_name,
             'birth_place' => $this->birth_place,
             'birth_date' => $this->day.' '.$this->month.' '.$this->year,
-            // 'email' => $this->email,
-            // 'phone' => $this->phone,
+            'gender' => $this->gender,
+            'email' => $this->email,
+            'phone' => $this->phone,
             'npsn' => $this->npsn,
         ];
         $school = [
