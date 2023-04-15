@@ -12,7 +12,7 @@
                                 d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
                             </path>
                         </svg>
-                        Home
+                        Dashboard
                     </a>
                 </li>
                 <li>
@@ -80,24 +80,24 @@
                     <input type="password"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('password') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
                         placeholder="Password" name="password">
-                        @error('password')
+                    @error('password')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="role"
-                        class="block mb-2 text-sm font-medium text-gray-900 @error('role') text-red-700 @enderror">Role</label>
-                    <select id="role" name="role"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('role') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
+                    <label for="role_id"
+                        class="block mb-2 text-sm font-medium text-gray-900 @error('role_id') text-red-700 @enderror">Role</label>
+                    <select id="role_id" name="role_id"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('role_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
                         <option selected disabled>Role</option>
-                        <option value="admin" {{ "admin" === old('role') ? 'selected' : '' }}>Admin</option>
-                        <option value="petugas"  {{ "petugas" === old('role') ? 'selected' : '' }}>Petugas</option>
+                        @foreach ($role as $data)
+                            <option value={{ $data->role_id }} {{ (old('role_id') == $data->role_id) ? 'selected' : '' }}>{{ $data->role_name }}</option>
+                        @endforeach
                     </select>
-                    @error('role')
+                    @error('role_id')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
-
                 <button type="submit"
                     class="text-white bg-secondary-500 hover:bg-secondary-600 focus:ring-4 focus:outline-none focus:ring-secondary-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Simpan</button>
             </form>

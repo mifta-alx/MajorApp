@@ -25,7 +25,7 @@
                                 d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                 clip-rule="evenodd"></path>
                         </svg>
-                        <span class="ml-1 text-sm font-pjs-semibold text-gray-500 md:ml-2">Subkriteria</span>
+                        <span class="ml-1 text-sm font-pjs-semibold text-gray-500 md:ml-2">Siswa</span>
                     </div>
                 </li>
             </ol>
@@ -33,10 +33,10 @@
         <div class="w-full p-4 mt-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 ">
             <div class="flex items-center justify-between mb-4">
               <h5 class="text-xl font-pjs-bold leading-none text-gray-900">
-                Data Subkriteria
+                Data Siswa
               </h5>
               <a
-                href="{{ route('addalternatif') }}"
+                href="{{ route('students.create') }}"
                 class="text-sm font-medium text-white bg-secondary-500 hover:bg-secondary-600 rounded-md px-4 py-2 "
               >
                 Tambah
@@ -51,16 +51,40 @@
                       No
                     </th>
                     <th scope="col" class="px-6 py-3">
-                      Nama Kriteria
+                      NISN
                     </th>
                     <th scope="col" class="px-6 py-3">
-                      Nilai Subkriteria
+                      Nama Siswa
                     </th>
+                    <th scope="col" class="px-6 py-3">
+                      Jenis Kelamin
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                      Tempat/Tanggal Lahir
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                      Sekolah
+                    </th>
+                    {{-- <th scope="col" class="px-6 py-3">
+                      Email
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                      No Telepon
+                    </th> --}}
                     <th scope="col" class="px-6 py-3"></th>
                   </tr>
                 </thead>
                 <tbody>
-                  
+                  @foreach ($siswa as $item)
+                    <tr>
+                      <td></td>
+                      <td>{{ $item->nisn }}</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>  
+                  @endforeach
                 </tbody>
               </table>
             </div>

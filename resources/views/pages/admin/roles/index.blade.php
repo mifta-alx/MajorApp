@@ -53,7 +53,7 @@
                                 d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                 clip-rule="evenodd"></path>
                         </svg>
-                        <span class="ml-1 text-sm font-pjs-semibold text-gray-500 md:ml-2">Users</span>
+                        <span class="ml-1 text-sm font-pjs-semibold text-gray-500 md:ml-2">Roles</span>
                     </div>
                 </li>
             </ol>
@@ -61,9 +61,9 @@
         <div class="w-full p-4 mt-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 ">
             <div class="flex items-center justify-between mb-4">
                 <h5 class="text-xl font-pjs-bold leading-none text-gray-900">
-                    Data Users
+                    Data Roles
                 </h5>
-                <a href="{{ route('users.create') }}"
+                <a href="{{ route('roles.create') }}"
                     class="text-sm font-pjs-medium text-white bg-secondary-500 hover:bg-secondary-600 rounded-md px-4 py-2 flex items-center">
                     <ion-icon name="add-outline" class="text-lg mr-2"></ion-icon>Tambah
                 </a>
@@ -77,12 +77,6 @@
                                 No
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Nama
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Username
-                            </th>
-                            <th scope="col" class="px-6 py-3">
                                 Role
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -91,23 +85,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($user as $data)
+                        @foreach ($roles as $data)
                             <tr class="bg-white border-b">
                                 <td class="px-6 py-4">
                                     {{ $loop->index + 1 }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $data->nama }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ $data->username }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ $data->role_id }}
+                                    {{ $data->role_name }}
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex flex-row">
-                                        <a href="{{ route('users.edit', $data->uuid) }}"
+                                        <a href="{{ route('roles.edit', $data->role_id) }}"
                                             class="px-3.5 py-2 justify-center items-center text-sm flex ml-3 rounded-md text-secondary-500 hover:text-white border border-secondary-500 hover:bg-secondary-600 focus:ring-4 focus:outline-none focus:ring-secondary-500 font-pjs-medium">
                                             <ion-icon name="create-outline" class="text-lg mr-2"></ion-icon> Edit
                                         </a>
@@ -118,7 +106,6 @@
                                         </button>
                                     </div>
                                 </td>
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -128,9 +115,9 @@
     </div>
     <div id="popup-modal" tabindex="-1"
         class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
-        @foreach ($user as $data)
+        @foreach ($roles as $data)
         
-        <form class="relative w-full h-full max-w-md md:h-auto" action="{{ route('users.destroy', $data->uuid) }}"
+        <form class="relative w-full h-full max-w-md md:h-auto" action="{{ route('roles.destroy', $data->role_id) }}"
             method="POST">
             @csrf
             @method('delete')

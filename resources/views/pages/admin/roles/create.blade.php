@@ -12,7 +12,7 @@
                                 d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
                             </path>
                         </svg>
-                        Home
+                        Dashboard
                     </a>
                 </li>
                 <li>
@@ -23,8 +23,8 @@
                                 d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                 clip-rule="evenodd"></path>
                         </svg>
-                        <a href="{{ route('alternatif.index') }}"
-                            class="ml-1 text-sm font-pjs-semibold text-gray-700 hover:text-secondary-500 md:ml-2">Alternatif</a>
+                        <a href="{{ route('roles.index') }}"
+                            class="ml-1 text-sm font-pjs-semibold text-gray-700 hover:text-secondary-500 md:ml-2">Roles</a>
                     </div>
                 </li>
                 <li aria-current="page">
@@ -35,28 +35,29 @@
                                 d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                 clip-rule="evenodd"></path>
                         </svg>
-                        <span class="ml-1 text-sm font-pjs-semibold text-gray-500 md:ml-2">Add Alternatif</span>
+                        <span class="ml-1 text-sm font-pjs-semibold text-gray-500 md:ml-2">Add Roles</span>
                     </div>
                 </li>
             </ol>
         </nav>
 
         <div class="w-full p-4 mt-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 ">
-            <form action="{{ route('alternatif.store') }}" method="POST">
+            <form action="{{ route('roles.store') }}" method="POST">
                 @csrf
                 <div class="mb-4">
-                    <label for="text" class="block mb-2 text-sm font-medium text-gray-900 @error('nama_alternatif') text-red-700 @enderror">Nama Alternatif</label>
+                    <label for="text"
+                        class="block mb-2 text-sm font-medium text-gray-900 @error('role_name') text-red-700 @enderror">Role Name</label>
                     <input type="text"
-                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('nama_alternatif') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                        placeholder="Nama Alternatif" name="nama_alternatif" value="{{ old('nama_alternatif') }}">
-                        @error('alternatif')
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('role_name') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
+                        placeholder="Role Name" name="role_name" value="{{ old('role_name') }}">
+                    @error('role_name')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
+
                 <button type="submit"
                     class="text-white bg-secondary-500 hover:bg-secondary-600 focus:ring-4 focus:outline-none focus:ring-secondary-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Simpan</button>
             </form>
         </div>
-
     </div>
 @endsection

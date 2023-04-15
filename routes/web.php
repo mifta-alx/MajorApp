@@ -1,6 +1,11 @@
 <?php
 
 use App\Http\Controllers\AlternativesController;
+use App\Http\Controllers\CriteriasController;
+use App\Http\Controllers\ScoresController;
+use App\Http\Controllers\RolesController;
+use App\Http\Controllers\SchoolsController;
+use App\Http\Controllers\SubcriteriasController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -21,30 +26,22 @@ Route::get('/', function () {
 })->name('home');
 //users
 // Route::get('/user', [StudentsController::class, 'register'])->name('user');
-Route::resource('students', StudentsController::class);
+// Route::resource('students', StudentsController::class);
 
 
-Route::get('/admin', function () {
+Route::get('admin', function () {
     return view('pages/admin/dashboard');
 })->name('dashboard');
 
-// Route::get('admin/alternatif', function () {
-//     return view('pages/admin/alternatif/base');
-// })->name('alternatif');
-
-// Route::get('admin/alternatif/add', function () {
-//     return view('pages/admin/alternatif/add');
-// })->name('addalternatif');
-
-Route::get('admin/siswa',[StudentsController::class, 'index'])->name('siswa');
-
-Route::get('admin/siswa/add', function () {
-    return view('pages/admin/siswa/add');
-})->name('addsiswa');
-
 //new way to route
-Route::resource('alternatif', AlternativesController::class);
+Route::resource('students', StudentsController::class);
+Route::resource('schools', SchoolsController::class);
+Route::resource('alternatives', AlternativesController::class);
 Route::resource('users', UsersController::class);
+Route::resource('roles', RolesController::class);
+Route::resource('criterias', CriteriasController::class);
+Route::resource('subcriterias', SubcriteriasController::class);
+Route::resource('scores', ScoresController::class);
 //
 
 // Route::get('admin/users', [UsersController::class, 'index'])->name('users.index');
@@ -55,18 +52,4 @@ Route::resource('users', UsersController::class);
 // Route::controller(UserController::class)->group(function (){
 //     Route::get('ad')
 // });
-
-Route::get('admin/kriteria', function () {
-    return view('pages/admin/kriteria/base');
-})->name('kriteria');
-
-Route::get('admin/subkriteria', function () {
-    return view('pages/admin/subkriteria/base');
-})->name('subkriteria');
-
-Route::get('admin/nilai', function () {
-    return view('pages/admin/nilai/base');
-})->name('nilai');
-
-
 
