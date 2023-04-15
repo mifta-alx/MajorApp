@@ -7,6 +7,8 @@
     <title>Jurusanku</title>
     <link rel="icon" href="{{ url('/images/logo.png') }}">
     @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
+    @livewireStyles
 </head>
 
 <body>
@@ -18,7 +20,7 @@
 
         </header>
     </div>
-
+    @livewireScripts
 </body>
 
 </html>
