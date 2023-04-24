@@ -13,6 +13,8 @@ class Criteria extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $criteria_id, $criteria_name, $criteria_label, $weight;
+    public $paginate = 5;
+    public $search = '';
 
     protected $rules = [
         'criteria_name' => 'required|unique:criterias',
@@ -86,7 +88,8 @@ class Criteria extends Component
     {
         $this->criteria_id = $criteria_id;
     }
-    public function destroy(){
+    public function destroy()
+    {
         $criteria = Criterias::find($this->criteria_id)->delete();
         session()->flash('success', 'Criteria deleted successfully!');
         $this->reset();
@@ -97,11 +100,14 @@ class Criteria extends Component
     {
         $this->reset();
     }
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
     public function render()
     {
-        $criterias = Criterias::all();
         return view('livewire.criteria', [
-            'criterias' => $criterias,
+            'criterias' =>  Criterias::where('criteria_name', 'like', '%'.$this->search.'%')->paginate($this->paginate),
         ]);
     }
 }
