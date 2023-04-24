@@ -10,8 +10,6 @@ class Criteria extends Component
 {
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
-
     public $criteria_id, $criteria_name, $criteria_label, $weight;
     public $paginate = 5;
     public $search = '';
@@ -106,8 +104,8 @@ class Criteria extends Component
     }
     public function render()
     {
-        return view('livewire.criteria', [
-            'criterias' =>  Criterias::where('criteria_name', 'like', '%'.$this->search.'%')->paginate($this->paginate),
+        return view('livewire.criterias.criteria', [
+            'criterias' =>  Criterias::where('criteria_name', 'like', '%' . $this->search . '%')->paginate($this->paginate),
         ]);
     }
 }

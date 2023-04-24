@@ -23,8 +23,9 @@
             </div>
             <!-- Modal body -->
             <form wire:submit.prevent='store'>
-                <div>
-                    <div class="mb-4">
+                @csrf
+                <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                    <div class="sm:col-span-2">
                         <label for="criteria_name"
                             class="block mb-2 text-sm font-medium text-gray-900 @error('criteria_name') text-red-700 @enderror">Nama
                             Kriteria</label>
@@ -35,7 +36,7 @@
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="mb-4">
+                    <div>
                         <label for="criteria_label"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('criteria_label') text-red-700 @enderror">Label
                             Kriteria</label>
@@ -47,10 +48,9 @@
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="mb-4">
+                    <div>
                         <label for="weight"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('weight') text-red-700 @enderror">Label
-                            Kriteria</label>
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('weight') text-red-700 @enderror">Bobot</label>
                         <input type="text" name="weight" id="weight"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('weight') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
                             value="{{ old('weight') }}" placeholder="Bobot" wire:model="weight">
@@ -99,8 +99,9 @@
             </div>
             <!-- Modal body -->
             <form wire:submit.prevent='update'>
-                <div>
-                    <div class="mb-4">
+                @csrf
+                <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                    <div class="sm:col-span-2">
                         <label for="criteria_name"
                             class="block mb-2 text-sm font-medium text-gray-900 @error('criteria_name') text-red-700 @enderror">Nama
                             Kriteria</label>
@@ -111,7 +112,7 @@
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="mb-4">
+                    <div>
                         <label for="criteria_label"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('criteria_label') text-red-700 @enderror">Label
                             Kriteria</label>
@@ -123,10 +124,9 @@
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="mb-4">
+                    <div>
                         <label for="weight"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('weight') text-red-700 @enderror">Label
-                            Kriteria</label>
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('weight') text-red-700 @enderror">Bobot</label>
                         <input type="text" name="weight" id="weight"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('weight') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
                             value="{{ old('weight') }}" placeholder="Bobot" wire:model="weight">
@@ -148,6 +148,7 @@
 <div wire:ignore.self id="DeleteModal" tabindex="-1" aria-hidden="true"
     class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
     <form class="relative w-full h-full max-w-md md:h-auto" wire:submit.prevent='destroy'>
+        @csrf
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <button type="button"
                 class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
