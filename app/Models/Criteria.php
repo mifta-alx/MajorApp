@@ -9,6 +9,14 @@ class Criteria extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'criteria_id';
+
+    protected $fillable = [
+        'criteria_name',
+        'criteria_label',
+        'weight'
+    ];
+
     public function subcriteria(){
         return $this->hasMany(Subcriteria::class);
     }
