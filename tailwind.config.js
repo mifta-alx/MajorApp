@@ -9,10 +9,13 @@ module.exports = {
     extend: {
       colors:{
         'primary-light':'#F6F1F1',
+        'secondary-200':'#4ac7e9',
+        'secondary-300':'#34c0e6',
+        'secondary-400':'#1db9e4',
         'secondary-500':'#19A7CE',
-        'secondary-600':'#1698BC',
-        'secondary-700':'#158CAD',
-        'secondary-800':'#137F9D',
+        'secondary-600':'#1695b7',
+        'secondary-700':'#1382a1',
+        'secondary-800':'#11708a',
         'third-light':'#146C94'
       },
       fontFamily:{
