@@ -21,7 +21,7 @@ return new class extends Migration
             $table->bigInteger('subcriteria_score');
             $table->timestamps();
 
-            $table->foreign('criteria_id')->references('criteria_id')->on('criterias')->onDelete('cascade');
+            // $table->foreign('criteria_id')->references('criteria_id')->on('criterias')->onDelete('cascade');
         });
     }
 
