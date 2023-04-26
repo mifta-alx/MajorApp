@@ -179,12 +179,11 @@
                                         type="button" wire:click="edit({{ $data->criteria_id }})"
                                         class="px-3.5 py-2 justify-center items-center text-sm flex ml-3 rounded-md text-secondary-500 hover:text-white border border-secondary-500 hover:bg-secondary-600 focus:ring-1 focus:outline-none focus:ring-secondary-500 font-pjs-medium">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                            class="w-4 h-4 mr-1" fill="currentColor">
-                                            <path
-                                                d="m7 17.013 4.413-.015 9.632-9.54c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.756-.756-2.075-.752-2.825-.003L7 12.583v4.43zM18.045 4.458l1.589 1.583-1.597 1.582-1.586-1.585 1.594-1.58zM9 13.417l6.03-5.973 1.586 1.586-6.029 5.971L9 15.006v-1.589z">
+                                            class="w-4 h-4 mr-1 -ml-1" fill="currentColor">
+                                            <path d="m18.988 2.012 3 3L19.701 7.3l-3-3zM8 16h3l7.287-7.287-3-3L8 13z">
                                             </path>
                                             <path
-                                                d="M5 21h14c1.103 0 2-.897 2-2v-8.668l-2 2V19H8.158c-.026 0-.053.01-.079.01-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2z">
+                                                d="M19 19H8.158c-.026 0-.053.01-.079.01-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .896-2 2v14c0 1.104.897 2 2 2h14a2 2 0 0 0 2-2v-8.668l-2 2V19z">
                                             </path>
                                         </svg> Edit
                                     </button>
@@ -192,11 +191,10 @@
                                         type="button" wire:click="delete({{ $data->criteria_id }})"
                                         class="px-3.5 py-2 justify-center items-center text-sm flex ml-3 rounded-md text-red-500 hover:text-white border border-red-500 hover:bg-red-600 focus:ring-1 focus:outline-none focus:ring-red-500 font-pjs-medium">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                            class="w-4 h-4 mr-1" fill="currentColor">
+                                            class="w-4 h-4 mr-1 -ml-1" fill="currentColor">
                                             <path
-                                                d="M5 20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h2V6h-4V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H3v2h2zM9 4h6v2H9zM8 8h9v12H7V8z">
+                                                d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm4 12H8v-9h2v9zm6 0h-2v-9h2v9zm.618-15L15 2H9L7.382 4H3v2h18V4z">
                                             </path>
-                                            <path d="M9 10h2v8H9zm4 0h2v8h-2z"></path>
                                         </svg>Hapus
                                     </button>
                                 </div>

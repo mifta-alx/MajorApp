@@ -17,7 +17,7 @@ class Criteria extends Component
     protected $rules = [
         'criteria_name' => 'required|unique:criterias',
         'criteria_label' => 'required|unique:criterias',
-        'weight' => 'required',
+        'weight' => 'required|numeric|between:0,1',
     ];
     protected $messages = [
         'criteria_name.unique' => 'Nama Kriteria Sudah Terdaftar',
@@ -25,6 +25,8 @@ class Criteria extends Component
         'criteria_label.unique' => 'Label Kriteria Sudah Terdaftar',
         'criteria_label.required' => 'Label Kriteria Tidak Boleh Kosong',
         'weight.required' => 'Bobot Tidak Boleh Kosong',
+        'weight.numeric' => 'Bobot harus berisi angka',
+        'weight.between' => 'Bobot harus berisi nilai antara 0 sampai 1',
     ];
     public function updated($fields)
     {
@@ -58,19 +60,22 @@ class Criteria extends Component
         $rules = [
             'criteria_name' => 'required',
             'criteria_label' => 'required',
-            'weight' => 'required',
+            'weight' => 'required|numeric',
         ];
 
         if ('criteria_name' == $this->criteria_name) {
             $rules['criteria_name'] = 'required|unique:criterias';
             $rules['criteria_label'] = 'required|unique:criterias';
-            $rules['weight'] = 'required';
+            $rules['weight'] = 'required|numeric|between:0,1';
         }
         $validated = $this->validate($rules, [
             'criteria_name.unique' => 'Nama Kriteria Sudah Terdaftar',
             'criteria_name.required' => 'Nama Kriteria Tidak Boleh Kosong',
             'criteria_label.unique' => 'Label Kriteria Sudah Terdaftar',
             'criteria_label.required' => 'Label Kriteria Tidak Boleh Kosong',
+            'weight.required' => 'Bobot Tidak Boleh Kosong',
+            'weight.numeric' => 'Bobot harus berisi angka',
+            'weight.between' => 'Bobot harus berisi nilai antara 0 sampai 1',
         ]);
         Criterias::where('criteria_id', $this->criteria_id)->update([
             'criteria_name' => $validated['criteria_name'],
