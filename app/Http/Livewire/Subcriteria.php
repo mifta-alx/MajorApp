@@ -32,9 +32,6 @@ class Subcriteria extends Component
         'subcriteria_score.numeric' => 'Nilai Subkriteria harus berisi angka',
         'subcriteria_score.between' => 'Nilai Subkriteria harus berisi nilai antara 1 sampai 5',
     ];
-    public function mount(){
-        
-    }
     public function updated($fields)
     {
         $this->validateOnly($fields);
