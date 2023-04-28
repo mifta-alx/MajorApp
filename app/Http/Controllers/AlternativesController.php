@@ -14,9 +14,7 @@ class AlternativesController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.alternatives.index', [
-            'alternative' => Alternative::all()
-        ]);
+        return view('pages.admin.alternatives.index');
     }
 
     /**
@@ -26,7 +24,7 @@ class AlternativesController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.alternatives.create');
+        //
     }
 
     /**
@@ -37,11 +35,7 @@ class AlternativesController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'nama_alternatif' => 'required|unique:alternatifs',
-        ]);
-        Alternative::create($validated);
-        return redirect()->route('alternatif.index')->with('success', 'Alternative created successfully!');
+        //
     }
 
     /**

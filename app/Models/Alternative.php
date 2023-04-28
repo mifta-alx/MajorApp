@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Alternative extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'alternative_id';
+
     protected $fillable = [
-        'nama_alternatif',
+        'alternative_name',
     ];
 }
