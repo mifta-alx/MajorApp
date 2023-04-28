@@ -1,5 +1,5 @@
 
-<nav class="bg-secondary-500 lg:px-[100px] px-4 py-2.5 relative">
+<nav class="bg-secondary-400 lg:px-[100px] px-4 py-2.5 relative">
   <div class="container flex flex-wrap items-center justify-between mx-auto">
     <a href="#" class="flex items-center">
         <span class="self-center text-2xl md:text-3xl font-pjs-extrabold whitespace-nowrap text-white italic">Major.</span>

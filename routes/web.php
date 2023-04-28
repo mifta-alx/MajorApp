@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AlternativesController;
 use App\Http\Controllers\CriteriasController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ScoresController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SchoolsController;
@@ -24,16 +25,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pages.user.home');
 })->name('home');
-//users
-// Route::get('/user', [StudentsController::class, 'register'])->name('user');
-// Route::resource('students', StudentsController::class);
 
-
-Route::get('admin', function () {
-    return view('pages/admin/dashboard');
-})->name('dashboard');
+// Route::get('admin', function () {
+//     return view('pages/admin/dashboard');
+// })->name('dashboard');
 
 //new way to route
+Route::resource('dashboard', DashboardController::class);
 Route::resource('students', StudentsController::class);
 Route::resource('schools', SchoolsController::class);
 Route::resource('alternatives', AlternativesController::class);
