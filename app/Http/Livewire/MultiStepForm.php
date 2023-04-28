@@ -9,23 +9,11 @@ use Illuminate\Support\Str;
 
 class MultiStepForm extends Component
 {
-    public $nisn;
-    public $student_name;
-    public $birth_place;
-    public $birth_date;
-    public $gender;
+    public $nisn, $student_name, $birth_place, $birth_date, $gender, $email, $phone;
     //birth_date
-    public $day;
-    public $month;
-    public $year;
+    public $day, $month, $year;
     //
-    public $email;
-    public $phone;
-    public $npsn;
-    public $school_name;
-    public $address;
-    public $city_regency;
-    public $province;
+    public $npsn, $school_name, $address, $city_regency, $province;
 
     public $totalSteps = 2;
     public $currentStep = 1;

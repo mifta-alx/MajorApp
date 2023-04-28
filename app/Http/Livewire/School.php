@@ -39,9 +39,9 @@ class School extends Component
         $validated = $this->validate();
         Schools::create($validated);
         session()->flash('success', 'School created successfully!');
+        return redirect()->to('/schhols');
         $this->reset();
-        $this->emit('closeModal', 'CreateModal');
-        $this->emit('hideToast');
+        $this->resetInput();
     }
     public function edit(int $npsn)
     {
@@ -91,9 +91,9 @@ class School extends Component
             'province' => $validated['province'],
         ]);
         session()->flash('success', 'School updated successfully!');
+        return redirect()->to('/schhols');
         $this->reset();
-        $this->emit('closeModal', 'EditModal');
-        $this->emit('hideToast');
+        $this->resetInput();
     }
     public function delete(int $npsn)
     {
@@ -103,22 +103,37 @@ class School extends Component
     {
         $school = Schools::find($this->npsn)->delete();
         session()->flash('success', 'School deleted successfully!');
+        return redirect()->to('/schhols');
         $this->reset();
-        $this->emit('closeModal', 'DeleteModal');
-        $this->emit('hideToast');
+        $this->resetInput();
     }
     public function closeModal()
     {
-        $this->reset();
+        $this->resetInput();
+    }
+    public function resetInput()
+    {
+        $this->npsn = '';
+        $this->school_name = '';
+        $this->address = '';
+        $this->city_regency = '';
+        $this->province = '';
     }
     public function updatingSearch()
     {
         $this->resetPage();
     }
+    public function clearSearch()
+    {
+        $this->search = '';
+    }
     public function render()
     {
         return view('livewire.schools.school', [
-            'schools' =>  Schools::where('school_name', 'like', '%' . $this->search . '%')->paginate($this->paginate)
+            'schools' =>  Schools::where('school_name', 'like', '%' . $this->search . '%')->paginate($this->paginate),
+            'count' => Schools::all()->count(),
+            'titles' => 'schools',
+            'title' => 'school'
         ]);
     }
 }

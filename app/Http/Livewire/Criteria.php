@@ -20,11 +20,11 @@ class Criteria extends Component
         'weight' => 'required|numeric|between:0,1',
     ];
     protected $messages = [
-        'criteria_name.unique' => 'Nama Kriteria Sudah Terdaftar',
-        'criteria_name.required' => 'Nama Kriteria Tidak Boleh Kosong',
-        'criteria_label.unique' => 'Label Kriteria Sudah Terdaftar',
-        'criteria_label.required' => 'Label Kriteria Tidak Boleh Kosong',
-        'weight.required' => 'Bobot Tidak Boleh Kosong',
+        'criteria_name.unique' => 'Nama kriteria sudah terdaftar',
+        'criteria_name.required' => 'Nama kriteria tidak boleh kosong',
+        'criteria_label.unique' => 'Label kriteria sudah terdaftar',
+        'criteria_label.required' => 'Label kriteria tidak boleh kosong',
+        'weight.required' => 'Bobot tidak boleh kosong',
         'weight.numeric' => 'Bobot harus berisi angka',
         'weight.between' => 'Bobot harus berisi nilai antara 0 sampai 1',
     ];
@@ -38,9 +38,9 @@ class Criteria extends Component
         $validated = $this->validate();
         Criterias::create($validated);
         session()->flash('success', 'Criteria created successfully!');
+        return redirect()->to('/criterias');
         $this->reset();
-        $this->emit('closeModal', 'CreateModal');
-        $this->emit('hideToast');
+        $this->resetInput();
     }
     public function edit(int $criteria_id)
     {
@@ -69,11 +69,11 @@ class Criteria extends Component
             $rules['weight'] = 'required|numeric|between:0,1';
         }
         $validated = $this->validate($rules, [
-            'criteria_name.unique' => 'Nama Kriteria Sudah Terdaftar',
-            'criteria_name.required' => 'Nama Kriteria Tidak Boleh Kosong',
-            'criteria_label.unique' => 'Label Kriteria Sudah Terdaftar',
-            'criteria_label.required' => 'Label Kriteria Tidak Boleh Kosong',
-            'weight.required' => 'Bobot Tidak Boleh Kosong',
+            'criteria_name.unique' => 'Nama kriteria sudah terdaftar',
+            'criteria_name.required' => 'Nama kriteria tidak boleh kosong',
+            'criteria_label.unique' => 'Label kriteria sudah terdaftar',
+            'criteria_label.required' => 'Label kriteria tidak boleh kosong',
+            'weight.required' => 'Bobot tidak boleh kosong',
             'weight.numeric' => 'Bobot harus berisi angka',
             'weight.between' => 'Bobot harus berisi nilai antara 0 sampai 1',
         ]);
@@ -83,9 +83,9 @@ class Criteria extends Component
             'weight' => $validated['weight'],
         ]);
         session()->flash('success', 'Criteria updated successfully!');
+        return redirect()->to('/criterias');
         $this->reset();
-        $this->emit('closeModal', 'EditModal');
-        $this->emit('hideToast');
+        $this->resetInput();
     }
     public function delete(int $criteria_id)
     {
@@ -95,22 +95,36 @@ class Criteria extends Component
     {
         $criteria = Criterias::find($this->criteria_id)->delete();
         session()->flash('success', 'Criteria deleted successfully!');
+        return redirect()->to('/criterias');
         $this->reset();
-        $this->emit('closeModal', 'DeleteModal');
-        $this->emit('hideToast');
+        $this->resetInput();
     }
     public function closeModal()
     {
-        $this->reset();
+        $this->resetInput();
+    }
+    public function resetInput()
+    {
+        $this->criteria_id = '';
+        $this->criteria_name = '';
+        $this->criteria_label = '';
+        $this->weight = '';
     }
     public function updatingSearch()
     {
         $this->resetPage();
     }
+    public function clearSearch()
+    {
+        $this->search = '';
+    }
     public function render()
     {
         return view('livewire.criterias.criteria', [
             'criterias' =>  Criterias::where('criteria_name', 'like', '%' . $this->search . '%')->paginate($this->paginate),
+            'count' => Criterias::all()->count(),
+            'titles' => 'criterias',
+            'title' => 'criteria'
         ]);
     }
 }

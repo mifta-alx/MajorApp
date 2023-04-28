@@ -21,16 +21,16 @@ class Subcriteria extends Component
         'subcriteria_score' => 'required|numeric|between:1,5',
     ];
     protected $messages = [
-        'criteria_id.required' => 'Id Kriteria Tidak Boleh Kosong',
-        'subcriteria_start.required' => 'Nilai Awal Subkriteria Tidak Boleh Kosong',
-        'subcriteria_start.numeric' => 'Nilai Awal Subkriteria harus berisi angka',
-        'subcriteria_start.between' => 'Nilai Awal Subkriteria harus berisi nilai antara 0 sampai 100',
-        'subcriteria_end.required' => 'Nilai Akhir Subkriteria Tidak Boleh Kosong',
-        'subcriteria_end.numeric' => 'Nilai Akhir Subkriteria harus berisi angka',
-        'subcriteria_end.between' => 'Nilai Akhir Subkriteria harus berisi nilai antara 0 sampai 100',
-        'subcriteria_score.required' => 'Nilai Subkriteria Tidak Boleh Kosong',
-        'subcriteria_score.numeric' => 'Nilai Subkriteria harus berisi angka',
-        'subcriteria_score.between' => 'Nilai Subkriteria harus berisi nilai antara 1 sampai 5',
+        'criteria_id.required' => 'Id kriteria tidak boleh kosong',
+        'subcriteria_start.required' => 'Nilai awal subkriteria tidak boleh kosong',
+        'subcriteria_start.numeric' => 'Nilai awal subkriteria harus berisi angka',
+        'subcriteria_start.between' => 'Nilai awal subkriteria harus berisi nilai antara 0 sampai 100',
+        'subcriteria_end.required' => 'Nilai akhir subkriteria tidak boleh kosong',
+        'subcriteria_end.numeric' => 'Nilai akhir subkriteria harus berisi angka',
+        'subcriteria_end.between' => 'Nilai akhir subkriteria harus berisi nilai antara 0 sampai 100',
+        'subcriteria_score.required' => 'Nilai subkriteria tidak boleh kosong',
+        'subcriteria_score.numeric' => 'Nilai subkriteria harus berisi angka',
+        'subcriteria_score.between' => 'Nilai subkriteria harus berisi nilai antara 1 sampai 5',
     ];
     public function updated($fields)
     {
@@ -41,10 +41,9 @@ class Subcriteria extends Component
         $this->resetErrorBag();
         $validated = $this->validate();
         Subcriterias::create($validated);
-        session()->flash('success', 'Subriteria created successfully!');
+        return redirect()->to('/subcriterias');
         $this->reset();
-        $this->emit('closeModal', 'CreateModal');
-        $this->emit('hideToast');
+        $this->resetInput();
     }
     public function edit(int $subcriteria_id)
     {
@@ -64,7 +63,7 @@ class Subcriteria extends Component
         $this->resetErrorBag();
         $rules = [
             'criteria_id' => 'required',
-            'subcriteria_start' => 'required',
+            'subcriteria_start' => 'required|numeric|between:0,100',
             'subcriteria_end' => 'required',
             'subcriteria_score' => 'required',
         ];
@@ -76,16 +75,16 @@ class Subcriteria extends Component
             $rules['subcriteria_score'] = 'required|numeric|between:1,5';
         }
         $validated = $this->validate($rules, [
-            'criteria_id.required' => 'Id Kriteria Tidak Boleh Kosong',
-            'subcriteria_start.required' => 'Nilai Awal Subkriteria Tidak Boleh Kosong',
-            'subcriteria_start.numeric' => 'Nilai Awal Subkriteria harus berisi angka',
-            'subcriteria_start.between' => 'Nilai Awal Subkriteria harus berisi nilai antara 0 sampai 100',
-            'subcriteria_end.required' => 'Nilai Akhir Subkriteria Tidak Boleh Kosong',
-            'subcriteria_end.numeric' => 'Nilai Akhir Subkriteria harus berisi angka',
-            'subcriteria_end.between' => 'Nilai Akhir Subkriteria harus berisi nilai antara 0 sampai 100',
-            'subcriteria_score.required' => 'Nilai Subkriteria Tidak Boleh Kosong',
-            'subcriteria_score.numeric' => 'Nilai Subkriteria harus berisi angka',
-            'subcriteria_score.between' => 'Nilai Subkriteria harus berisi nilai antara 1 sampai 5',
+            'criteria_id.required' => 'Id Kriteria tidak boleh kosong',
+            'subcriteria_start.required' => 'Nilai awal subkriteria tidak boleh kosong',
+            'subcriteria_start.numeric' => 'Nilai awal subkriteria harus berisi angka',
+            'subcriteria_start.between' => 'Nilai awal subkriteria harus berisi nilai antara 0 sampai 100',
+            'subcriteria_end.required' => 'Nilai akhir subkriteria tidak boleh kosong',
+            'subcriteria_end.numeric' => 'Nilai akhir subkriteria harus berisi angka',
+            'subcriteria_end.between' => 'Nilai akhir subkriteria harus berisi nilai antara 0 sampai 100',
+            'subcriteria_score.required' => 'Nilai subkriteria tidak boleh kosong',
+            'subcriteria_score.numeric' => 'Nilai subkriteria harus berisi angka',
+            'subcriteria_score.between' => 'Nilai subkriteria harus berisi nilai antara 1 sampai 5',
         ]);
         Subcriterias::where('subcriteria_id', $this->subcriteria_id)->update([
             'criteria_id' => $validated['criteria_id'],
@@ -94,9 +93,9 @@ class Subcriteria extends Component
             'subcriteria_score' => $validated['subcriteria_score'],
         ]);
         session()->flash('success', 'Subcriteria updated successfully!');
+        return redirect()->to('/subcriterias');
         $this->reset();
-        $this->emit('closeModal', 'EditModal');
-        $this->emit('hideToast');
+        $this->resetInput();
     }
     public function delete(int $subcriteria_id)
     {
@@ -106,22 +105,39 @@ class Subcriteria extends Component
     {
         $subcriteria = Subcriterias::find($this->subcriteria_id)->delete();
         session()->flash('success', 'Subcriteria deleted successfully!');
+        return redirect()->to('/subcriterias');
         $this->reset();
-        $this->emit('closeModal', 'DeleteModal');
-        $this->emit('hideToast');
+        $this->resetInput();
     }
     public function closeModal()
     {
-        $this->reset();
+        $this->resetInput();
+    }
+    public function resetInput()
+    {
+        $this->subcriteria_id = '';
+        $this->criteria_id = '';
+        $this->subcriteria_start = '';
+        $this->subcriteria_end = '';
+        $this->subcriteria_score = '';
     }
     public function updatingSearch()
     {
         $this->resetPage();
     }
+    public function clearSearch()
+    {
+        $this->search = '';
+    }
     public function render()
     {
         return view('livewire.subcriterias.subcriteria', [
-            'subcriterias' =>  Subcriterias::where('criteria_id', 'like', '%' . $this->search . '%')->paginate($this->paginate),
+            'subcriterias' =>  Subcriterias::where('criteria_name', 'like', '%' . $this->search . '%')
+                ->join('criterias', 'subcriterias.criteria_id', '=', 'criterias.criteria_id')
+                ->paginate($this->paginate, ['subcriterias.*', 'criterias.criteria_label']),
+            'count' => SubCriterias::all()->count(),
+            'titles' => 'subcriterias',
+            'title' => 'subcriteria',
             'criterias' => Criterias::all(),
         ]);
     }
