@@ -1,5 +1,5 @@
 <div>
-    @include('livewire.schools.schoolmodal')
+    @include('livewire.students.studentmodal')
     @if (session()->has('success'))
         <div id="toast"
             class="toast absolute flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow right-5"
@@ -30,168 +30,6 @@
             </button>
         </div>
     @endif
-    {{-- <div class="w-full p-4 mt-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 ">
-        <div class="flex items-center justify-between mb-4">
-            <h5 class="text-xl font-pjs-bold leading-none text-gray-900">
-                Data Schools
-            </h5>
-            <button data-modal-target="CreateModal" data-modal-toggle="CreateModal"
-                class="text-sm font-pjs-medium text-white bg-secondary-500 hover:bg-secondary-600 rounded-md px-3 py-2 flex items-center">
-                <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                        clip-rule="evenodd"></path>
-                </svg>Tambah
-            </button>
-        </div>
-
-        <div class="relative overflow-x-auto sm:rounded-lg">
-            <div class="flex items-center justify-between pb-4">
-                <div>
-                    <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio"
-                        class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-1 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                        type="button">
-                        {{ $paginate }}
-                        <svg class="w-3 h-3 ml-2" aria-hidden="true" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <!-- Dropdown menu -->
-                    <div id="dropdownRadio"
-                        class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg border border-gray-200"
-                        data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top"
-                        style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(522.5px, 3847.5px, 0px);">
-                        <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
-                            aria-labelledby="dropdownRadioButton">
-                            <li>
-                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                    <input id="filter-radio-example-1" type="radio" wire:model="paginate"
-                                        value="5" name="filter-radio"
-                                        class="w-4 h-4 text-secondary-600 bg-gray-100 border-gray-300 focus:ring-secondary-500 dark:focus:ring-secondary-600">
-                                    <label for="filter-radio-example-1"
-                                        class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">5</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                    <input checked="" id="filter-radio-example-2" wire:model="paginate"
-                                        type="radio" value="10" name="filter-radio"
-                                        class="w-4 h-4 text-secondary-600 bg-gray-100 border-gray-300 focus:ring-secondary-500 dark:focus:ring-secondary-600">
-                                    <label for="filter-radio-example-2"
-                                        class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">10</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                    <input id="filter-radio-example-3" type="radio" wire:model="paginate"
-                                        value="15" name="filter-radio"
-                                        class="w-4 h-4 text-secondary-600 bg-gray-100 border-gray-300 focus:ring-secondary-500 dark:focus:ring-secondary-600">
-                                    <label for="filter-radio-example-3"
-                                        class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">15</label>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <label for="table-search" class="sr-only">Search</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor"
-                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <input type="text" wire:model="search" id="table-search"
-                        class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-gray-200 focus:border-gray-200"
-                        placeholder="Search for school">
-                </div>
-            </div>
-            <table class="w-full text-sm text-left text-gray-500">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            No
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Nama Sekolah
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Alamat
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Kota/Kabupaten
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Provinsi
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Action
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($schools as $data)
-                        <tr class="bg-white border-b">
-                            <td class="px-6 py-4">
-                                {{ $loop->index + 1 }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $data->school_name }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $data->address }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $data->city_regency }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $data->province }}
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex flex-row">
-                                    <button data-modal-target="EditModal" data-modal-toggle="EditModal"
-                                        type="button" wire:click="edit({{ $data->npsn }})"
-                                        class="px-3.5 py-2 justify-center items-center text-sm flex ml-3 rounded-md text-secondary-500 hover:text-white border border-secondary-500 hover:bg-secondary-600 focus:ring-1 focus:outline-none focus:ring-secondary-500 font-pjs-medium">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                            class="w-4 h-4 mr-1 -ml-1" fill="currentColor">
-                                            <path d="m18.988 2.012 3 3L19.701 7.3l-3-3zM8 16h3l7.287-7.287-3-3L8 13z">
-                                            </path>
-                                            <path
-                                                d="M19 19H8.158c-.026 0-.053.01-.079.01-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .896-2 2v14c0 1.104.897 2 2 2h14a2 2 0 0 0 2-2v-8.668l-2 2V19z">
-                                            </path>
-                                        </svg> Edit
-                                    </button>
-                                    <button data-modal-target="DeleteModal" data-modal-toggle="DeleteModal"
-                                        type="button" wire:click="delete({{ $data->npsn }})"
-                                        class="px-3.5 py-2 justify-center items-center text-sm flex ml-3 rounded-md text-red-500 hover:text-white border border-red-500 hover:bg-red-600 focus:ring-1 focus:outline-none focus:ring-red-500 font-pjs-medium">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                            class="w-4 h-4 mr-1 -ml-1" fill="currentColor">
-                                            <path
-                                                d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm4 12H8v-9h2v9zm6 0h-2v-9h2v9zm.618-15L15 2H9L7.382 4H3v2h18V4z">
-                                            </path>
-                                        </svg>Hapus
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="5" class="text-center font-pjs-semibold text-normal py-4 text-gray-700">No
-                                schools found.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-            <div class="mt-4">
-                {{ $schools->links('pagination::tailwind') }}
-            </div>
-        </div>
-    </div> --}}
     <section class="container px-4 mx-auto">
         <div class="sm:flex sm:items-center sm:justify-between">
             <div>
@@ -290,7 +128,7 @@
             </div>
         </div>
 
-        @if ($schools->count())
+        @if ($students->count())
             <div class="flex flex-col mt-6">
                 <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -305,27 +143,27 @@
 
                                         <th scope="col"
                                             class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            NPSN
+                                            NISN
                                         </th>
 
                                         <th scope="col"
                                             class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            Nama Sekolah
+                                            Nama
                                         </th>
 
                                         <th scope="col"
                                             class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            Alamat
+                                            Sekolah
                                         </th>
 
                                         <th scope="col"
                                             class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            Kota/Kabupaten
+                                            Jenis Kelamin
                                         </th>
 
                                         <th scope="col"
                                             class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            Provinsi
+                                            Tempat/Tanggal Lahir
                                         </th>
 
                                         <th scope="col"
@@ -335,29 +173,29 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                                    @foreach ($schools as $school)
+                                    @foreach ($students as $student)
                                         <tr>
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                                                 {{ $loop->index + 1 }}
                                             </td>
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $school->npsn }}
+                                                {{ $student->nisn }}
                                             </td>
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $school->school_name }}
+                                                {{ $student->student_name }}
                                             </td>
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $school->address }}
+                                                {{ $student->school_name }}
                                             </td>
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $school->city_regency }}
+                                                {{ $student->gender }}
                                             </td>
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $school->province }}
+                                                {{ $student->birth_place.', '.$student->birth_date }}
                                             </td>
                                             <td class="px-4 py-4 text-sm whitespace-nowrap">
                                                 <div class="flex flex-row space-x-2">
-                                                    <button wire:click="edit({{ $school->npsn }})"
+                                                    <button wire:click="edit({{ $student->nisn }})"
                                                         data-modal-target="EditModal" data-modal-toggle="EditModal"
                                                         class="flex items-center justify-center px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-secondary-400 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-secondary-500 dark:hover:bg-secondary-400 dark:bg-secondary-500">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -368,7 +206,7 @@
                                                         </svg>
                                                         <span>Edit</span>
                                                     </button>
-                                                    <button wire:click="delete({{ $school->npsn }})"
+                                                    <button wire:click="delete({{ $student->nisn }})"
                                                         data-modal-target="DeleteModal"
                                                         data-modal-toggle="DeleteModal"
                                                         class="flex items-center justify-center px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-red-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-red-600 dark:hover:bg-red-500 dark:bg-red-600">
@@ -429,7 +267,7 @@
         @endif
 
         <div class="mt-6">
-            {{ $schools->links('pagination::tailwind') }}
+            {{ $students->links('pagination::tailwind') }}
         </div>
 
     </section>

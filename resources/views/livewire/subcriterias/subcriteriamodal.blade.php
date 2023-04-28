@@ -11,7 +11,7 @@
                 </h3>
                 <button type="button" wire:click="closeModal"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                    data-modal-toggle="CreateModal">
+                    data-modal-hide="CreateModal">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -33,7 +33,9 @@
                             <option hidden>Pilih kriteria</option>
                             <option disabled="disabled" default="true">Pilih kriteria</option>
                             @forelse ($criterias as $key => $value)
-                                <option value="{{ $value->criteria_id }}" @if (old('criteria_id') == $value->criteria_id ) selected @endif>{{ $value->criteria_label }}</option>
+                                <option value="{{ $value->criteria_id }}"
+                                    @if (old('criteria_id') == $value->criteria_id) selected @endif>{{ $value->criteria_label }}
+                                </option>
                             @empty
                                 <option disabled selected>No subcriteria found.</option>
                             @endforelse
@@ -71,14 +73,15 @@
                             Subkriteria</label>
                         <input type="text" name="subcriteria_score" id="subcriteria_score"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('subcriteria_score') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                            value="{{ old('subcriteria_score') }}" placeholder="Nilai Subkriteria" wire:model="subcriteria_score">
+                            value="{{ old('subcriteria_score') }}" placeholder="Nilai Subkriteria"
+                            wire:model="subcriteria_score">
                         @error('subcriteria_score')
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
                 <button type="submit"
-                    class="text-white inline-flex items-center bg-secondary-700 hover:bg-secondary-800 focus:ring-4 focus:outline-none focus:ring-secondary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                    class="text-white inline-flex items-center bg-secondary-500 hover:bg-secondary-600 focus:ring-2 focus:outline-none focus:ring-secondary-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                     <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -105,7 +108,7 @@
                 </h3>
                 <button type="button" wire:click="closeModal"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                    data-modal-toggle="EditModal">
+                    data-modal-hide="EditModal">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -127,7 +130,9 @@
                             <option hidden>Pilih kriteria</option>
                             <option disabled="disabled" default="true">Pilih kriteria</option>
                             @forelse ($criterias as $item)
-                                <option value="{{ $item->criteria_id }}" {{ old('criteria_id') == $item->criteria_id ? 'selected' : '' }}>{{ $item->criteria_label }}</option>
+                                <option value="{{ $item->criteria_id }}"
+                                    {{ old('criteria_id') == $item->criteria_id ? 'selected' : '' }}>
+                                    {{ $item->criteria_label }}</option>
                             @empty
                                 <option>No subcriteria found.</option>
                             @endforelse
@@ -154,7 +159,8 @@
                             Akhir</label>
                         <input type="text" name="subcriteria_end" id="subcriteria_end"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('subcriteria_end') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                            value="{{ old('subcriteria_end') }}" placeholder="Nilai Akhir" wire:model="subcriteria_end">
+                            value="{{ old('subcriteria_end') }}" placeholder="Nilai Akhir"
+                            wire:model="subcriteria_end">
                         @error('subcriteria_end')
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -165,14 +171,15 @@
                             Subkriteria</label>
                         <input type="text" name="subcriteria_score" id="subcriteria_score"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('subcriteria_score') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                            value="{{ old('subcriteria_score') }}" placeholder="Nilai Subkriteria" wire:model="subcriteria_score">
+                            value="{{ old('subcriteria_score') }}" placeholder="Nilai Subkriteria"
+                            wire:model="subcriteria_score">
                         @error('subcriteria_score')
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
                 <button type="submit"
-                    class="text-white inline-flex items-center bg-secondary-700 hover:bg-secondary-800 focus:ring-4 focus:outline-none focus:ring-secondary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                    class="text-white inline-flex items-center bg-secondary-500 hover:bg-secondary-600 focus:ring-2 focus:outline-none focus:ring-secondary-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                     Update subcriteria
                 </button>
             </form>
@@ -188,7 +195,7 @@
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <button type="button"
                 class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                data-modal-toggle="DeleteModal">
+                data-modal-hide="DeleteModal" wire:click="closeModal">
                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
@@ -208,11 +215,11 @@
                     Apakah anda yakin untuk menghapus
                     data ini?</h3>
                 <button type="submit" type="button"
-                    class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                    class="text-white bg-red-600 hover:bg-red-700 focus:ring-2 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                     Ya, Saya Yakin
                 </button>
-                <button data-modal-toggle="DeleteModal" type="button"
-                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Tidak,
+                <button data-modal-hide="DeleteModal" type="button" wire:click="closeModal"
+                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-2 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Tidak,
                     Batal</button>
             </div>
         </div>
