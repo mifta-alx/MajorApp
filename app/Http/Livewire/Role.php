@@ -74,13 +74,14 @@ class Role extends Component
     public function destroy()
     {
         $role = Roles::find($this->role_id)->delete();
-        session()->flash('success', 'Roles deleted successfully!');
+        session()->flash('success', 'Role deleted successfully!');
         return redirect()->to('/roles');
         $this->reset();
         $this->resetInput();
     }
     public function closeModal()
     {
+        $this->resetErrorBag();
         $this->resetInput();
     }
     public function resetInput()

@@ -61,31 +61,7 @@ class Subcriteria extends Component
     public function update()
     {
         $this->resetErrorBag();
-        $rules = [
-            'criteria_id' => 'required',
-            'subcriteria_start' => 'required|numeric|between:0,100',
-            'subcriteria_end' => 'required',
-            'subcriteria_score' => 'required',
-        ];
-
-        if ('subcriteria_start' == $this->subcriteria_start) {
-            $rules['criteria_id'] = 'required';
-            $rules['subcriteria_start'] = 'required|numeric|between:0,100';
-            $rules['subcriteria_end'] = 'required|numeric|between:0,100';
-            $rules['subcriteria_score'] = 'required|numeric|between:1,5';
-        }
-        $validated = $this->validate($rules, [
-            'criteria_id.required' => 'Id Kriteria tidak boleh kosong',
-            'subcriteria_start.required' => 'Nilai awal subkriteria tidak boleh kosong',
-            'subcriteria_start.numeric' => 'Nilai awal subkriteria harus berisi angka',
-            'subcriteria_start.between' => 'Nilai awal subkriteria harus berisi nilai antara 0 sampai 100',
-            'subcriteria_end.required' => 'Nilai akhir subkriteria tidak boleh kosong',
-            'subcriteria_end.numeric' => 'Nilai akhir subkriteria harus berisi angka',
-            'subcriteria_end.between' => 'Nilai akhir subkriteria harus berisi nilai antara 0 sampai 100',
-            'subcriteria_score.required' => 'Nilai subkriteria tidak boleh kosong',
-            'subcriteria_score.numeric' => 'Nilai subkriteria harus berisi angka',
-            'subcriteria_score.between' => 'Nilai subkriteria harus berisi nilai antara 1 sampai 5',
-        ]);
+        $validated = $this->validate();
         Subcriterias::where('subcriteria_id', $this->subcriteria_id)->update([
             'criteria_id' => $validated['criteria_id'],
             'subcriteria_start' => $validated['subcriteria_start'],
@@ -111,6 +87,7 @@ class Subcriteria extends Component
     }
     public function closeModal()
     {
+        $this->resetErrorBag();
         $this->resetInput();
     }
     public function resetInput()
@@ -133,6 +110,7 @@ class Subcriteria extends Component
     {
         return view('livewire.subcriterias.subcriteria', [
             'subcriterias' =>  Subcriterias::where('criteria_name', 'like', '%' . $this->search . '%')
+                ->orWhere('criteria_label', 'like', '%' . $this->search . '%')
                 ->join('criterias', 'subcriterias.criteria_id', '=', 'criterias.criteria_id')
                 ->paginate($this->paginate, ['subcriterias.*', 'criterias.criteria_label']),
             'count' => SubCriterias::all()->count(),

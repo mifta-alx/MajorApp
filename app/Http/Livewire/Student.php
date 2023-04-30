@@ -123,14 +123,7 @@ class Student extends Component
         if ('student_name' == $this->student_name) {
             $rules['nisn'] = 'required|numeric|digits:10|unique:students';
             $rules['student_name'] = 'required|min:3|unique:students';
-            $rules['birth_place'] = 'required';
-            $rules['day'] = 'required|numeric|digits:2';
-            $rules['month'] = 'required';
-            $rules['year'] = 'required|numeric|digits:4';
-            $rules['gender'] = 'required';
             $rules['email'] = 'required|email:dns|unique:students';
-            $rules['phone'] = 'required|numeric|min:11';
-            $rules['npsn'] = 'required';
         }
         $validated = $this->validate($rules, [
             'nisn.required' => 'NISN tidak boleh kosong',
@@ -172,7 +165,7 @@ class Student extends Component
         $this->reset();
         $this->resetInput();
     }
-    public function delete(String $nisn)
+    public function delete(int $nisn)
     {
         $this->nisn = $nisn;
     }
@@ -213,6 +206,7 @@ class Student extends Component
     {
         return view('livewire.students.student', [
             'students' =>  Students::where('student_name', 'like', '%' . $this->search . '%')
+                ->orWhere('nisn', 'like', '%' . $this->search . '%')
                 ->join('schools', 'students.npsn', '=', 'schools.npsn')
                 ->paginate($this->paginate, ['students.*', 'schools.school_name']),
             'months' => $this->months,

@@ -60,13 +60,12 @@ class Criteria extends Component
         $rules = [
             'criteria_name' => 'required',
             'criteria_label' => 'required',
-            'weight' => 'required|numeric',
+            'weight' => 'required|numeric|between:0,1',
         ];
 
         if ('criteria_name' == $this->criteria_name) {
             $rules['criteria_name'] = 'required|unique:criterias';
             $rules['criteria_label'] = 'required|unique:criterias';
-            $rules['weight'] = 'required|numeric|between:0,1';
         }
         $validated = $this->validate($rules, [
             'criteria_name.unique' => 'Nama kriteria sudah terdaftar',
@@ -101,6 +100,7 @@ class Criteria extends Component
     }
     public function closeModal()
     {
+        $this->resetErrorBag();
         $this->resetInput();
     }
     public function resetInput()
@@ -121,7 +121,9 @@ class Criteria extends Component
     public function render()
     {
         return view('livewire.criterias.criteria', [
-            'criterias' =>  Criterias::where('criteria_name', 'like', '%' . $this->search . '%')->paginate($this->paginate),
+            'criterias' =>  Criterias::where('criteria_name', 'like', '%' . $this->search . '%')
+                ->orWhere('criteria_label', 'like', '%' . $this->search . '%')
+                ->paginate($this->paginate),
             'count' => Criterias::all()->count(),
             'titles' => 'criterias',
             'title' => 'criteria'

@@ -81,6 +81,7 @@ class Alternative extends Component
     }
     public function closeModal()
     {
+        $this->resetErrorBag();
         $this->resetInput();
     }
     public function resetInput()
