@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('phone');
             $table->timestamps();
 
-            $table->foreign('npsn')->references('npsn')->on('schools')->onDelete('no action');
+            $table->foreign('npsn')->references('npsn')->on('schools')->onDelete('cascade');
         });
     }
 

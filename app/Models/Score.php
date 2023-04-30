@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Score extends Model
 {
     use HasFactory;
+    
+    protected $primaryKey = 'score_id';
+
+    protected $fillable = [
+        'nisn',
+        'alternative_id',
+        'criteria_id',
+        'score',
+    ];
 
     public function criteria(){
         return $this->hasMany(Criteria::class);

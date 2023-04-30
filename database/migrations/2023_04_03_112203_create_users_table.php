@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->unsignedBigInteger('role_id');
-            $table->rememberToken();
+            // $table->rememberToken();
             $table->timestamps();
 
             $table->foreign('role_id')->references('role_id')->on('roles')->onDelete('no action');
