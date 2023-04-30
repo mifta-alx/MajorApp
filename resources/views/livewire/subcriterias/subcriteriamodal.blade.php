@@ -1,5 +1,5 @@
 <!-- Main modal -->
-<div wire:ignore.self id="CreateModal" tabindex="-1" aria-hidden="true"
+<div wire:ignore.self id="CreateModal" tabindex="-1" aria-hidden="true" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
         <!-- Modal content -->
@@ -41,7 +41,7 @@
                             @endforelse
                         </select>
                         @error('criteria_id')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
@@ -53,7 +53,7 @@
                             value="{{ old('subcriteria_start') }}" placeholder="Nilai Awal"
                             wire:model="subcriteria_start">
                         @error('subcriteria_start')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
@@ -64,7 +64,7 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('subcriteria_end') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
                             value="{{ old('subcriteria_end') }}" placeholder="Nilai Akhir" wire:model="subcriteria_end">
                         @error('subcriteria_end')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
@@ -76,7 +76,7 @@
                             value="{{ old('subcriteria_score') }}" placeholder="Nilai Subkriteria"
                             wire:model="subcriteria_score">
                         @error('subcriteria_score')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
@@ -96,7 +96,7 @@
 </div>
 
 <!-- Update modal -->
-<div wire:ignore.self id="EditModal" tabindex="-1" aria-hidden="true"
+<div wire:ignore.self id="EditModal" tabindex="-1" aria-hidden="true" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
         <!-- Modal content -->
@@ -138,7 +138,7 @@
                             @endforelse
                         </select>
                         @error('criteria_id')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
@@ -150,7 +150,7 @@
                             value="{{ old('subcriteria_start') }}" placeholder="Nilai Awal"
                             wire:model="subcriteria_start">
                         @error('subcriteria_start')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
@@ -162,7 +162,7 @@
                             value="{{ old('subcriteria_end') }}" placeholder="Nilai Akhir"
                             wire:model="subcriteria_end">
                         @error('subcriteria_end')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
@@ -174,7 +174,7 @@
                             value="{{ old('subcriteria_score') }}" placeholder="Nilai Subkriteria"
                             wire:model="subcriteria_score">
                         @error('subcriteria_score')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
@@ -188,7 +188,7 @@
 </div>
 
 {{-- Delete Modal --}}
-<div wire:ignore.self id="DeleteModal" tabindex="-1" aria-hidden="true"
+<div wire:ignore.self id="DeleteModal" tabindex="-1" aria-hidden="true" data-modal-backdrop="static"
     class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
     <form class="relative w-full h-full max-w-md md:h-auto" wire:submit.prevent='destroy'>
         @csrf

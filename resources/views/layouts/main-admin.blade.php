@@ -17,7 +17,7 @@
     @livewireScripts
     @yield('script')
     <script type="module">
-$(document).ready(function() {
+        $(document).ready(function() {
             setTimeout(() => {
                 $('#toast').addClass('hidden');
             }, 1500);

@@ -1,6 +1,17 @@
 @if ($paginator->hasPages())
+<div class="sm:hidden flex">
+    <p class="text-sm text-gray-500 leading-5">
+        {!! __('Page') !!}
+        @if ($paginator->firstItem())
+            <span class="font-semibold text-gray-700">{{ $paginator->currentPage() }}</span>
+            
+        @endif
+        {!! __('of') !!}
+        <span class="font-semibold text-gray-700">{{ $paginator->lastPage() }}</span>
+    </p>
+</div>
     <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="flex items-center justify-between">
-        <div class="flex justify-between flex-1 sm:hidden">
+        <div class="flex justify-between flex-1 sm:hidden mt-4 ">
             @if ($paginator->onFirstPage())
                 <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 rounded-md">
                     {!! __('pagination.previous') !!}

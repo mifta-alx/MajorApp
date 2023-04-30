@@ -1,5 +1,5 @@
 <!-- Main modal -->
-<div wire:ignore.self id="CreateModal" tabindex="-1" aria-hidden="true"
+<div wire:ignore.self id="CreateModal" tabindex="-1" aria-hidden="true" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
         <!-- Modal content -->
@@ -32,7 +32,7 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('npsn') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
                             value="{{ old('npsn') }}" placeholder="NPSN" wire:model="npsn">
                         @error('npsn')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
@@ -43,37 +43,58 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('school_name') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
                             value="{{ old('school_name') }}" placeholder="Nama Sekolah" wire:model="school_name">
                         @error('school_name')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div>
-                        <label for="city_regency"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('city_regency') text-red-700 @enderror">Kota/Kabupaten</label>
-                        <input type="text" name="city_regency" id="city_regency"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('city_regency') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                            value="{{ old('city_regency') }}" placeholder="Kota/Kabupaten" wire:model="city_regency">
-                        @error('city_regency')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div>
+                    <div wire:ignore.self class="">
                         <label for="province"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('province') text-red-700 @enderror">Provinsi</label>
-                        <input type="text" name="province" id="province"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('province') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                            value="{{ old('province') }}" placeholder="Provinsi" wire:model="province">
+                            class="block mb-2 text-sm font-medium text-gray-900 @error('province') text-red-700 @enderror">Provinsi</label>
+                        <select id="province" wire:model="province" name="province"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('province') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
+                            <option hidden>Pilih provinsi</option>
+                            <option disabled="disabled" default="true">Pilih provinsi</option>
+                            @forelse ($province_arr as $data_province => $value)
+                                <option value="{{ $data_province }}" @if (old('province') == $data_province) selected @endif>
+                                    {{ $data_province }}
+                                </option>
+                            @empty
+                                <option disabled selected>No province found.</option>
+                            @endforelse
+                        </select>
                         @error('province')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div wire:ignore.self class="">
+                        <label for="city_regency"
+                            class="block mb-2 text-sm font-medium text-gray-900 @error('city_regency') text-red-700 @enderror">Kota/Kabupaten</label>
+                        <select id="city_regency" wire:model="city_regency" name="city_regency"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('city_regency') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
+                            <option hidden>Pilih kota/kabupaten</option>
+                            <option disabled="disabled" default="true">Pilih kota/kabupaten</option>
+                            @if (isset($province))
+                                @if (isset($province_arr[$province]))
+                                    @forelse ($province_arr[$province] as $kabkota)
+                                        <option>{{ $kabkota }}
+                                        </option>
+                                    @empty
+                                        <option disabled selected>No city or regency found.</option>
+                                    @endforelse
+                                @endif
+                            @endif
+                        </select>
+                        @error('city_regency')
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="sm:col-span-2">
                         <label for="address"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('address') text-red-700 @enderror">Alamat</label>
                         <textarea id="address" wire:model="address" rows="4"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-secondary-500 focus:border-secondary-500 @error('school_name') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-secondary-500 focus:border-secondary-500 @error('address') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
                             placeholder="Alamat sekolah lengkap"></textarea>
                         @error('address')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
@@ -93,7 +114,7 @@
 </div>
 
 <!-- Update modal -->
-<div wire:ignore.self id="EditModal" tabindex="-1" aria-hidden="true"
+<div wire:ignore.self id="EditModal" tabindex="-1" aria-hidden="true" data-modal-backdrop="static"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
         <!-- Modal content -->
@@ -126,7 +147,7 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('npsn') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
                             value="{{ old('npsn') }}" placeholder="NPSN" wire:model="npsn">
                         @error('npsn')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
@@ -137,38 +158,58 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('school_name') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
                             value="{{ old('school_name') }}" placeholder="Nama Sekolah" wire:model="school_name">
                         @error('school_name')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div>
-                        <label for="city_regency"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('city_regency') text-red-700 @enderror">Kota/Kabupaten</label>
-                        <input type="text" name="city_regency" id="city_regency"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('city_regency') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                            value="{{ old('city_regency') }}" placeholder="Kota/Kabupaten"
-                            wire:model="city_regency">
-                        @error('city_regency')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div>
+                    <div wire:ignore.self class="">
                         <label for="province"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('province') text-red-700 @enderror">Provinsi</label>
-                        <input type="text" name="province" id="province"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('province') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                            value="{{ old('province') }}" placeholder="Provinsi" wire:model="province">
+                            class="block mb-2 text-sm font-medium text-gray-900 @error('province') text-red-700 @enderror">Provinsi</label>
+                        <select id="province" wire:model="province" name="province"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('province') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
+                            <option hidden>Pilih provinsi</option>
+                            <option disabled="disabled" default="true">Pilih provinsi</option>
+                            @forelse ($province_arr as $data_province => $value)
+                                <option value="{{ $data_province }}" @if (old('province') == $data_province) selected @endif>
+                                    {{ $data_province }}
+                                </option>
+                            @empty
+                                <option disabled selected>No province found.</option>
+                            @endforelse
+                        </select>
                         @error('province')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div wire:ignore.self class="">
+                        <label for="city_regency"
+                            class="block mb-2 text-sm font-medium text-gray-900 @error('city_regency') text-red-700 @enderror">Kota/Kabupaten</label>
+                        <select id="city_regency" wire:model="city_regency" name="city_regency"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('city_regency') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
+                            <option hidden>Pilih kota/kabupaten</option>
+                            <option disabled="disabled" default="true">Pilih kota/kabupaten</option>
+                            @if (isset($province))
+                                @if (isset($province_arr[$province]))
+                                    @forelse ($province_arr[$province] as $kabkota)
+                                        <option>{{ $kabkota }}
+                                        </option>
+                                    @empty
+                                        <option disabled selected>No city or regency found.</option>
+                                    @endforelse
+                                @endif
+                            @endif
+                        </select>
+                        @error('city_regency')
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="sm:col-span-2">
                         <label for="address"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('address') text-red-700 @enderror">Alamat</label>
                         <textarea id="address" wire:model="address" rows="4"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-secondary-500 focus:border-secondary-500 @error('school_name') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-secondary-500 focus:border-secondary-500 @error('address') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
                             placeholder="Alamat sekolah lengkap"></textarea>
                         @error('address')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
@@ -182,7 +223,7 @@
 </div>
 
 {{-- Delete Modal --}}
-<div wire:ignore.self id="DeleteModal" tabindex="-1" aria-hidden="true"
+<div wire:ignore.self id="DeleteModal" tabindex="-1" aria-hidden="true" data-modal-backdrop="static"
     class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
     <form class="relative w-full h-full max-w-md md:h-auto" wire:submit.prevent='destroy'>
         @csrf
