@@ -9,9 +9,10 @@ class School extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'npsn';
-
+    protected $primaryKey = 'uuid';
+    public $incrementing = false;
     protected $fillable = [
+        'uuid',
         'npsn',
         'school_name',
         'address',
@@ -20,6 +21,10 @@ class School extends Model
     ];
     public function student()
     {
-        return $this->hasMany(Student::class);
+        return $this->hasMany(Student::class, 'npsn', 'npsn');
+    }
+    public function getRouteKeyName()
+    {
+        return 'uuid';
     }
 }

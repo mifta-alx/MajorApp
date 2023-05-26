@@ -19,6 +19,6 @@ class Subcriteria extends Model
     ];
 
     public function criteria(){
-        return $this->belongsTo(Criteria::class);
+        return $this->belongsTo(Criteria::class, 'criteria_id', 'criteria_id');
     }
 }

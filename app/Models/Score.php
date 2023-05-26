@@ -13,15 +13,13 @@ class Score extends Model
 
     protected $fillable = [
         'nisn',
-        'alternative_id',
         'criteria_id',
         'score',
     ];
-
-    public function criteria(){
-        return $this->hasMany(Criteria::class);
+    public function student(){
+        return $this->belongsTo(Student::class, 'nisn', 'nisn');
     }
-    public function alternative(){
-        return $this->hasMany(alternative::class);
+    public function criteria(){
+        return $this->hasMany(Criteria::class, 'criteria_id', 'criteria_id');
     }
 }

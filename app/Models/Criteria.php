@@ -18,6 +18,6 @@ class Criteria extends Model
     ];
 
     public function subcriteria(){
-        return $this->hasMany(Subcriteria::class);
+        return $this->hasMany(Subcriteria::class, 'criteria_id', 'criteria_id');
     }
 }
