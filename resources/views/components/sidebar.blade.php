@@ -43,24 +43,13 @@
             </li>
             <li>
                 <a href="{{ route('schools.index') }}"
-                    class="{{ Request::is('schools*') ? 'bg-secondary-400 hover:bg-secondary-500 text-white hover:text-white' : '' }} flex items-center p-2 text-base font-pjs-regular text-gray-400 rounded-lg hover:bg-gray-100">
+                    class="{{ Request::is('schools*') ? 'bg-secondary-400 hover:bg-secondary-500 text-white hover:text-white' : '' }} flex items-center p-2 text-base font-pjs-regular text-gray-400 rounded-lg hover:bg-gray-100 hover:text-gray-500">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="flex-shrink-0 w-6 h-6 transition duration-75">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
                     </svg>
                     <span class="flex-1 ml-3 whitespace-nowrap">Schools</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('alternatives.index') }}"
-                    class="{{ Request::is('alternatives*') ? 'bg-secondary-400 hover:bg-secondary-500 text-white hover:text-white' : '' }} flex items-center p-2 text-base font-pjs-regular text-gray-400 rounded-md hover:bg-gray-100 hover:text-gray-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="flex-shrink-0 w-6 h-6 transition duration-75">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0112 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5" />
-                    </svg>
-                    <span class="flex-1 ml-3 whitespace-nowrap">Alternatives</span>
                 </a>
             </li>
             <li>
@@ -94,7 +83,6 @@
                             d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
                     </svg>
                     <span class="flex-1 ml-3 whitespace-nowrap">Criterias</span>
-                    {{-- <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full">3</span> --}}
                 </a>
             </li>
             <li>
@@ -119,12 +107,32 @@
                     <span class="flex-1 ml-3 whitespace-nowrap">Scores</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('results.index') }}"
+                    class="{{ Request::is('results*') ? 'bg-secondary-400 hover:bg-secondary-500 text-white hover:text-white' : '' }} flex items-center p-2 text-base font-pjs-regular text-gray-400 rounded-md hover:bg-gray-100 hover:text-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 w-6 h-6 transition duration-75">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" />
+                      </svg>
+                      
+                    <span class="flex-1 ml-3 whitespace-nowrap">Results</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('rankings.index') }}"
+                    class="{{ Request::is('rankings*') ? 'bg-secondary-400 hover:bg-secondary-500 text-white hover:text-white' : '' }} flex items-center p-2 text-base font-pjs-regular text-gray-400 rounded-md hover:bg-gray-100 hover:text-gray-500">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 w-6 h-6 transition duration-75">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+                      </svg>
+                      
+                    <span class="flex-1 ml-3 whitespace-nowrap">Rankings</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>
 
 <div class="p-4 sm:ml-64">
-    <div >
+    <div>
         @yield('container-admin')
     </div>
 </div>

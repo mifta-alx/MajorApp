@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AlternativesController;
 use App\Http\Controllers\CriteriasController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ScoresController;
@@ -9,6 +8,9 @@ use App\Http\Controllers\SchoolsController;
 use App\Http\Controllers\SubcriteriasController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ResultsController;
+use App\Http\Controllers\RankingsController;
+use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,23 +25,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('pages.user.home');
+    return view('pages.home');
 })->name('home');
-
-// Route::get('admin', function () {
-//     return view('pages/admin/dashboard');
-// })->name('dashboard');
 
 //new way to route
 Route::resource('dashboard', DashboardController::class);
 Route::resource('students', StudentsController::class);
 Route::resource('schools', SchoolsController::class);
-Route::resource('alternatives', AlternativesController::class);
 Route::resource('users', UsersController::class);
 Route::resource('roles', RolesController::class);
 Route::resource('criterias', CriteriasController::class);
 Route::resource('subcriterias', SubcriteriasController::class);
 Route::resource('scores', ScoresController::class);
+Route::resource('results', ResultsController::class);
+Route::resource('rankings', RankingsController::class);
+Route::resource('report', PdfController::class);
 //
 
 // Route::get('admin/users', [UsersController::class, 'index'])->name('users.index');
