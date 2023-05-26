@@ -13,19 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('students', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
-            $table->string('nisn')->unique();
-            $table->string('student_name');
-            $table->string('gender');
-            $table->string('birth_place');
-            $table->string('birth_date');
+        Schema::create('rankings', function (Blueprint $table) {
+            $table->id('ranking_id');
+            $table->bigInteger('ranking');
+            $table->unsignedBigInteger('result_id')->unique();
+            $table->string('nisn');
             $table->string('npsn');
-            $table->string('email');
-            $table->string('phone');
             $table->timestamps();
 
             $table->foreign('npsn')->references('npsn')->on('schools')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('nisn')->references('nisn')->on('students')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('result_id')->references('result_id')->on('results')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -36,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('rankings');
     }
 };

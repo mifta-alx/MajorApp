@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('criterias', function (Blueprint $table) {
             $table->id('criteria_id');
             $table->string('criteria_name');
-            $table->string('criteria_label');
-            $table->string('weight');
+            $table->string('criteria_code');
+            $table->float('weight');
             $table->timestamps();
         });
     }
