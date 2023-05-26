@@ -176,7 +176,7 @@
                                     @foreach ($students as $student)
                                         <tr>
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $loop->index + 1 }}
+                                                {{ ($students->currentPage() - 1) * $students->perPage() + $loop->iteration }}
                                             </td>
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                                                 {{ $student->nisn }}
@@ -185,7 +185,7 @@
                                                 {{ $student->student_name }}
                                             </td>
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $student->school_name }}
+                                                {{ $student->school->school_name }}
                                             </td>
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                                                 {{ $student->gender }}
@@ -195,7 +195,7 @@
                                             </td>
                                             <td class="px-4 py-4 text-sm whitespace-nowrap">
                                                 <div class="flex flex-row space-x-2">
-                                                    <button wire:click="edit({{ $student->nisn }})"
+                                                    <button wire:click="edit('{{ $student->uuid }}')"
                                                         data-modal-target="EditModal" data-modal-toggle="EditModal"
                                                         class="flex items-center justify-center px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-secondary-400 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-secondary-500 dark:hover:bg-secondary-400 dark:bg-secondary-500">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -206,7 +206,7 @@
                                                         </svg>
                                                         <span>Edit</span>
                                                     </button>
-                                                    <button wire:click="delete({{ $student->nisn }})"
+                                                    <button wire:click="delete('{{ $student->uuid }}')"
                                                         data-modal-target="DeleteModal"
                                                         data-modal-toggle="DeleteModal"
                                                         class="flex items-center justify-center px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-red-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-red-600 dark:hover:bg-red-500 dark:bg-red-600">
@@ -267,7 +267,7 @@
         @endif
 
         <div class="mt-6">
-            {{ $students->links('pagination::tailwind') }}
+            {{ $students->links() }}
         </div>
 
     </section>

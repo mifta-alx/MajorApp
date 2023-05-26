@@ -25,7 +25,7 @@
                 <form wire:submit.prevent='store'>
                     @csrf
                     <div class="grid gap-4 mb-4 sm:grid-cols-2">
-                        <div wire:ignore.self>
+                        <div wire:ignore.self class="col-span-2">
                             <label for="nisn"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('nisn') text-red-700 @enderror">Siswa</label>
                             <select id="nisn" wire:model="nisn" name="nisn"
@@ -34,7 +34,8 @@
                                 <option disabled="disabled" default="true">Pilih siswa</option>
                                 @forelse ($students as $key => $value)
                                     <option value="{{ $value->nisn }}"
-                                        @if (old('nisn') == $value->nisn) selected @endif>{{ $value->student_name }}
+                                        @if (old('nisn') == $value->nisn) selected @endif>
+                                        {{ $value->student_name }}
                                     </option>
                                 @empty
                                     <option disabled selected>No student found.</option>
@@ -44,70 +45,34 @@
                                 <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div wire:ignore.self class="">
-                            <label for="alternative_id"
-                                class="block mb-2 text-sm font-medium text-gray-900 @error('alternative_id') text-red-700 @enderror">Alternatif</label>
-                            <select id="alternative_id" wire:model="alternative_id" name="alternative_id"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('alternative_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
-                                <option hidden>Pilih alternatif</option>
-                                <option disabled="disabled" default="true">Pilih alternatif</option>
-                                @forelse ($alternatives as $key => $value)
-                                    <option value="{{ $value->alternative_id }}"
-                                        @if (old('alternative_id') == $value->alternative_id) selected @endif>{{ $value->alternative_name }}
-                                    </option>
-                                @empty
-                                    <option disabled selected>No alternative found.</option>
-                                @endforelse
-                            </select>
-                            @error('alternative_id')
-                                <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div wire:ignore.self class="">
-                            <label for="criteria_id"
-                                class="block mb-2 text-sm font-medium text-gray-900 @error('criteria_id') text-red-700 @enderror">Kriteria</label>
-                            <select id="criteria_id" wire:model="criteria_id" name="criteria_id"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('criteria_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
-                                <option hidden>Pilih kriteria</option>
-                                <option disabled="disabled" default="true">Pilih kriteria</option>
-                                @forelse ($criterias as $key => $value)
-                                    <option value="{{ $value->criteria_id }}"
-                                        @if (old('criteria_id') == $value->criteria_id) selected @endif>{{ $value->criteria_label }}
-                                    </option>
-                                @empty
-                                    <option disabled selected>No criteria found.</option>
-                                @endforelse
-                            </select>
-                            @error('criteria_id')
-                                <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div>
-                            <div class="flex flex-row items-center mb-2 space-x-1">
-                                <label for="score"
-                                    class="block text-sm font-medium text-gray-900 @error('score') text-red-700 @enderror">Nilai</label>
-                                <button data-tooltip-target="tooltip-default" type="button"
-                                    class="text-gray-400 hover:text-gray-600">
-                                    <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-                                            clip-rule="evenodd"></path>
-                                    </svg></button>
+                        @foreach ($criterias as $criteria_id => $criteria)
+                            <div wire:key="{{ $criteria_id }}">
+                                <div class="flex flex-row items-center mb-2 space-x-1">
+                                    <label for="score"
+                                        class="block text-sm font-medium text-gray-900 @error('score.' . $criteria->criteria_id) text-red-700 @enderror">{{ $criteria->criteria_name }}</label>
+                                    <button data-tooltip-target="tooltip-default" type="button"
+                                        class="text-gray-400 hover:text-gray-600">
+                                        <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                                clip-rule="evenodd"></path>
+                                        </svg></button>
+                                </div>
+                                <div id="tooltip-default" role="tooltip"
+                                    class="absolute z-10 invisible inline-block px-3 py-2 text-xs font-normal text-white transition-opacity duration-300 bg-gray-900 rounded-md shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                    Nilai dari 0 - 100
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div>
+                                <input type="text" name="score.{{ $criteria->criteria_id }}"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('score.' . $criteria->criteria_id) bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
+                                    placeholder="{{ $criteria->criteria_name }}"
+                                    wire:model="score.{{ $criteria->criteria_id }}">
+                                @error('score.' . $criteria->criteria_id)
+                                    <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
-                            <div id="tooltip-default" role="tooltip"
-                                class="absolute z-10 invisible inline-block px-3 py-2 text-xs font-normal text-white transition-opacity duration-300 bg-gray-900 rounded-md shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                                Nilai dari 0 - 100
-                                <div class="tooltip-arrow" data-popper-arrow></div>
-                            </div>
-                            <input type="text" name="score" id="score"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('score') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                                placeholder="Nilai" value="{{ old('score') }}" wire:model="score">
-                            @error('score')
-                                <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-
+                        @endforeach
                     </div>
                     <button type="submit"
                         class="text-white inline-flex items-center bg-secondary-500 hover:bg-secondary-600 focus:ring-2 focus:outline-none focus:ring-secondary-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
@@ -152,7 +117,7 @@
                 <form wire:submit.prevent='update'>
                     @csrf
                     <div class="grid gap-4 mb-4 sm:grid-cols-2">
-                        <div wire:ignore.self>
+                        <div wire:ignore.self class="col-span-2">
                             <label for="nisn"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('nisn') text-red-700 @enderror">Siswa</label>
                             <select id="nisn" wire:model="nisn" name="nisn"
@@ -161,7 +126,8 @@
                                 <option disabled="disabled" default="true">Pilih siswa</option>
                                 @forelse ($students as $key => $value)
                                     <option value="{{ $value->nisn }}"
-                                        @if (old('nisn') == $value->nisn) selected @endif>{{ $value->student_name }}
+                                        @if (old('nisn') == $value->nisn) selected @endif>
+                                        {{ $value->student_name }}
                                     </option>
                                 @empty
                                     <option disabled selected>No student found.</option>
@@ -171,71 +137,34 @@
                                 <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div wire:ignore.self class="">
-                            <label for="alternative_id"
-                                class="block mb-2 text-sm font-medium text-gray-900 @error('alternative_id') text-red-700 @enderror">Alternatif</label>
-                            <select id="alternative_id" wire:model="alternative_id" name="alternative_id"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('alternative_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
-                                <option hidden>Pilih alternatif</option>
-                                <option disabled="disabled" default="true">Pilih alternatif</option>
-                                @forelse ($alternatives as $key => $value)
-                                    <option value="{{ $value->alternative_id }}"
-                                        @if (old('alternative_id') == $value->alternative_id) selected @endif>
-                                        {{ $value->alternative_name }}
-                                    </option>
-                                @empty
-                                    <option disabled selected>No alternative found.</option>
-                                @endforelse
-                            </select>
-                            @error('alternative_id')
-                                <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div wire:ignore.self class="">
-                            <label for="criteria_id"
-                                class="block mb-2 text-sm font-medium text-gray-900 @error('criteria_id') text-red-700 @enderror">Kriteria</label>
-                            <select id="criteria_id" wire:model="criteria_id" name="criteria_id"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('criteria_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
-                                <option hidden>Pilih kriteria</option>
-                                <option disabled="disabled" default="true">Pilih kriteria</option>
-                                @forelse ($criterias as $key => $value)
-                                    <option value="{{ $value->criteria_id }}"
-                                        @if (old('criteria_id') == $value->criteria_id) selected @endif>{{ $value->criteria_label }}
-                                    </option>
-                                @empty
-                                    <option disabled selected>No criteria found.</option>
-                                @endforelse
-                            </select>
-                            @error('criteria_id')
-                                <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div>
-                            <div class="flex flex-row items-center mb-2 space-x-1">
-                                <label for="score"
-                                    class="block text-sm font-medium text-gray-900 @error('score') text-red-700 @enderror">Nilai</label>
-                                <button data-tooltip-target="tooltip-default" type="button"
-                                    class="text-gray-400 hover:text-gray-600">
-                                    <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-                                            clip-rule="evenodd"></path>
-                                    </svg></button>
+                        @foreach ($criterias as $criteria_id => $criteria)
+                            <div>
+                                <div class="flex flex-row items-center mb-2 space-x-1">
+                                    <label for="score"
+                                        class="block text-sm font-medium text-gray-900 @error('score.' . $criteria->criteria_id) text-red-700 @enderror">{{ $criteria->criteria_name }}</label>
+                                    <button data-tooltip-target="tooltip-default" type="button"
+                                        class="text-gray-400 hover:text-gray-600">
+                                        <svg aria-hidden="true" class="w-4 h-4" fill="currentColor"
+                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                                clip-rule="evenodd"></path>
+                                        </svg></button>
+                                </div>
+                                <div id="tooltip-default" role="tooltip"
+                                    class="absolute z-10 invisible inline-block px-3 py-2 text-xs font-normal text-white transition-opacity duration-300 bg-gray-900 rounded-md shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                    Nilai dari 0 - 100
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div>
+                                <input type="text" name="score.{{ $criteria->criteria_id }}"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('score.' . $criteria->criteria_id) bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
+                                    placeholder="{{ $criteria->criteria_name }}"
+                                    wire:model="score.{{ $criteria->criteria_id }}">
+                                @error('score.' . $criteria->criteria_id)
+                                    <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
-                            <div id="tooltip-default" role="tooltip"
-                                class="absolute z-10 invisible inline-block px-3 py-2 text-xs font-normal text-white transition-opacity duration-300 bg-gray-900 rounded-md shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                                Nilai dari 0 - 100
-                                <div class="tooltip-arrow" data-popper-arrow></div>
-                            </div>
-                            <input type="text" name="score" id="score"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('score') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                                placeholder="Nilai" value="{{ old('score') }}" wire:model="score">
-                            @error('score')
-                                <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-
+                        @endforeach
                     </div>
                     <button type="submit"
                         class="text-white inline-flex items-center bg-secondary-500 hover:bg-secondary-600 focus:ring-2 focus:outline-none focus:ring-secondary-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">

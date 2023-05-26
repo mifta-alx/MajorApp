@@ -1,4 +1,5 @@
 <div>
+    {{-- @dd($data_max) --}}
     @include('livewire.scores.scoremodal')
     @if (session()->has('success'))
         <div id="toast"
@@ -111,115 +112,186 @@
                         </li>
                     </ul>
                 </div>
-
             </div>
-
-            <div wire:ignore.self class="relative flex items-center mt-4 md:mt-0">
-                <span class="absolute">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-5 h-5 mx-3 text-gray-400 dark:text-gray-600">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                    </svg>
-                </span>
-
-                <input type="text" placeholder="Search" wire:model="search" id="searchData"
-                    class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-secondary-400 dark:focus:border-secondary-300 focus:ring-secondary-300 focus:outline-none focus:ring focus:ring-opacity-40">
+            <div class="flex md:flex-row flex-col md:space-x-2 space-y-4 md:space-y-0">
+                <div wire:ignore.self class="relative flex items-center mt-4 md:mt-0">
+                    <span class="absolute">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor"
+                            class="w-5 h-5 mx-3 text-gray-400 dark:text-gray-600">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                        </svg>
+                    </span>
+                    <input type="text" placeholder="Search" wire:model="search" id="searchData"
+                        class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-secondary-400 dark:focus:border-secondary-300 focus:ring-secondary-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                </div>
+                {{-- <div class="mt-4 md:flex md:items-center md:justify-end"> --}}
+                <div class="flex flex-row space-x-2">
+                    <button
+                        class="{{ $currentStep == 1 ? 'text-white bg-secondary-400 hover:bg-secondary-500' : 'text-gray-500 bg-white hover:bg-gray-100 border-gray-200 hover:text-gray-900' }} focus:ring-0 focus:outline-none rounded-lg border text-xs font-pjs-medium px-5 py-2.5 focus:z-10"
+                        wire:click="changeStep(1)">
+                        Tabel Nilai Awal
+                    </button>
+                    <button
+                        class="{{ $currentStep == 2 ? 'text-white bg-secondary-400 hover:bg-secondary-500' : 'text-gray-500 bg-white hover:bg-gray-100 border-gray-200 hover:text-gray-900' }} focus:ring-0 focus:outline-none rounded-lg border text-xs font-pjs-medium px-5 py-2.5 focus:z-10"
+                        wire:click="changeStep(2)">
+                        Tabel Nilai Subcriteria
+                    </button>
+                </div>
+                {{-- </div> --}}
             </div>
         </div>
 
         @if ($scores->count())
-            <div class="flex flex-col mt-6">
-                <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                        <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-                            <table class="w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                <thead class="bg-gray-50 dark:bg-gray-800">
-                                    <tr>
-                                        <th scope="col"
-                                            class="py-4 px-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            No
-                                        </th>
-
-                                        <th scope="col"
-                                            class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            Nama Siswa
-                                        </th>
-
-                                        <th scope="col"
-                                            class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            Alternatif
-                                        </th>
-
-                                        <th scope="col"
-                                            class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            Kriteria
-                                        </th>
-
-                                        <th scope="col"
-                                            class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            Nilai
-                                        </th>
-
-                                        <th scope="col"
-                                            class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            Action
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                                    @foreach ($scores as $score)
+            {{-- TABEL NORMAL --}}
+            @if ($currentStep == 1)
+                <div class="flex flex-col mt-6">
+                    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                            <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+                                <table class="w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                    <thead class="bg-gray-50 dark:bg-gray-800">
                                         <tr>
-                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $loop->index + 1 }}
-                                            </td>
-                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $score->student_name }}
-                                            </td>
-                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $score->alternative_name }}
-                                            </td>
-                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $score->criteria_label }}
-                                            </td>
-                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $score->score }}
-                                            </td>
-                                            <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                                <div class="flex flex-row space-x-2">
-                                                    <button wire:click="edit({{ $score->score_id }})"
-                                                        data-modal-target="EditModal" data-modal-toggle="EditModal"
-                                                        class="flex items-center justify-center px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-secondary-400 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-secondary-500 dark:hover:bg-secondary-400 dark:bg-secondary-500">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                            viewBox="0 0 24 24" class="w-5 h-5">
-                                                            <path
-                                                                d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413L19.045 7.401zm-3-3 1.587 1.585-1.59 1.584-1.586-1.585 1.589-1.584zM6 16v-1.585l7.04-7.018 1.586 1.586L7.587 16H6zm-2 4h16v2H4z">
-                                                            </path>
-                                                        </svg>
-                                                        <span>Edit</span>
-                                                    </button>
-                                                    <button wire:click="delete({{ $score->score_id }})"
-                                                        data-modal-target="DeleteModal"
-                                                        data-modal-toggle="DeleteModal"
-                                                        class="flex items-center justify-center px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-red-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-red-600 dark:hover:bg-red-500 dark:bg-red-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                            viewBox="0 0 24 24" class="w-5 h-5">
-                                                            <path
-                                                                d="M15 2H9c-1.103 0-2 .897-2 2v2H3v2h2v12c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V8h2V6h-4V4c0-1.103-.897-2-2-2zM9 4h6v2H9V4zm8 16H7V8h10v12z">
-                                                            </path>
-                                                        </svg>
-                                                        <span>Delete</span>
-                                                    </button>
-                                                </div>
-                                            </td>
+                                            <th scope="col"
+                                                class="py-4 px-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
+                                                No
+                                            </th>
+
+                                            <th scope="col"
+                                                class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
+                                                Nama Siswa
+                                            </th>
+                                            @foreach ($criterias as $item)
+                                                <th scope="col"
+                                                    class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
+                                                    {{ $item->criteria_name }}
+                                                </th>
+                                            @endforeach
+
+                                            <th scope="col"
+                                                class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
+                                                Action
+                                            </th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody
+                                        class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                                        @foreach ($scores as $score)
+                                            <tr>
+                                                <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                                    {{ $loop->index + 1 }}
+                                                </td>
+                                                <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                                    {{ $score['nama'] }}
+                                                </td>
+                                                @foreach ($score['scores'] as $item)
+                                                    <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                                        {{ $item['score'] }}
+                                                    </td>
+                                                @endforeach
+                                                <td class="px-4 py-4 text-sm whitespace-nowrap">
+                                                    <div class="flex flex-row space-x-2">
+                                                        <button wire:click="edit('{{ $score['nisn'] }}')"
+                                                            data-modal-target="EditModal"
+                                                            data-modal-toggle="EditModal"
+                                                            class="flex items-center justify-center px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-secondary-400 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-secondary-500 dark:hover:bg-secondary-400 dark:bg-secondary-500">
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                fill="currentColor" viewBox="0 0 24 24"
+                                                                class="w-5 h-5">
+                                                                <path
+                                                                    d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413L19.045 7.401zm-3-3 1.587 1.585-1.59 1.584-1.586-1.585 1.589-1.584zM6 16v-1.585l7.04-7.018 1.586 1.586L7.587 16H6zm-2 4h16v2H4z">
+                                                                </path>
+                                                            </svg>
+                                                            <span>Edit</span>
+                                                        </button>
+                                                        <button wire:click="delete('{{ $score['nisn'] }}')"
+                                                            data-modal-target="DeleteModal"
+                                                            data-modal-toggle="DeleteModal"
+                                                            class="flex items-center justify-center px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-red-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-red-600 dark:hover:bg-red-500 dark:bg-red-600">
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                fill="currentColor" viewBox="0 0 24 24"
+                                                                class="w-5 h-5">
+                                                                <path
+                                                                    d="M15 2H9c-1.103 0-2 .897-2 2v2H3v2h2v12c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V8h2V6h-4V4c0-1.103-.897-2-2-2zM9 4h6v2H9V4zm8 16H7V8h10v12z">
+                                                                </path>
+                                                            </svg>
+                                                            <span>Delete</span>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
+            {{-- TABEL NORMALISASI --}}
+            @if ($currentStep == 2)
+                <div class="flex flex-col mt-6">
+                    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                            <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+                                <table class="w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                    <thead class="bg-gray-50 dark:bg-gray-800">
+                                        <tr>
+                                            <th scope="col"
+                                                class="py-4 px-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
+                                                No
+                                            </th>
+
+                                            <th scope="col"
+                                                class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
+                                                Nama Siswa
+                                            </th>
+                                            @foreach ($criterias as $item)
+                                                <th scope="col"
+                                                    class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
+                                                    {{ $item->criteria_name }}
+                                                </th>
+                                            @endforeach
+                                        </tr>
+                                    </thead>
+                                    <tbody
+                                        class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                                        @foreach ($scores as $score)
+                                            <tr>
+                                                <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                                    {{ $loop->index + 1 }}
+                                                </td>
+                                                <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                                    {{ $score['nama'] }}
+                                                </td>
+                                                @foreach ($score['scores'] as $item)
+                                                    <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                                        {{ $item['sub_score'] }}
+                                                    </td>
+                                                @endforeach
+                                            </tr>
+                                        @endforeach
+                                        <tr>
+                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+
+                                            </td>
+                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                                Max
+                                            </td>
+                                            @foreach ($data_max as $item)
+                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                                {{ $item }}
+                                            </td>
+                                            @endforeach
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         @else
             <div class="flex items-center mt-6 text-center border rounded-lg h-96 dark:border-gray-700">
                 @if ($search)
@@ -259,7 +331,7 @@
         @endif
 
         <div class="mt-6">
-            {{ $scores->links('pagination::tailwind') }}
+            {{-- {{ $scores->links() }} --}}
         </div>
 
     </section>

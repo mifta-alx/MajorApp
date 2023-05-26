@@ -1,35 +1,4 @@
 <div>
-    @include('livewire.roles.rolemodal')
-    @if (session()->has('success'))
-        <div id="toast"
-            class="toast absolute flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow right-5"
-            role="alert">
-            <div
-                class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg">
-                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"></path>
-                </svg>
-                <span class="sr-only">Check icon</span>
-            </div>
-            <div class="ml-3 text-sm font-normal">
-                {{ session('success') }}
-            </div>
-            <button type="button"
-                class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 "
-                data-dismiss-target="#toast" aria-label="Close">
-                <span class="sr-only">Close</span>
-                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fillRule="evenodd"
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clipRule="evenodd"></path>
-                </svg>
-            </button>
-        </div>
-    @endif
     <section class="container px-4 mx-auto">
         <div class="sm:flex sm:items-center sm:justify-between">
             <div>
@@ -40,11 +9,11 @@
                         class="px-3 py-1 text-xs text-secondary-600 bg-secondary-100 rounded-full">{{ $count . ' ' . $titles }}</span>
                 </div>
 
-                <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">Add {{ $titles }}, edit and more.</p>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">See the {{ $titles }}.</p>
             </div>
 
             <div class="flex items-center mt-4 gap-x-3">
-                {{-- <button
+                <button
                     class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-5 h-5">
@@ -53,17 +22,6 @@
                     </svg>
 
                     <span>Report</span>
-                </button> --}}
-
-                <button data-modal-target="CreateModal" data-modal-toggle="CreateModal"
-                    class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-secondary-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-secondary-600 dark:hover:bg-secondary-500 dark:bg-secondary-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-5 h-5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-
-                    <span>Add {{ $title }}</span>
                 </button>
             </div>
         </div>
@@ -128,75 +86,71 @@
             </div>
         </div>
 
-        @if ($roles->count())
-            <div class="flex flex-col mt-6">
-                <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                        <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-                            <table class="w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                <thead class="bg-gray-50 dark:bg-gray-800">
-                                    <tr>
-                                        <th scope="col"
-                                            class="py-4 px-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            No
-                                        </th>
+        @if ($results->count())
+        <div class="flex flex-col mt-6">
+            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                    <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+                        <table class="w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead class="bg-gray-50 dark:bg-gray-800">
+                                <tr>
+                                    <th scope="col"
+                                        class="py-4 px-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
+                                        No
+                                    </th>
 
+                                    <th scope="col"
+                                        class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
+                                        Nama Siswa
+                                    </th>
+
+                                    @foreach ($criterias as $item)
                                         <th scope="col"
                                             class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            Nama Role
+                                            {{ $item->criteria_name }}
                                         </th>
-
-                                        <th scope="col"
-                                            class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            Action
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                                    @foreach ($roles as $role)
-                                        <tr>
-                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ ($roles->currentPage() - 1) * $roles->perPage() + $loop->iteration }}
-                                            </td>
-                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $role->role_name }}
-                                            </td>
-                                            <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                                <div class="flex flex-row space-x-2">
-                                                    <button wire:click="edit({{ $role->role_id }})"
-                                                        data-modal-target="EditModal" data-modal-toggle="EditModal"
-                                                        class="flex items-center justify-center px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-secondary-400 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-secondary-500 dark:hover:bg-secondary-400 dark:bg-secondary-500">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                            viewBox="0 0 24 24" class="w-5 h-5">
-                                                            <path
-                                                                d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413L19.045 7.401zm-3-3 1.587 1.585-1.59 1.584-1.586-1.585 1.589-1.584zM6 16v-1.585l7.04-7.018 1.586 1.586L7.587 16H6zm-2 4h16v2H4z">
-                                                            </path>
-                                                        </svg>
-                                                        <span>Edit</span>
-                                                    </button>
-                                                    <button wire:click="delete({{ $role->role_id }})"
-                                                        data-modal-target="DeleteModal"
-                                                        data-modal-toggle="DeleteModal"
-                                                        class="flex items-center justify-center px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-red-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-red-600 dark:hover:bg-red-500 dark:bg-red-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                            viewBox="0 0 24 24" class="w-5 h-5">
-                                                            <path
-                                                                d="M15 2H9c-1.103 0-2 .897-2 2v2H3v2h2v12c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V8h2V6h-4V4c0-1.103-.897-2-2-2zM9 4h6v2H9V4zm8 16H7V8h10v12z">
-                                                            </path>
-                                                        </svg>
-                                                        <span>Delete</span>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
                                     @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+
+                                    <th scope="col"
+                                        class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
+                                        Hasil
+                                    </th>
+
+                                    <th scope="col"
+                                        class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
+                                        Rekomendasi
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                                @foreach ($results as $result)  
+                                <tr>
+                                    <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                        {{ ($results->currentPage() - 1) * $results->perPage() + $loop->iteration }}
+                                    </td>
+                                    <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                        {{ $result->student->student_name }}
+                                    </td>
+                                    @foreach ($result->normalized_value as $value)
+                                    <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                        {{ $value }}
+                                    </td>
+                                    @endforeach
+                                    <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                        {{ $result->saw_result }}
+                                    </td>
+                                    <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                        {{ $result->recomendation_result }}
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            @else
+        </div>
+        @else
             <div class="flex items-center mt-6 text-center border rounded-lg h-96 dark:border-gray-700">
                 @if ($search)
                     <div class="flex flex-col w-full max-w-sm px-4 mx-auto">
@@ -235,7 +189,7 @@
         @endif
 
         <div class="mt-6">
-            {{ $roles->links() }}
+            {{ $results->links() }}
         </div>
 
     </section>

@@ -34,7 +34,7 @@
                             <option disabled="disabled" default="true">Pilih kriteria</option>
                             @forelse ($criterias as $key => $value)
                                 <option value="{{ $value->criteria_id }}"
-                                    @if (old('criteria_id') == $value->criteria_id) selected @endif>{{ $value->criteria_label }}
+                                    @if (old('criteria_id') == $value->criteria_id) selected @endif>{{ $value->criteria_name }}
                                 </option>
                             @empty
                                 <option disabled selected>No subcriteria found.</option>
@@ -132,7 +132,7 @@
                             @forelse ($criterias as $item)
                                 <option value="{{ $item->criteria_id }}"
                                     {{ old('criteria_id') == $item->criteria_id ? 'selected' : '' }}>
-                                    {{ $item->criteria_label }}</option>
+                                    {{ $item->criteria_name }}</option>
                             @empty
                                 <option>No subcriteria found.</option>
                             @endforelse

@@ -37,14 +37,13 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="criteria_label"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('criteria_label') text-red-700 @enderror">Label
-                            Kriteria</label>
-                        <input type="text" name="criteria_label" id="criteria_label"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('criteria_label') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                            value="{{ old('criteria_label') }}" placeholder="Label Kriteria"
-                            wire:model="criteria_label">
-                        @error('criteria_label')
+                        <label for="criteria_code"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('criteria_code') text-red-700 @enderror">Kode Kriteria</label>
+                        <input type="text" name="criteria_code" id="criteria_code"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('criteria_code') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
+                            value="{{ old('criteria_code') }}" placeholder="Label Kriteria"
+                            wire:model="criteria_code">
+                        @error('criteria_code')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
@@ -113,14 +112,13 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="criteria_label"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('criteria_label') text-red-700 @enderror">Label
-                            Kriteria</label>
-                        <input type="text" name="criteria_label" id="criteria_label"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('criteria_label') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                            value="{{ old('criteria_label') }}" placeholder="Label Kriteria"
-                            wire:model="criteria_label">
-                        @error('criteria_label')
+                        <label for="criteria_code"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('criteria_code') text-red-700 @enderror">Kode Kriteria</label>
+                        <input type="text" name="criteria_code" id="criteria_code"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('criteria_code') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
+                            value="{{ old('criteria_code') }}" placeholder="Label Kriteria"
+                            wire:model="criteria_code">
+                        @error('criteria_code')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
                     </div>

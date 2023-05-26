@@ -53,7 +53,7 @@
                         <div class="grid grid-cols-2">
                             <div
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-l-lg flex items-center py-2 px-3 @error('gender') bg-red-50 border-red-500 text-red-900 @enderror">
-                                <input id="inline-radio" type="radio" value="Laki - laki" wire:model='gender'
+                                <input id="inline-radio" type="radio" value="Laki-laki" wire:model='gender'
                                     name="inline-radio-group"
                                     class="w-4 h-4 text-secondary-500 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-0 @error('gender') text-red-700 border-red-500 bg-red-50 @enderror">
                                 <label for="inline-radio"
@@ -243,7 +243,7 @@
                         <div class="grid grid-cols-2">
                             <div
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-l-lg flex items-center py-2 px-3 @error('gender') bg-red-50 border-red-500 text-red-900 @enderror">
-                                <input id="inline-radio" type="radio" value="Laki - laki" wire:model='gender'
+                                <input id="inline-radio" type="radio" value="Laki-laki" wire:model='gender'
                                     name="inline-radio-group"
                                     class="w-4 h-4 text-secondary-500 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-0 @error('gender') text-red-700 border-red-500 bg-red-50 @enderror">
                                 <label for="inline-radio"

@@ -44,7 +44,7 @@
             </div>
 
             <div class="flex items-center mt-4 gap-x-3">
-                <button
+                {{-- <button
                     class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-5 h-5">
@@ -53,7 +53,7 @@
                     </svg>
 
                     <span>Report</span>
-                </button>
+                </button> --}}
 
                 <button data-modal-target="CreateModal" data-modal-toggle="CreateModal"
                     class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-secondary-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-secondary-600 dark:hover:bg-secondary-500 dark:bg-secondary-600">
@@ -171,7 +171,7 @@
                                     @foreach ($users as $user)
                                         <tr>
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $loop->index + 1 }}
+                                                {{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}
                                             </td>
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                                                 {{ $user->nama }}
@@ -183,7 +183,7 @@
                                                 {{ $user->email }}
                                             </td>
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $user->role_name }}
+                                                {{ $user->role->role_name }}
                                             </td>
                                             <td class="px-4 py-4 text-sm whitespace-nowrap">
                                                 <div class="flex flex-row space-x-2">
@@ -259,7 +259,7 @@
         @endif
 
         <div class="mt-6">
-            {{ $users->links('pagination::tailwind') }}
+            {{ $users->links() }}
         </div>
 
     </section>

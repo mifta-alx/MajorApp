@@ -44,7 +44,7 @@
             </div>
 
             <div class="flex items-center mt-4 gap-x-3">
-                <button
+                {{-- <button
                     class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-5 h-5">
@@ -53,7 +53,7 @@
                     </svg>
 
                     <span>Report</span>
-                </button>
+                </button> --}}
 
                 <button data-modal-target="CreateModal" data-modal-toggle="CreateModal"
                     class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-secondary-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-secondary-600 dark:hover:bg-secondary-500 dark:bg-secondary-600">
@@ -143,22 +143,22 @@
 
                                         <th scope="col"
                                             class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            Criteria
+                                            Kriteria
                                         </th>
                                         
                                         <th scope="col"
                                             class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            Initial Limit
+                                            Nilai Batas Awal
                                         </th>
 
                                         <th scope="col"
                                             class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            Final Limit
+                                            Nilai Batas Akhir
                                         </th>
 
                                         <th scope="col"
                                             class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            Subcriteria Score
+                                            Nilai Subkriteria
                                         </th>
 
                                         <th scope="col"
@@ -171,10 +171,10 @@
                                     @foreach ($subcriterias as $subcriteria)
                                         <tr>
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $loop->index + 1 }}
+                                                {{ ($subcriterias->currentPage() - 1) * $subcriterias->perPage() + $loop->iteration }}
                                             </td>
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $subcriteria->criteria_label }}
+                                                {{ $subcriteria->criteria->criteria_name }}
                                             </td>
                                             
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
@@ -263,7 +263,7 @@
         @endif
 
         <div class="mt-6">
-            {{ $subcriterias->links('pagination::tailwind') }}
+            {{ $subcriterias->links() }}
         </div>
 
     </section>
