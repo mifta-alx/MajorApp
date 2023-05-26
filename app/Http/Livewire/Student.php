@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 class Student extends Component
 {
     use WithPagination;
+    protected $paginationTheme = 'tailwind';
     public $months = [
         'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
     ];
@@ -69,8 +70,8 @@ class Student extends Component
         $uuid = Str::uuid();
         $validated = $this->validate();
         $student = [
-            'nisn' => $validated['nisn'],
             'uuid' => $uuid,
+            'nisn' => $validated['nisn'],
             'student_name' => $validated['student_name'],
             'birth_place' => $validated['birth_place'],
             'birth_date' => $validated['day'] . ' ' . $validated['month'] . ' ' . $validated['year'],
@@ -79,16 +80,20 @@ class Student extends Component
             'phone' => $validated['phone'],
             'npsn' => $validated['npsn'],
         ];
-        Students::create($student);
-        session()->flash('success', 'Student created successfully!');
+        if (Students::create($student)) {
+            session()->flash('success', 'Student created successfully!');
+        } else {
+            session()->flash('danger', 'Student created failed!');
+        }
         return redirect()->to('/students');
         $this->reset();
         $this->resetInput();
     }
-    public function edit(int $nisn)
+    public function edit(string $uuid)
     {
-        $student = Students::find($nisn);
+        $student = Students::find($uuid);
         if ($student) {
+            $this->uuid = $uuid;
             $birth_dates = explode(' ', $student->birth_date);
             $this->nisn = $student->nisn;
             $this->student_name = $student->student_name;
@@ -120,7 +125,7 @@ class Student extends Component
             'npsn' => 'required'
         ];
 
-        if ('student_name' == $this->student_name) {
+        if ('nisn' == $this->nisn) {
             $rules['nisn'] = 'required|numeric|digits:10|unique:students';
             $rules['student_name'] = 'required|min:3|unique:students';
             $rules['email'] = 'required|email:dns|unique:students';
@@ -150,7 +155,7 @@ class Student extends Component
             'phone.min' => 'Nomor telepon minimal 11 karakter',
             'npsn.required' => 'Asal sekolah tidak boleh kosong',
         ]);
-        Students::where('nisn', $this->nisn)->update([
+        Students::where('uuid', $this->uuid)->update([
             'nisn' => $validated['nisn'],
             'student_name' => $validated['student_name'],
             'birth_place' => $validated['birth_place'],
@@ -165,13 +170,13 @@ class Student extends Component
         $this->reset();
         $this->resetInput();
     }
-    public function delete(int $nisn)
+    public function delete(string $uuid)
     {
-        $this->nisn = $nisn;
+        $this->uuid = $uuid;
     }
     public function destroy()
     {
-        $student = Students::find($this->nisn)->delete();
+        $student = Students::find($this->uuid)->delete();
         session()->flash('success', 'Student deleted successfully!');
         return redirect()->to('/students');
         $this->reset();
@@ -205,10 +210,12 @@ class Student extends Component
     public function render()
     {
         return view('livewire.students.student', [
-            'students' =>  Students::where('student_name', 'like', '%' . $this->search . '%')
-                ->orWhere('nisn', 'like', '%' . $this->search . '%')
-                ->join('schools', 'students.npsn', '=', 'schools.npsn')
-                ->paginate($this->paginate, ['students.*', 'schools.school_name']),
+            'students' =>  Students::with('school')
+            ->whereHas('school', function ($query) {
+                $query->where('student_name', 'like', '%' . $this->search . '%')
+                    ->orWhere('nisn', 'like', '%' . $this->search . '%');
+            })
+                ->paginate($this->paginate),
             'months' => $this->months,
             'schools' => Schools::all(),
             'count' => Students::all()->count(),

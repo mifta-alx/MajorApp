@@ -11,7 +11,7 @@ use App\Models\Role as Roles;
 class User extends Component
 {
     use WithPagination;
-
+    protected $paginationTheme = 'tailwind';
     public $user_id, $nama, $username, $email, $password, $role_id, $uuid;
     public $paginate = 5;
     public $search = '';
@@ -143,9 +143,8 @@ class User extends Component
     public function render()
     {
         return view('livewire.users.user', [
-            'users' =>  Users::where('nama', 'like', '%' . $this->search . '%')
-                ->join('roles', 'users.role_id', '=', 'roles.role_id')
-                ->paginate($this->paginate, ['users.*', 'roles.role_name']),
+            'users' =>  Users::with('role')->where('nama', 'like', '%' . $this->search . '%')
+                ->paginate($this->paginate),
             'count' => Users::all()->count(),
             'roles' => Roles::all(),
             'titles' => 'users',

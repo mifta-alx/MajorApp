@@ -9,7 +9,7 @@ use App\Models\Role as Roles;
 class Role extends Component
 {
     use WithPagination;
-
+    protected $paginationTheme = 'tailwind';
     public $role_id, $role_name;
     public $paginate = 5;
     public $search = '';

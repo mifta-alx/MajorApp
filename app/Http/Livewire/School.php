@@ -5,11 +5,14 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\School as Schools;
+use Illuminate\Support\Str;
 
 class School extends Component
 {
     use WithPagination;
+    protected $paginationTheme = 'tailwind';
     public $npsn, $school_name, $address, $city_regency, $province;
+    public $uuid;
     public $paginate = 5;
     public $search = '';
     public $province_arr = [
@@ -616,17 +619,27 @@ class School extends Component
     public function store()
     {
         $this->resetErrorBag();
+        $uuid = Str::uuid();
         $validated = $this->validate();
-        Schools::create($validated);
+        $school = [
+            'uuid' => $uuid,
+            'npsn' => $validated['npsn'],
+            'school_name' => $validated['school_name'],
+            'address' => $validated['address'],
+            'city_regency' => $validated['city_regency'],
+            'province' => $validated['province']
+        ];
+        Schools::create($school);
         session()->flash('success', 'School created successfully!');
         return redirect()->to('/schools');
         $this->reset();
         $this->resetInput();
     }
-    public function edit(int $npsn)
+    public function edit(string $uuid)
     {
-        $school = Schools::find($npsn);
+        $school = Schools::find($uuid);
         if ($school) {
+            $this->uuid = $uuid;
             $this->npsn = $school->npsn;
             $this->school_name = $school->school_name;
             $this->address = $school->address;
@@ -647,12 +660,9 @@ class School extends Component
             'province' => 'required',
         ];
 
-        if ('school_name' == $this->school_name) {
+        if ('npsn' == $this->npsn) {
             $rules['npsn'] = 'required|unique:schools';
             $rules['school_name'] = 'required|unique:schools';
-            $rules['address'] = 'required';
-            $rules['city_regency'] = 'required';
-            $rules['province'] = 'required';
         }
         $validated = $this->validate($rules, [
             'npsn.required' => 'NPSN tidak boleh kosong',
@@ -663,7 +673,7 @@ class School extends Component
             'city_regency.required' => 'Kota/Kabupaten tidak boleh kosong',
             'province.required' => 'Provinsi tidak boleh kosong',
         ]);
-        Schools::where('npsn', $this->npsn)->update([
+        Schools::where('uuid', $this->uuid)->update([
             'npsn' => $validated['npsn'],
             'school_name' => $validated['school_name'],
             'address' => $validated['address'],
@@ -675,13 +685,13 @@ class School extends Component
         $this->reset();
         $this->resetInput();
     }
-    public function delete(int $npsn)
+    public function delete(string $uuid)
     {
-        $this->npsn = $npsn;
+        $this->uuid = $uuid;
     }
     public function destroy()
     {
-        $school = Schools::find($this->npsn)->delete();
+        $school = Schools::find($this->uuid)->delete();
         session()->flash('success', 'School deleted successfully!');
         return redirect()->to('/schools');
         $this->reset();

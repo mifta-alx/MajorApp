@@ -9,21 +9,21 @@ use App\Models\Criteria as Criterias;
 class Criteria extends Component
 {
     use WithPagination;
-
-    public $criteria_id, $criteria_name, $criteria_label, $weight;
+    protected $paginationTheme = 'tailwind';
+    public $criteria_id, $criteria_name, $criteria_code, $weight;
     public $paginate = 5;
     public $search = '';
 
     protected $rules = [
         'criteria_name' => 'required|unique:criterias',
-        'criteria_label' => 'required|unique:criterias',
+        'criteria_code' => 'required|unique:criterias',
         'weight' => 'required|numeric|between:0,1',
     ];
     protected $messages = [
         'criteria_name.unique' => 'Nama kriteria sudah terdaftar',
         'criteria_name.required' => 'Nama kriteria tidak boleh kosong',
-        'criteria_label.unique' => 'Label kriteria sudah terdaftar',
-        'criteria_label.required' => 'Label kriteria tidak boleh kosong',
+        'criteria_code.unique' => 'Label kriteria sudah terdaftar',
+        'criteria_code.required' => 'Label kriteria tidak boleh kosong',
         'weight.required' => 'Bobot tidak boleh kosong',
         'weight.numeric' => 'Bobot harus berisi angka',
         'weight.between' => 'Bobot harus berisi nilai antara 0 sampai 1',
@@ -48,7 +48,7 @@ class Criteria extends Component
         if ($criteria) {
             $this->criteria_id = $criteria->criteria_id;
             $this->criteria_name = $criteria->criteria_name;
-            $this->criteria_label = $criteria->criteria_label;
+            $this->criteria_code = $criteria->criteria_code;
             $this->weight = $criteria->weight;
         } else {
             return redirect()->to('/criterias');
@@ -59,26 +59,26 @@ class Criteria extends Component
         $this->resetErrorBag();
         $rules = [
             'criteria_name' => 'required',
-            'criteria_label' => 'required',
+            'criteria_code' => 'required',
             'weight' => 'required|numeric|between:0,1',
         ];
 
         if ('criteria_name' == $this->criteria_name) {
             $rules['criteria_name'] = 'required|unique:criterias';
-            $rules['criteria_label'] = 'required|unique:criterias';
+            $rules['criteria_code'] = 'required|unique:criterias';
         }
         $validated = $this->validate($rules, [
             'criteria_name.unique' => 'Nama kriteria sudah terdaftar',
             'criteria_name.required' => 'Nama kriteria tidak boleh kosong',
-            'criteria_label.unique' => 'Label kriteria sudah terdaftar',
-            'criteria_label.required' => 'Label kriteria tidak boleh kosong',
+            'criteria_code.unique' => 'Label kriteria sudah terdaftar',
+            'criteria_code.required' => 'Label kriteria tidak boleh kosong',
             'weight.required' => 'Bobot tidak boleh kosong',
             'weight.numeric' => 'Bobot harus berisi angka',
             'weight.between' => 'Bobot harus berisi nilai antara 0 sampai 1',
         ]);
         Criterias::where('criteria_id', $this->criteria_id)->update([
             'criteria_name' => $validated['criteria_name'],
-            'criteria_label' => $validated['criteria_label'],
+            'criteria_code' => $validated['criteria_code'],
             'weight' => $validated['weight'],
         ]);
         session()->flash('success', 'Criteria updated successfully!');
@@ -107,7 +107,7 @@ class Criteria extends Component
     {
         $this->criteria_id = '';
         $this->criteria_name = '';
-        $this->criteria_label = '';
+        $this->criteria_code = '';
         $this->weight = '';
     }
     public function updatingSearch()
@@ -122,7 +122,6 @@ class Criteria extends Component
     {
         return view('livewire.criterias.criteria', [
             'criterias' =>  Criterias::where('criteria_name', 'like', '%' . $this->search . '%')
-                ->orWhere('criteria_label', 'like', '%' . $this->search . '%')
                 ->paginate($this->paginate),
             'count' => Criterias::all()->count(),
             'titles' => 'criterias',

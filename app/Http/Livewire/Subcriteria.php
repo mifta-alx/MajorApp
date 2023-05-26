@@ -6,20 +6,68 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Criteria as Criterias;
 use App\Models\Subcriteria as SubCriterias;
+use Illuminate\Validation\Rule;
+use App\Rules\NotBetween;
 
 class Subcriteria extends Component
 {
     use WithPagination;
+    protected $paginationTheme = 'tailwind';
     public $subcriteria_id, $criteria_id, $subcriteria_start, $subcriteria_end, $subcriteria_score;
     public $paginate = 5;
     public $search = '';
 
-    protected $rules = [
-        'criteria_id' => 'required',
-        'subcriteria_start' => 'required|numeric|between:0,100',
-        'subcriteria_end' => 'required|numeric|between:0,100',
-        'subcriteria_score' => 'required|numeric|between:1,5',
-    ];
+    public function rules()
+    {
+        return [
+            'criteria_id' => [
+                'required',
+                Rule::unique('subcriterias')->where(function ($query) {
+                    return $query->where([
+                        ['subcriteria_start', $this->subcriteria_start],
+                        ['subcriteria_end', $this->subcriteria_end],
+                        ['subcriteria_score', $this->subcriteria_score,]
+                    ]);
+                })
+            ],
+            'subcriteria_start' => [
+                'required',
+                'numeric',
+                'between:0,100',
+                Rule::unique('subcriterias')->where(function ($query) {
+                    return $query->where([
+                        ['criteria_id', $this->criteria_id],
+                        ['subcriteria_end', $this->subcriteria_end],
+                        ['subcriteria_score', $this->subcriteria_score],
+                    ]);
+                })
+            ],
+            'subcriteria_end' => [
+                'required',
+                'numeric',
+                'between:0,100',
+                Rule::unique('subcriterias')->where(function ($query) {
+                    return $query->where([
+                        ['criteria_id', $this->criteria_id],
+                        ['subcriteria_start', $this->subcriteria_start],
+                        ['subcriteria_score', $this->subcriteria_score,]
+                    ]);
+                })
+            ],
+            'subcriteria_score' => [
+                'required',
+                'numeric',
+                'between:1,5',
+                Rule::unique('subcriterias')->where(function ($query) {
+                    return $query->where([
+                        ['criteria_id', $this->criteria_id],
+                        ['subcriteria_start', $this->subcriteria_start],
+                        ['subcriteria_end', $this->subcriteria_end,]
+                    ]);
+                })
+            ]
+        ];
+    }
     protected $messages = [
         'criteria_id.required' => 'Id kriteria tidak boleh kosong',
         'subcriteria_start.required' => 'Nilai awal subkriteria tidak boleh kosong',
@@ -61,7 +109,127 @@ class Subcriteria extends Component
     public function update()
     {
         $this->resetErrorBag();
-        $validated = $this->validate();
+        $rules = [
+            'criteria_id' => [
+                'required',
+                Rule::unique('subcriterias')->where(function ($query) {
+                    return $query->where([
+                        ['subcriteria_start', $this->subcriteria_start],
+                        ['subcriteria_end', $this->subcriteria_end],
+                        ['subcriteria_score', $this->subcriteria_score,]
+                    ]);
+                })
+            ],
+            'subcriteria_start' => [
+                'required',
+                'numeric',
+                'between:0,100',
+                Rule::unique('subcriterias')->where(function ($query) {
+                    return $query->where([
+                        ['criteria_id', $this->criteria_id],
+                        ['subcriteria_end', $this->subcriteria_end],
+                        ['subcriteria_score', $this->subcriteria_score],
+                    ]);
+                })
+            ],
+            'subcriteria_end' => [
+                'required',
+                'numeric',
+                'between:0,100',
+                Rule::unique('subcriterias')->where(function ($query) {
+                    return $query->where([
+                        ['criteria_id', $this->criteria_id],
+                        ['subcriteria_start', $this->subcriteria_start],
+                        ['subcriteria_score', $this->subcriteria_score,]
+                    ]);
+                })
+            ],
+            'subcriteria_score' => [
+                'required',
+                'numeric',
+                'between:1,5',
+                Rule::unique('subcriterias')->where(function ($query) {
+                    return $query->where([
+                        ['criteria_id', $this->criteria_id],
+                        ['subcriteria_start', $this->subcriteria_start],
+                        ['subcriteria_end', $this->subcriteria_end,]
+                    ]);
+                })
+            ]
+        ];
+
+        if ('subcriteria_id' == $this->subcriteria_id) {
+            $rules['criteria_id'] = [
+                'required',
+                Rule::unique('subcriterias')->where(function ($query) {
+                    return $query->where([
+                        ['subcriteria_start', $this->subcriteria_start],
+                        ['subcriteria_end', $this->subcriteria_end],
+                        ['subcriteria_score', $this->subcriteria_score,]
+                    ]);
+                })
+            ];
+            $rules['subcriteria_start'] = [
+                'required',
+                'numeric',
+                'between:0,100',
+                Rule::unique('subcriterias')->where(function ($query) {
+                    return $query->where([
+                        ['criteria_id', $this->criteria_id],
+                        ['subcriteria_end', $this->subcriteria_end],
+                        ['subcriteria_score', $this->subcriteria_score],
+                    ]);
+                })
+            ];
+            $rules['subcriteria_end'] = [
+                'required',
+                'numeric',
+                'between:0,100',
+                Rule::unique('subcriterias')->where(function ($query) {
+                    return $query->where([
+                        ['criteria_id', $this->criteria_id],
+                        ['subcriteria_start', $this->subcriteria_start],
+                        ['subcriteria_score', $this->subcriteria_score,]
+                    ]);
+                })
+            ];
+            $rules['subcriteria_score'] = [
+                'required',
+                'numeric',
+                'between:0,100',
+                Rule::unique('subcriterias')->where(function ($query) {
+                    return $query->where([
+                        ['criteria_id', $this->criteria_id],
+                        ['subcriteria_start', $this->subcriteria_start],
+                        ['subcriteria_score', $this->subcriteria_score,]
+                    ]);
+                })
+            ];
+            $rules['subcriteria_end'] = [
+                'required',
+                'numeric',
+                'between:1,5',
+                Rule::unique('subcriterias')->where(function ($query) {
+                    return $query->where([
+                        ['criteria_id', $this->criteria_id],
+                        ['subcriteria_start', $this->subcriteria_start],
+                        ['subcriteria_end', $this->subcriteria_end,]
+                    ]);
+                })
+            ];
+        }
+        $validated = $this->validate($rules, [
+            'criteria_id.required' => 'Id kriteria tidak boleh kosong',
+            'subcriteria_start.required' => 'Nilai awal subkriteria tidak boleh kosong',
+            'subcriteria_start.numeric' => 'Nilai awal subkriteria harus berisi angka',
+            'subcriteria_start.between' => 'Nilai awal subkriteria harus berisi nilai antara 0 sampai 100',
+            'subcriteria_end.required' => 'Nilai akhir subkriteria tidak boleh kosong',
+            'subcriteria_end.numeric' => 'Nilai akhir subkriteria harus berisi angka',
+            'subcriteria_end.between' => 'Nilai akhir subkriteria harus berisi nilai antara 0 sampai 100',
+            'subcriteria_score.required' => 'Nilai subkriteria tidak boleh kosong',
+            'subcriteria_score.numeric' => 'Nilai subkriteria harus berisi angka',
+            'subcriteria_score.between' => 'Nilai subkriteria harus berisi nilai antara 1 sampai 5',
+        ]);
         Subcriterias::where('subcriteria_id', $this->subcriteria_id)->update([
             'criteria_id' => $validated['criteria_id'],
             'subcriteria_start' => $validated['subcriteria_start'],
@@ -109,10 +277,11 @@ class Subcriteria extends Component
     public function render()
     {
         return view('livewire.subcriterias.subcriteria', [
-            'subcriterias' =>  Subcriterias::where('criteria_name', 'like', '%' . $this->search . '%')
-                ->orWhere('criteria_label', 'like', '%' . $this->search . '%')
-                ->join('criterias', 'subcriterias.criteria_id', '=', 'criterias.criteria_id')
-                ->paginate($this->paginate, ['subcriterias.*', 'criterias.criteria_label']),
+            'subcriterias' =>  Subcriterias::with('criteria')
+                ->whereHas('criteria', function ($query) {
+                    $query->where('criteria_name', 'like', '%' . $this->search . '%');
+                })
+                ->paginate($this->paginate),
             'count' => SubCriterias::all()->count(),
             'titles' => 'subcriterias',
             'title' => 'subcriteria',

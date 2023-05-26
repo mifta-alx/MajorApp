@@ -6,61 +6,36 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Score as Scores;
 use App\Models\Student as Students;
-use App\Models\Alternative as Alternatives;
 use App\Models\Criteria as Criterias;
+use App\Models\Subcriteria as Subcriterias;
+use App\Models\Result as Results;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class Score extends Component
 {
     use WithPagination;
-
-    public $score_id, $nisn, $alternative_id, $criteria_id, $score;
+    protected $paginationTheme = 'tailwind';
+    public $score_id, $nisn, $criteria_id, $score, $uuid;
+    public $score_by_criteria;
     public $paginate = 5;
     public $search = '';
+    public $totalSteps = 2;
+    public $currentStep = 1;
 
     public function rules()
     {
         return [
-            'nisn' => [
-                'required',
-                Rule::unique('scores')->where(function ($query) {
-                    return $query->where([
-                        ['alternative_id', $this->alternative_id],
-                        ['criteria_id', $this->criteria_id],
-                    ]);
-                })
-            ],
-            'alternative_id' => [
-                'required',
-                Rule::unique('scores')->where(function ($query) {
-                    return $query->where([
-                        ['criteria_id', $this->criteria_id],
-                        ['nisn', $this->nisn],
-                    ]);
-                })
-            ],
-            'criteria_id' => [
-                'required',
-                Rule::unique('scores')->where(function ($query) {
-                    return $query->where([
-                        ['alternative_id', $this->alternative_id],
-                        ['nisn', $this->nisn],
-                    ]);
-                })
-            ],
-            'score' => 'required|numeric|between:0,100',
+            'nisn' => ['required'],
+            'score.*' => 'required|numeric',
         ];
     }
     protected $messages = [
         'nisn.required' => 'Siswa tidak boleh kosong',
         'nisn.unique' => 'Siswa ini sudah digunakan untuk alternatif dan kriteria yang dipilih',
-        'alternative_id.required' => 'Alternative tidak boleh kosong',
-        'alternative_id.unique' => 'Alternatif ini sudah digunakan untuk siswa dan kriteria yang dipilih',
-        'criteria_id.required' => 'Kriteria tidak boleh kosong',
-        'criteria_id.unique' => 'Kriteria ini sudah digunakan untuk siswa dan alternatif yang dipilih',
-        'score.required' => 'Nilai tidak boleh kosong',
-        'score.numeric' => 'Nilai harus berisi angka',
-        'score.between' => 'Nilai harus berisi nilai antara 0 sampai 100',
+        'score.*.required' => 'Nilai tidak boleh kosong',
+        'score.*.numeric' => 'Nilai harus berisi angka',
+        'score.*.between' => 'Nilai harus berisi nilai antara 0 sampai 100',
     ];
     public function updated($fields)
     {
@@ -70,21 +45,30 @@ class Score extends Component
     {
         $this->resetErrorBag();
         $validated = $this->validate();
-        Scores::create($validated);
+        $scoreData = [];
+        $normalizedData = [];
+        foreach ($validated['score'] as $key => $value) {
+            $data = [
+                'nisn' => $validated['nisn'],
+                'criteria_id' => $key,
+                'score' => $this->score[$key]
+            ];
+            Scores::create($data);
+        }
         session()->flash('success', 'Score created successfully!');
         return redirect()->to('/scores');
         $this->reset();
         $this->resetInput();
     }
-    public function edit(int $score_id)
+    public function edit(string $nisn)
     {
-        $score = Scores::find($score_id);
+        $score = Scores::where('nisn', $nisn)->get();
         if ($score) {
-            $this->score_id = $score->score_id;
-            $this->criteria_id = $score->criteria_id;
-            $this->alternative_id = $score->alternative_id;
-            $this->nisn = $score->nisn;
-            $this->score = $score->score;
+            $this->score = [];
+            $this->nisn = $score->first()->nisn;
+            foreach ($score as $value) {
+                $this->score[$value->criteria_id] = strval($value->score);
+            }
         } else {
             return redirect()->to('/scores');
         }
@@ -92,71 +76,27 @@ class Score extends Component
     public function update()
     {
         $this->resetErrorBag();
-        $rules = [
-            'nisn' => 'required',
-            'alternative_id' => 'required',
-            'criteria_id' => 'required',
-            'score' => 'required|numeric|between:0,100',
-        ];
-
-        if ('nisn' == $this->nisn) {
-            $rules['nisn'] = [
-                'required',
-                Rule::unique('scores')->where(function ($query) {
-                    return $query->where([
-                        ['alternative_id', $this->alternative_id],
-                        ['criteria_id', $this->criteria_id],
-                    ]);
-                })
+        $validated = $this->validate();
+        foreach ($validated['score'] as $key => $value) {
+            $data = [
+                'nisn' => $validated['nisn'],
+                'criteria_id' => $key,
+                'score' => $this->score[$key]
             ];
-            $rules['alternative_id'] = [
-                'required',
-                Rule::unique('scores')->where(function ($query) {
-                    return $query->where([
-                        ['criteria_id', $this->criteria_id],
-                        ['nisn', $this->nisn],
-                    ]);
-                })
-            ];
-            $rules['criteria_id'] = [
-                'required',
-                Rule::unique('scores')->where(function ($query) {
-                    return $query->where([
-                        ['alternative_id', $this->alternative_id],
-                        ['nisn', $this->nisn],
-                    ]);
-                })
-            ];
+            Scores::where('nisn', $this->nisn)->where('criteria_id', $key)->update($data);
         }
-        $validated = $this->validate($rules, [
-            'nisn.required' => 'Siswa tidak boleh kosong',
-            'nisn.unique' => 'Siswa ini sudah digunakan untuk alternatif dan kriteria yang dipilih',
-            'alternative_id.required' => 'Alternative tidak boleh kosong',
-            'alternative_id.unique' => 'Alternatif ini sudah digunakan untuk siswa dan kriteria yang dipilih',
-            'criteria_id.required' => 'Kriteria tidak boleh kosong',
-            'criteria_id.unique' => 'Kriteria ini sudah digunakan untuk siswa dan alternatif yang dipilih',
-            'score.required' => 'Nilai tidak boleh kosong',
-            'score.numeric' => 'Nilai harus berisi angka',
-            'score.between' => 'Nilai harus berisi nilai antara 0 sampai 100',
-        ]);
-        Scores::where('score_id', $this->score_id)->update([
-            'nisn' => $validated['nisn'],
-            'alternative_id' => $validated['alternative_id'],
-            'criteria_id' => $validated['criteria_id'],
-            'score' => $validated['score'],
-        ]);
         session()->flash('success', 'Score updated successfully!');
         return redirect()->to('/scores');
         $this->reset();
         $this->resetInput();
     }
-    public function delete(int $score_id)
+    public function delete(string $nisn)
     {
-        $this->score_id = $score_id;
+        $this->nisn = $nisn;
     }
     public function destroy()
     {
-        $score = Scores::find($this->score_id)->delete();
+        $score = Scores::where('nisn', $this->nisn)->delete();
         session()->flash('success', 'Score deleted successfully!');
         return redirect()->to('/scores');
         $this->reset();
@@ -171,7 +111,6 @@ class Score extends Component
     {
         $this->score_id = '';
         $this->criteria_id = '';
-        $this->alternative_id = '';
         $this->nisn = '';
         $this->score = '';
     }
@@ -183,20 +122,84 @@ class Score extends Component
     {
         $this->search = '';
     }
+    public function changeStep(int $step)
+    {
+        $this->currentStep = $step;
+    }
     public function render()
     {
+        $scores = Scores::with(['student', 'criteria'])
+            ->whereHas('student', function ($query) {
+                $query->where('student_name', 'like', '%' . $this->search . '%');
+            })
+            ->orderBy('nisn')
+            ->get()
+            ->groupBy('nisn');
+        $scoresArray = $scores->map(function ($item) {
+            $scores = $item->map(function ($score) {
+                $sub_score = Subcriterias::where('criteria_id', $score->criteria_id)
+                    ->where('subcriteria_start', '<=', $score->score)
+                    ->where('subcriteria_end', '>=', $score->score)
+                    ->value('subcriteria_score');
+                return [
+                    'criteria_id' => $score->criteria_id,
+                    'score' => $score->score,
+                    'sub_score' => $sub_score,
+                ];
+            });
+            return [
+                'nisn' => $item->first()->nisn,
+                'nama' => $item->first()->student->student_name,
+                'scores' => $scores,
+            ];
+        });
+
+        $result = Scores::orderBy('nisn')->get()->groupBy('criteria_id');
+        $nilaiMax = $result->map(function ($item) {
+            $res = $item->map(function ($ress) {
+                $sub_score = Subcriterias::where('criteria_id', $ress->criteria_id)
+                    ->where('subcriteria_start', '<=', $ress->score)
+                    ->where('subcriteria_end', '>=', $ress->score)
+                    ->value('subcriteria_score');
+                return $sub_score;
+            })->toArray();
+            return max($res);
+        });
+        $normalize = $scores->map(function ($item) {
+            $scores = $item->map(function ($score) {
+                $sub_score = Subcriterias::where('criteria_id', $score->criteria_id)
+                    ->where('subcriteria_start', '<=', $score->score)
+                    ->where('subcriteria_end', '>=', $score->score)
+                    ->value('subcriteria_score');
+                return $sub_score;
+            });
+            return $scores;
+        });
+        $normalizedData = [];
+        foreach ($normalize as $key => $item) {
+            $dividedData = $item->map(function ($score, $index) use ($nilaiMax) {
+                $maxValue = $nilaiMax[$index + 1];
+                $dividedScore = $score / $maxValue;
+                return $dividedScore;
+            });
+            $normalizedData[$key] = $dividedData;
+        }
+        $currentPage = request()->input('page', 1); // Mendapatkan nomor halaman saat ini dari URL
+
+        // Buat objek Paginator menggunakan $searchResults
+        $paginatedResults = new \Illuminate\Pagination\LengthAwarePaginator(
+            $scoresArray->forPage($currentPage, $this->paginate),
+            $scoresArray->count(),
+            $this->paginate,
+            $currentPage,
+            ['path' => request()->url()]
+        );
         return view('livewire.scores.score', [
-            'scores' =>  Scores::where('student_name', 'like', '%' . $this->search . '%')
-                ->orWhere('alternative_name', 'like', '%' . $this->search . '%')
-                ->orWhere('criteria_label', 'like', '%' . $this->search . '%')
-                ->join('students', 'scores.nisn', '=', 'students.nisn')
-                ->join('criterias', 'scores.criteria_id', '=', 'criterias.criteria_id')
-                ->join('alternatives', 'scores.alternative_id', '=', 'alternatives.alternative_id')
-                ->paginate($this->paginate, ['scores.*', 'students.student_name', 'criterias.criteria_label', 'alternatives.alternative_name']),
+            'scores' => $scoresArray,
+            'data_max' => $nilaiMax,
             'students' => Students::all(),
-            'alternatives' => Alternatives::all(),
-            'criterias' => Criterias::all(),
-            'count' => Scores::all()->count(),
+            'criterias' => Criterias::get(['criteria_name', 'criteria_id']),
+            'count' => $scores->count(),
             'titles' => 'scores',
             'title' => 'score'
         ]);
