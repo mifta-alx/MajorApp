@@ -14,15 +14,15 @@
 <body>
     @include('components.sidebar')
     {{-- <script src="https://code.jquery.com/jquery-3.6.4.js"></script> --}}
-    @livewireScripts
-    @yield('script')
     <script type="module">
         $(document).ready(function() {
             setTimeout(() => {
                 $('#toast').addClass('hidden');
             }, 1500);
         })
-    </script>
+        </script>
+    @livewireScripts
+    @yield('script')
 </body>
 
 </html>

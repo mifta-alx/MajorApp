@@ -6,32 +6,59 @@ use Livewire\Component;
 use App\Models\Student;
 use App\Models\Result;
 use App\Models\School;
-use App\Models\Scores;
+use App\Models\Score;
 use App\Models\Criteria;
+use App\Models\Major;
 use App\Models\Subcriteria;
+use App\Models\Ranking;
 use Livewire\WithPagination;
 
 class Dashboard extends Component
 {
     use WithPagination;
+    public $recentStudent;
+    public $byGender, $nilaiMax;
+    public $count_result, $count_criteria, $count_school, $count_student, $count_major;
+    public function mount()
+    {
+        $all_student = Student::latest()->get()->groupBy('gender');
+        foreach ($all_student as $key => $student) {
+            $gender['label'][] = $key;
+            $gender['data'][] = $student->count();
+        }
+        $this->byGender = json_encode($gender);
+
+        $this->count_result = Result::all()->count();
+        $this->count_criteria = Criteria::all()->count();
+        $this->count_school = School::all()->count();
+        $this->count_student = Student::all()->count();
+        $this->count_major = Major::all()->count();
+
+        $scores = Score::with('criteria')->latest()->get()->groupBy('criteria_id');
+
+        foreach ($scores as $key => $score) {
+            $maxScore['label'][] = $score->first()->criteria->first()->criteria_name;
+            $maxScore['data'][] = $score->max('score');
+        }
+        $this->nilaiMax = json_encode($maxScore);
+    }
     public function render()
     {
-        $student = Student::join('schools', 'students.npsn', '=', 'schools.npsn')->latest()->take(5)
-            ->get(['students.*', 'schools.school_name']);
-        $all_gender = Student::all()->count();
-        $male = Student::where('gender', '=', "Laki-laki")->count();
-        $female = Student::where('gender', '=', "Perempuan")->count();
-        $percent_male = ($male/$all_gender)*100;
-        $percent_female = ($female/$all_gender)*100;
+        $students = Student::with(['school'])->latest()->take(5)->get();
+        foreach ($students as $student) {
+            $data[$student->nisn] = [
+                'student_name' => $student->student_name,
+                'school_name' => $student->school->school_name,
+                'date' => $student->created_at->format('D, d M'),
+                'time' => $student->created_at->format('h:i A'),
+            ];
+        }
+
+        $this->recentStudent = $data;
         return view('livewire.dashboard', [
-            'students' => $student,
-            'count_result' => Result::all()->count(),
-            'count_criteria' => Criteria::all()->count(),
-            'count_subcriteria' => Subcriteria::get()->groupBy('criteria_id')->count(),
-            'count_school' => School::all()->count(),
-            'count_student' => Student::all()->count(),
-            'percentage_male' => $percent_male,
-            'percentage_female' => $percent_female,
+            'recentStudents' => $this->recentStudent,
+            'count_major' => Major::all()->count(),
+            'rankings' => Ranking::with(['student', 'school', 'result'])->latest()->take(5)->get(),
         ]);
     }
 }
