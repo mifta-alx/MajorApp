@@ -31,7 +31,7 @@
                             Role</label>
                         <input type="text" name="role_name" id="role_name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('role_name') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                            placeholder="Nama Role" value="{{ old('role_name') }}" wire:model="role_name">
+                            placeholder="Nama Role" value="{{ old('role_name') }}" wire:model.defer="role_name">
                         @error('role_name')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -85,7 +85,7 @@
                             Role</label>
                         <input type="text" name="role_name" id="role_name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('role_name') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                            placeholder="Nama Role" value="{{ old('role_name') }}" wire:model="role_name">
+                            placeholder="Nama Role" value="{{ old('role_name') }}" wire:model.defer="role_name">
                         @error('role_name')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror

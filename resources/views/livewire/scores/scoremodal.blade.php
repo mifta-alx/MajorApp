@@ -28,7 +28,7 @@
                         <div wire:ignore.self class="col-span-2">
                             <label for="nisn"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('nisn') text-red-700 @enderror">Siswa</label>
-                            <select id="nisn" wire:model="nisn" name="nisn"
+                            <select id="nisn" wire:model.defer="nisn" name="nisn"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('nisn') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
                                 <option hidden>Pilih siswa</option>
                                 <option disabled="disabled" default="true">Pilih siswa</option>
@@ -67,7 +67,7 @@
                                 <input type="text" name="score.{{ $criteria->criteria_id }}"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('score.' . $criteria->criteria_id) bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
                                     placeholder="{{ $criteria->criteria_name }}"
-                                    wire:model="score.{{ $criteria->criteria_id }}">
+                                    wire:model.defer="score.{{ $criteria->criteria_id }}">
                                 @error('score.' . $criteria->criteria_id)
                                     <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                                 @enderror
@@ -120,7 +120,7 @@
                         <div wire:ignore.self class="col-span-2">
                             <label for="nisn"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('nisn') text-red-700 @enderror">Siswa</label>
-                            <select id="nisn" wire:model="nisn" name="nisn"
+                            <select id="nisn" wire:model.defer="nisn" name="nisn"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('nisn') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
                                 <option hidden>Pilih siswa</option>
                                 <option disabled="disabled" default="true">Pilih siswa</option>
@@ -159,7 +159,7 @@
                                 <input type="text" name="score.{{ $criteria->criteria_id }}"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('score.' . $criteria->criteria_id) bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
                                     placeholder="{{ $criteria->criteria_name }}"
-                                    wire:model="score.{{ $criteria->criteria_id }}">
+                                    wire:model.defer="score.{{ $criteria->criteria_id }}">
                                 @error('score.' . $criteria->criteria_id)
                                     <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                                 @enderror

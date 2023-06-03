@@ -30,7 +30,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 @error('npsn') text-red-700 @enderror">NPSN</label>
                         <input type="text" name="npsn" id="npsn"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('npsn') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                            value="{{ old('npsn') }}" placeholder="NPSN" wire:model="npsn">
+                            value="{{ old('npsn') }}" placeholder="NPSN" wire:model.defer="npsn">
                         @error('npsn')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -41,7 +41,7 @@
                             Sekolah</label>
                         <input type="text" name="school_name" id="school_name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('school_name') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                            value="{{ old('school_name') }}" placeholder="Nama Sekolah" wire:model="school_name">
+                            value="{{ old('school_name') }}" placeholder="Nama Sekolah" wire:model.defer="school_name">
                         @error('school_name')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -49,7 +49,7 @@
                     <div wire:ignore.self class="">
                         <label for="province"
                             class="block mb-2 text-sm font-medium text-gray-900 @error('province') text-red-700 @enderror">Provinsi</label>
-                        <select id="province" wire:model="province" name="province"
+                        <select id="province" wire:model.defer="province" name="province"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('province') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
                             <option hidden>Pilih provinsi</option>
                             <option disabled="disabled" default="true">Pilih provinsi</option>
@@ -68,7 +68,7 @@
                     <div wire:ignore.self class="">
                         <label for="city_regency"
                             class="block mb-2 text-sm font-medium text-gray-900 @error('city_regency') text-red-700 @enderror">Kota/Kabupaten</label>
-                        <select id="city_regency" wire:model="city_regency" name="city_regency"
+                        <select id="city_regency" wire:model.defer="city_regency" name="city_regency"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('city_regency') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
                             <option hidden>Pilih kota/kabupaten</option>
                             <option disabled="disabled" default="true">Pilih kota/kabupaten</option>
@@ -90,7 +90,7 @@
                     <div class="sm:col-span-2">
                         <label for="address"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('address') text-red-700 @enderror">Alamat</label>
-                        <textarea id="address" wire:model="address" rows="4"
+                        <textarea id="address" wire:model.defer="address" rows="4"
                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-secondary-500 focus:border-secondary-500 @error('address') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
                             placeholder="Alamat sekolah lengkap"></textarea>
                         @error('address')
@@ -145,7 +145,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 @error('npsn') text-red-700 @enderror">NPSN</label>
                         <input type="text" name="npsn" id="npsn"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('npsn') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                            value="{{ old('npsn') }}" placeholder="NPSN" wire:model="npsn">
+                            value="{{ old('npsn') }}" placeholder="NPSN" wire:model.defer="npsn">
                         @error('npsn')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -156,7 +156,8 @@
                             Sekolah</label>
                         <input type="text" name="school_name" id="school_name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('school_name') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                            value="{{ old('school_name') }}" placeholder="Nama Sekolah" wire:model="school_name">
+                            value="{{ old('school_name') }}" placeholder="Nama Sekolah"
+                            wire:model.defer="school_name">
                         @error('school_name')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -164,12 +165,13 @@
                     <div wire:ignore.self class="">
                         <label for="province"
                             class="block mb-2 text-sm font-medium text-gray-900 @error('province') text-red-700 @enderror">Provinsi</label>
-                        <select id="province" wire:model="province" name="province"
+                        <select id="province" wire:model.defer="province" name="province"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('province') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
                             <option hidden>Pilih provinsi</option>
                             <option disabled="disabled" default="true">Pilih provinsi</option>
                             @forelse ($province_arr as $data_province => $value)
-                                <option value="{{ $data_province }}" @if (old('province') == $data_province) selected @endif>
+                                <option value="{{ $data_province }}"
+                                    @if (old('province') == $data_province) selected @endif>
                                     {{ $data_province }}
                                 </option>
                             @empty
@@ -183,7 +185,7 @@
                     <div wire:ignore.self class="">
                         <label for="city_regency"
                             class="block mb-2 text-sm font-medium text-gray-900 @error('city_regency') text-red-700 @enderror">Kota/Kabupaten</label>
-                        <select id="city_regency" wire:model="city_regency" name="city_regency"
+                        <select id="city_regency" wire:model.defer="city_regency" name="city_regency"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('city_regency') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
                             <option hidden>Pilih kota/kabupaten</option>
                             <option disabled="disabled" default="true">Pilih kota/kabupaten</option>
@@ -205,7 +207,7 @@
                     <div class="sm:col-span-2">
                         <label for="address"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('address') text-red-700 @enderror">Alamat</label>
-                        <textarea id="address" wire:model="address" rows="4"
+                        <textarea id="address" wire:model.defer="address" rows="4"
                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-secondary-500 focus:border-secondary-500 @error('address') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
                             placeholder="Alamat sekolah lengkap"></textarea>
                         @error('address')

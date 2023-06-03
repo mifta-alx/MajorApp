@@ -28,7 +28,7 @@
                     <div wire:ignore.self>
                         <label for="criteria_id"
                             class="block mb-2 text-sm font-medium text-gray-900 @error('criteria_id') text-red-700 @enderror">Kriteria</label>
-                        <select id="criteria_id" wire:model="criteria_id" name="criteria_id"
+                        <select id="criteria_id" wire:model.defer="criteria_id" name="criteria_id"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('criteria_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
                             <option hidden>Pilih kriteria</option>
                             <option disabled="disabled" default="true">Pilih kriteria</option>
@@ -51,7 +51,7 @@
                         <input type="text" name="subcriteria_start" id="subcriteria_start"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('subcriteria_start') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
                             value="{{ old('subcriteria_start') }}" placeholder="Nilai Awal"
-                            wire:model="subcriteria_start">
+                            wire:model.defer="subcriteria_start">
                         @error('subcriteria_start')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -62,7 +62,8 @@
                             Akhir</label>
                         <input type="text" name="subcriteria_end" id="subcriteria_end"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('subcriteria_end') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                            value="{{ old('subcriteria_end') }}" placeholder="Nilai Akhir" wire:model="subcriteria_end">
+                            value="{{ old('subcriteria_end') }}" placeholder="Nilai Akhir"
+                            wire:model.defer="subcriteria_end">
                         @error('subcriteria_end')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -74,7 +75,7 @@
                         <input type="text" name="subcriteria_score" id="subcriteria_score"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('subcriteria_score') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
                             value="{{ old('subcriteria_score') }}" placeholder="Nilai Subkriteria"
-                            wire:model="subcriteria_score">
+                            wire:model.defer="subcriteria_score">
                         @error('subcriteria_score')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -125,7 +126,7 @@
                     <div>
                         <label for="criteria_id"
                             class="block mb-2 text-sm font-medium text-gray-900 @error('criteria_id') text-red-700 @enderror">Kriteria</label>
-                        <select id="criteria_id" wire:model="criteria_id" name="criteria_id"
+                        <select id="criteria_id" wire:model.defer="criteria_id" name="criteria_id"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('criteria_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
                             <option hidden>Pilih kriteria</option>
                             <option disabled="disabled" default="true">Pilih kriteria</option>
@@ -148,7 +149,7 @@
                         <input type="text" name="subcriteria_start" id="subcriteria_start"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('subcriteria_start') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
                             value="{{ old('subcriteria_start') }}" placeholder="Nilai Awal"
-                            wire:model="subcriteria_start">
+                            wire:model.defer="subcriteria_start">
                         @error('subcriteria_start')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -160,7 +161,7 @@
                         <input type="text" name="subcriteria_end" id="subcriteria_end"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('subcriteria_end') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
                             value="{{ old('subcriteria_end') }}" placeholder="Nilai Akhir"
-                            wire:model="subcriteria_end">
+                            wire:model.defer="subcriteria_end">
                         @error('subcriteria_end')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -172,7 +173,7 @@
                         <input type="text" name="subcriteria_score" id="subcriteria_score"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('subcriteria_score') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
                             value="{{ old('subcriteria_score') }}" placeholder="Nilai Subkriteria"
-                            wire:model="subcriteria_score">
+                            wire:model.defer="subcriteria_score">
                         @error('subcriteria_score')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror

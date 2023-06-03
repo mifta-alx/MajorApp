@@ -30,7 +30,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 @error('nisn') text-red-700 @enderror">NISN</label>
                         <input type="text" name="nisn" id="nisn"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('nisn') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                            value="{{ old('nisn') }}" placeholder="NISN" wire:model="nisn">
+                            value="{{ old('nisn') }}" placeholder="NISN" wire:model.defer="nisn">
                         @error('nisn')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -41,7 +41,7 @@
                             Siswa</label>
                         <input type="text" name="student_name" id="student_name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('student_name') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                            value="{{ old('student_name') }}" placeholder="Nama Siswa" wire:model="student_name">
+                            value="{{ old('student_name') }}" placeholder="Nama Siswa" wire:model.defer="student_name">
                         @error('student_name')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -53,7 +53,7 @@
                         <div class="grid grid-cols-2">
                             <div
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-l-lg flex items-center py-2 px-3 @error('gender') bg-red-50 border-red-500 text-red-900 @enderror">
-                                <input id="inline-radio" type="radio" value="Laki-laki" wire:model='gender'
+                                <input id="inline-radio" type="radio" value="Laki-laki" wire:model.defer='gender'
                                     name="inline-radio-group"
                                     class="w-4 h-4 text-secondary-500 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-0 @error('gender') text-red-700 border-red-500 bg-red-50 @enderror">
                                 <label for="inline-radio"
@@ -63,7 +63,7 @@
                             </div>
                             <div
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-r-lg flex items-center py-2 px-3 @error('gender') bg-red-50 border-red-500 text-red-900 @enderror"">
-                                <input id="inline-2-radio" type="radio" value="Perempuan" wire:model='gender'
+                                <input id="inline-2-radio" type="radio" value="Perempuan" wire:model.defer='gender'
                                     name="inline-radio-group"
                                     class="w-4 h-4 text-secondary-600 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-0 @error('gender') text-red-700 border-red-500 bg-red-50 @enderror">
                                 <label for="inline-2-radio"
@@ -81,7 +81,7 @@
                         <input type="text"
                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('birth_place') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
                             placeholder="Tempat Lahir" name="birth_place" value="{{ old('birth_place') }}"
-                            wire:model='birth_place'>
+                            wire:model.defer='birth_place'>
                         @error('birth_place')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -91,7 +91,7 @@
                             <div class="sm:col-span-2" wire:ignore.self>
                                 <label for="month"
                                     class="block mb-2 text-sm font-medium text-gray-900 @error('month') text-red-700 @enderror">Bulan</label>
-                                <select id="month" name="month" wire:model='month'
+                                <select id="month" name="month" wire:model.defer='month'
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('month') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
                                     <option hidden>Bulan</option>
                                     <option disabled="disabled" default="true">Bulan</option>
@@ -109,16 +109,16 @@
                                     class="block mb-2 text-sm font-medium text-gray-900 @error('day') text-red-700 @enderror">Hari</label>
                                 <input type="text"
                                     class="shadow-sm bg-gray-50 text-center border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('day') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                                    placeholder="DD" name="day" value="{{ old('day') }}" wire:model='day'
-                                    autocomplete="off">
+                                    placeholder="DD" name="day" value="{{ old('day') }}"
+                                    wire:model.defer='day' autocomplete="off">
                             </div>
                             <div>
                                 <label for="text"
                                     class="block mb-2 text-sm font-medium text-gray-900 @error('year') text-red-700 @enderror">Tahun</label>
                                 <input type="text"
                                     class="shadow-sm bg-gray-50 text-center border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('year') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                                    placeholder="YYYY" name="year" value="{{ old('year') }}" wire:model='year'
-                                    autocomplete="off">
+                                    placeholder="YYYY" name="year" value="{{ old('year') }}"
+                                    wire:model.defer='year' autocomplete="off">
                             </div>
                         </div>
                         @error('month')
@@ -136,7 +136,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('email') text-red-700 @enderror">Email</label>
                         <input type="text" name="email" id="email"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('email') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                            value="{{ old('email') }}" placeholder="name@company.com" wire:model="email">
+                            value="{{ old('email') }}" placeholder="name@company.com" wire:model.defer="email">
                         @error('email')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -147,7 +147,7 @@
                             Telepon</label>
                         <input type="text" name="phone" id="phone"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('phone') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                            value="{{ old('phone') }}" placeholder="No. Telepon" wire:model="phone">
+                            value="{{ old('phone') }}" placeholder="No. Telepon" wire:model.defer="phone">
                         @error('phone')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -156,7 +156,7 @@
                         <label for="npsn"
                             class="block mb-2 text-sm font-medium text-gray-900 @error('npsn') text-red-700 @enderror">Asal
                             Sekolah</label>
-                        <select id="npsn" wire:model="npsn" name="npsn"
+                        <select id="npsn" wire:model.defer="npsn" name="npsn"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('npsn') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
                             <option hidden>Pilih asal sekolah</option>
                             <option disabled="disabled" default="true">Pilih asal sekolah</option>
@@ -220,7 +220,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 @error('nisn') text-red-700 @enderror">NISN</label>
                         <input type="text" name="nisn" id="nisn"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('nisn') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                            value="{{ old('nisn') }}" placeholder="NISN" wire:model="nisn">
+                            value="{{ old('nisn') }}" placeholder="NISN" wire:model.defer="nisn">
                         @error('nisn')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -231,7 +231,8 @@
                             Siswa</label>
                         <input type="text" name="student_name" id="student_name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('student_name') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                            value="{{ old('student_name') }}" placeholder="Nama Siswa" wire:model="student_name">
+                            value="{{ old('student_name') }}" placeholder="Nama Siswa"
+                            wire:model.defer="student_name">
                         @error('student_name')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -243,7 +244,7 @@
                         <div class="grid grid-cols-2">
                             <div
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-l-lg flex items-center py-2 px-3 @error('gender') bg-red-50 border-red-500 text-red-900 @enderror">
-                                <input id="inline-radio" type="radio" value="Laki-laki" wire:model='gender'
+                                <input id="inline-radio" type="radio" value="Laki-laki" wire:model.defer='gender'
                                     name="inline-radio-group"
                                     class="w-4 h-4 text-secondary-500 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-0 @error('gender') text-red-700 border-red-500 bg-red-50 @enderror">
                                 <label for="inline-radio"
@@ -253,8 +254,8 @@
                             </div>
                             <div
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-r-lg flex items-center py-2 px-3 @error('gender') bg-red-50 border-red-500 text-red-900 @enderror"">
-                                <input id="inline-2-radio" type="radio" value="Perempuan" wire:model='gender'
-                                    name="inline-radio-group"
+                                <input id="inline-2-radio" type="radio" value="Perempuan"
+                                    wire:model.defer='gender' name="inline-radio-group"
                                     class="w-4 h-4 text-secondary-600 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-0 @error('gender') text-red-700 border-red-500 bg-red-50 @enderror">
                                 <label for="inline-2-radio"
                                     class="ml-3 text-sm font-normal text-gray-900 @error('gender') text-red-600 @enderror">Perempuan</label>
@@ -271,7 +272,7 @@
                         <input type="text"
                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('birth_place') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
                             placeholder="Tempat Lahir" name="birth_place" value="{{ old('birth_place') }}"
-                            wire:model='birth_place'>
+                            wire:model.defer='birth_place'>
                         @error('birth_place')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -281,7 +282,7 @@
                             <div class="sm:col-span-2" wire:ignore.self>
                                 <label for="month"
                                     class="block mb-2 text-sm font-medium text-gray-900 @error('month') text-red-700 @enderror">Bulan</label>
-                                <select id="month" name="month" wire:model='month'
+                                <select id="month" name="month" wire:model.defer='month'
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('month') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
                                     <option hidden>Bulan</option>
                                     <option disabled="disabled" default="true">Bulan</option>
@@ -299,16 +300,16 @@
                                     class="block mb-2 text-sm font-medium text-gray-900 @error('day') text-red-700 @enderror">Hari</label>
                                 <input type="text"
                                     class="shadow-sm bg-gray-50 text-center border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('day') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                                    placeholder="DD" name="day" value="{{ old('day') }}" wire:model='day'
-                                    autocomplete="off">
+                                    placeholder="DD" name="day" value="{{ old('day') }}"
+                                    wire:model.defer='day' autocomplete="off">
                             </div>
                             <div>
                                 <label for="text"
                                     class="block mb-2 text-sm font-medium text-gray-900 @error('year') text-red-700 @enderror">Tahun</label>
                                 <input type="text"
                                     class="shadow-sm bg-gray-50 text-center border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('year') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                                    placeholder="YYYY" name="year" value="{{ old('year') }}" wire:model='year'
-                                    autocomplete="off">
+                                    placeholder="YYYY" name="year" value="{{ old('year') }}"
+                                    wire:model.defer='year' autocomplete="off">
                             </div>
                         </div>
                         @error('month')
@@ -326,7 +327,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('email') text-red-700 @enderror">Email</label>
                         <input type="text" name="email" id="email"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('email') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                            value="{{ old('email') }}" placeholder="name@company.com" wire:model="email">
+                            value="{{ old('email') }}" placeholder="name@company.com" wire:model.defer="email">
                         @error('email')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -337,7 +338,7 @@
                             Telepon</label>
                         <input type="text" name="phone" id="phone"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('phone') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                            value="{{ old('phone') }}" placeholder="No. Telepon" wire:model="phone">
+                            value="{{ old('phone') }}" placeholder="No. Telepon" wire:model.defer="phone">
                         @error('phone')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -346,7 +347,7 @@
                         <label for="npsn"
                             class="block mb-2 text-sm font-medium text-gray-900 @error('npsn') text-red-700 @enderror">Asal
                             Sekolah</label>
-                        <select id="npsn" wire:model="npsn" name="npsn"
+                        <select id="npsn" wire:model.defer="npsn" name="npsn"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('npsn') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
                             <option hidden>Pilih asal sekolah</option>
                             <option disabled="disabled" default="true">Pilih asal sekolah</option>
