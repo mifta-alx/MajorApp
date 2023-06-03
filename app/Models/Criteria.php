@@ -13,11 +13,14 @@ class Criteria extends Model
 
     protected $fillable = [
         'criteria_name',
-        'criteria_label',
+        'criteria_code',
         'weight'
     ];
 
     public function subcriteria(){
         return $this->hasMany(Subcriteria::class, 'criteria_id', 'criteria_id');
+    }
+    public function major(){
+        return $this->hasMany(Major::class, 'criteria_id', 'criteria_id');
     }
 }

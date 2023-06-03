@@ -20,34 +20,64 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Criteria::create([
-            'criteria_name' => 'IQ',
-            'criteria_code' => 'iq',
-            'weight' => '0.18'
+            'criteria_name' => 'Kimia',
+            'criteria_code' => 'kimia',
+            'weight' => '20'
         ]);
         Criteria::create([
-            'criteria_name' => 'Placement MTK',
-            'criteria_code' => 'placement_mtk',
-            'weight' => '0.14'
+            'criteria_name' => 'Fisika',
+            'criteria_code' => 'fisika',
+            'weight' => '30'
         ]);
         Criteria::create([
-            'criteria_name' => 'Placement IPA',
-            'criteria_code' => 'placement_ipa',
-            'weight' => '0.14'
+            'criteria_name' => 'Biologi',
+            'criteria_code' => 'biologi',
+            'weight' => '10'
         ]);
         Criteria::create([
-            'criteria_name' => 'Nilai Rapor MTK',
-            'criteria_code' => 'rapor_mtk',
-            'weight' => '0.18'
+            'criteria_name' => 'Matematika(IPA)',
+            'criteria_code' => 'matematika ipa',
+            'weight' => '40'
         ]);
         Criteria::create([
-            'criteria_name' => 'Nilai Rapor IPA',
-            'criteria_code' => 'rapor_ipa',
-            'weight' => '0.18'
+            'criteria_name' => 'Matematika(BAHASA)',
+            'criteria_code' => 'matematika bahasa',
+            'weight' => '30'
         ]);
         Criteria::create([
-            'criteria_name' => 'Nilai Rapor IPS',
-            'criteria_code' => 'rapor_ips',
-            'weight' => '0.18'
+            'criteria_name' => 'Ekonomi',
+            'criteria_code' => 'ekonomi',
+            'weight' => '25'
+        ]);
+        Criteria::create([
+            'criteria_name' => 'Sejarah',
+            'criteria_code' => 'sejarah',
+            'weight' => '20'
+        ]);
+        Criteria::create([
+            'criteria_name' => 'Geografi',
+            'criteria_code' => 'geografi',
+            'weight' => '15'
+        ]);
+        Criteria::create([
+            'criteria_name' => 'Sosiologi',
+            'criteria_code' => 'sosiologi',
+            'weight' => '10'
+        ]);
+        Criteria::create([
+            'criteria_name' => 'Bahasa Indonesia',
+            'criteria_code' => 'bahasa Indonesia',
+            'weight' => '40'
+        ]);
+        Criteria::create([
+            'criteria_name' => 'Bahasa Inggris',
+            'criteria_code' => 'bahasa inggris',
+            'weight' => '40'
+        ]);
+        Criteria::create([
+            'criteria_name' => 'Bahasa Jepang',
+            'criteria_code' => 'bahasa jepang',
+            'weight' => '20'
         ]);
         School::create([
             'uuid' => Str::uuid(),
@@ -142,31 +172,31 @@ class DatabaseSeeder extends Seeder
         Subcriteria::create([
             'criteria_id' => '1',
             'subcriteria_start' => '0',
-            'subcriteria_end' => '65',
+            'subcriteria_end' => '50',
             'subcriteria_score' => '1'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '1',
+            'subcriteria_start' => '51',
+            'subcriteria_end' => '65',
+            'subcriteria_score' => '2'
         ]);
         Subcriteria::create([
             'criteria_id' => '1',
             'subcriteria_start' => '66',
             'subcriteria_end' => '75',
-            'subcriteria_score' => '2'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '1',
-            'subcriteria_start' => '75',
-            'subcriteria_end' => '85',
             'subcriteria_score' => '3'
         ]);
         Subcriteria::create([
             'criteria_id' => '1',
-            'subcriteria_start' => '85',
-            'subcriteria_end' => '99',
+            'subcriteria_start' => '76',
+            'subcriteria_end' => '85',
             'subcriteria_score' => '4'
         ]);
         Subcriteria::create([
             'criteria_id' => '1',
-            'subcriteria_start' => '100',
-            'subcriteria_end' => '130',
+            'subcriteria_start' => '86',
+            'subcriteria_end' => '100',
             'subcriteria_score' => '5'
         ]);
         Subcriteria::create([
@@ -315,6 +345,186 @@ class DatabaseSeeder extends Seeder
         ]);
         Subcriteria::create([
             'criteria_id' => '6',
+            'subcriteria_start' => '86',
+            'subcriteria_end' => '100',
+            'subcriteria_score' => '5'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '7',
+            'subcriteria_start' => '0',
+            'subcriteria_end' => '50',
+            'subcriteria_score' => '1'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '7',
+            'subcriteria_start' => '51',
+            'subcriteria_end' => '65',
+            'subcriteria_score' => '2'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '7',
+            'subcriteria_start' => '66',
+            'subcriteria_end' => '75',
+            'subcriteria_score' => '3'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '7',
+            'subcriteria_start' => '76',
+            'subcriteria_end' => '85',
+            'subcriteria_score' => '4'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '7',
+            'subcriteria_start' => '86',
+            'subcriteria_end' => '100',
+            'subcriteria_score' => '5'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '8',
+            'subcriteria_start' => '0',
+            'subcriteria_end' => '50',
+            'subcriteria_score' => '1'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '8',
+            'subcriteria_start' => '51',
+            'subcriteria_end' => '65',
+            'subcriteria_score' => '2'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '8',
+            'subcriteria_start' => '66',
+            'subcriteria_end' => '75',
+            'subcriteria_score' => '3'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '8',
+            'subcriteria_start' => '76',
+            'subcriteria_end' => '85',
+            'subcriteria_score' => '4'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '8',
+            'subcriteria_start' => '86',
+            'subcriteria_end' => '100',
+            'subcriteria_score' => '5'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '9',
+            'subcriteria_start' => '0',
+            'subcriteria_end' => '50',
+            'subcriteria_score' => '1'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '9',
+            'subcriteria_start' => '51',
+            'subcriteria_end' => '65',
+            'subcriteria_score' => '2'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '9',
+            'subcriteria_start' => '66',
+            'subcriteria_end' => '75',
+            'subcriteria_score' => '3'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '9',
+            'subcriteria_start' => '76',
+            'subcriteria_end' => '85',
+            'subcriteria_score' => '4'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '9',
+            'subcriteria_start' => '86',
+            'subcriteria_end' => '100',
+            'subcriteria_score' => '5'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '10',
+            'subcriteria_start' => '0',
+            'subcriteria_end' => '50',
+            'subcriteria_score' => '1'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '10',
+            'subcriteria_start' => '51',
+            'subcriteria_end' => '65',
+            'subcriteria_score' => '2'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '10',
+            'subcriteria_start' => '66',
+            'subcriteria_end' => '75',
+            'subcriteria_score' => '3'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '10',
+            'subcriteria_start' => '76',
+            'subcriteria_end' => '85',
+            'subcriteria_score' => '4'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '10',
+            'subcriteria_start' => '86',
+            'subcriteria_end' => '100',
+            'subcriteria_score' => '5'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '11',
+            'subcriteria_start' => '0',
+            'subcriteria_end' => '50',
+            'subcriteria_score' => '1'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '11',
+            'subcriteria_start' => '51',
+            'subcriteria_end' => '65',
+            'subcriteria_score' => '2'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '11',
+            'subcriteria_start' => '66',
+            'subcriteria_end' => '75',
+            'subcriteria_score' => '3'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '11',
+            'subcriteria_start' => '76',
+            'subcriteria_end' => '85',
+            'subcriteria_score' => '4'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '11',
+            'subcriteria_start' => '86',
+            'subcriteria_end' => '100',
+            'subcriteria_score' => '5'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '12',
+            'subcriteria_start' => '0',
+            'subcriteria_end' => '50',
+            'subcriteria_score' => '1'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '12',
+            'subcriteria_start' => '51',
+            'subcriteria_end' => '65',
+            'subcriteria_score' => '2'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '12',
+            'subcriteria_start' => '66',
+            'subcriteria_end' => '75',
+            'subcriteria_score' => '3'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '12',
+            'subcriteria_start' => '76',
+            'subcriteria_end' => '85',
+            'subcriteria_score' => '4'
+        ]);
+        Subcriteria::create([
+            'criteria_id' => '12',
             'subcriteria_start' => '86',
             'subcriteria_end' => '100',
             'subcriteria_score' => '5'

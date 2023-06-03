@@ -25,14 +25,22 @@ class Score extends Component
 
     public function rules()
     {
+        $criteriaCount = Criterias::count();
         return [
-            'nisn' => ['required'],
+            'nisn' => ['required', Rule::unique('scores')->ignore($this->score_id)->where(function ($query) use ($criteriaCount) {
+                $query->whereExists(function ($subQuery) use ($criteriaCount) {
+                    $subQuery->selectRaw('nisn')
+                        ->from('scores')
+                        ->groupBy('nisn')
+                        ->havingRaw('COUNT(DISTINCT criteria_id) = ?', [$criteriaCount]);
+                });
+            })],
             'score.*' => 'required|numeric',
         ];
     }
     protected $messages = [
         'nisn.required' => 'Siswa tidak boleh kosong',
-        'nisn.unique' => 'Siswa ini sudah digunakan untuk alternatif dan kriteria yang dipilih',
+        'nisn.unique' => 'Siswa ini sudah memiliki score',
         'score.*.required' => 'Nilai tidak boleh kosong',
         'score.*.numeric' => 'Nilai harus berisi angka',
         'score.*.between' => 'Nilai harus berisi nilai antara 0 sampai 100',
@@ -45,8 +53,6 @@ class Score extends Component
     {
         $this->resetErrorBag();
         $validated = $this->validate();
-        $scoreData = [];
-        $normalizedData = [];
         foreach ($validated['score'] as $key => $value) {
             $data = [
                 'nisn' => $validated['nisn'],
@@ -76,7 +82,30 @@ class Score extends Component
     public function update()
     {
         $this->resetErrorBag();
-        $validated = $this->validate();
+        $criteriaCount = Criterias::count();
+        $rules = [
+            'nisn' => ['required', Rule::unique('scores')->ignore($this->score_id)->where(function ($query) use ($criteriaCount) {
+                $query->whereExists(function ($subQuery) use ($criteriaCount) {
+                    $subQuery->selectRaw('nisn')
+                        ->from('scores')
+                        ->groupBy('nisn')
+                        ->havingRaw('COUNT(DISTINCT criteria_id) = ?', [$criteriaCount]);
+                });
+            })],
+            'score.*' => 'required|numeric',
+        ];
+
+        if ('nisn' != $this->nisn) {
+            $rules['nisn'] = 'required';
+        }
+        $validated = $this->validate($rules, [
+            'nisn.required' => 'Siswa tidak boleh kosong',
+            'nisn.unique' => 'Siswa ini sudah memiliki score',
+            'score.*.required' => 'Nilai tidak boleh kosong',
+            'score.*.numeric' => 'Nilai harus berisi angka',
+            'score.*.between' => 'Nilai harus berisi nilai antara 0 sampai 100',
+        ]);
+        // $validated = $this->validate();
         foreach ($validated['score'] as $key => $value) {
             $data = [
                 'nisn' => $validated['nisn'],
@@ -132,74 +161,48 @@ class Score extends Component
             ->whereHas('student', function ($query) {
                 $query->where('student_name', 'like', '%' . $this->search . '%');
             })
-            ->orderBy('nisn')
-            ->get()
-            ->groupBy('nisn');
-        $scoresArray = $scores->map(function ($item) {
-            $scores = $item->map(function ($score) {
-                $sub_score = Subcriterias::where('criteria_id', $score->criteria_id)
+            ->paginate($this->paginate * Criterias::all()->count());
+        $groupedScores = [];
+        foreach ($scores as $score) {
+            $groupedScores[$score->nisn][] = $score;
+        }
+        $scoresArray = collect($groupedScores)->map(function ($item) {
+            $scores = collect($item)->map(function ($score) {
+                $alternative_score = Subcriterias::where('criteria_id', $score->criteria_id)
                     ->where('subcriteria_start', '<=', $score->score)
                     ->where('subcriteria_end', '>=', $score->score)
                     ->value('subcriteria_score');
                 return [
                     'criteria_id' => $score->criteria_id,
                     'score' => $score->score,
-                    'sub_score' => $sub_score,
+                    'alternative_score' => $alternative_score ?? 0,
                 ];
             });
             return [
-                'nisn' => $item->first()->nisn,
-                'nama' => $item->first()->student->student_name,
+                'nisn' => collect($item)->first()->nisn,
+                'nama' => collect($item)->first()->student->student_name,
                 'scores' => $scores,
             ];
         });
 
-        $result = Scores::orderBy('nisn')->get()->groupBy('criteria_id');
-        $nilaiMax = $result->map(function ($item) {
-            $res = $item->map(function ($ress) {
-                $sub_score = Subcriterias::where('criteria_id', $ress->criteria_id)
-                    ->where('subcriteria_start', '<=', $ress->score)
-                    ->where('subcriteria_end', '>=', $ress->score)
+        $scores_by_criteria = Scores::orderBy('nisn')->get()->groupBy('criteria_id');
+        $max_score = $scores_by_criteria->map(function ($item) {
+            $score_by_criteria = $item->map(function ($data) {
+                $alternative_score = Subcriterias::where('criteria_id', $data->criteria_id)
+                    ->where('subcriteria_start', '<=', $data->score)
+                    ->where('subcriteria_end', '>=', $data->score)
                     ->value('subcriteria_score');
-                return $sub_score;
+                return $alternative_score ?? 0;
             })->toArray();
-            return max($res);
+            return max($score_by_criteria);
         });
-        $normalize = $scores->map(function ($item) {
-            $scores = $item->map(function ($score) {
-                $sub_score = Subcriterias::where('criteria_id', $score->criteria_id)
-                    ->where('subcriteria_start', '<=', $score->score)
-                    ->where('subcriteria_end', '>=', $score->score)
-                    ->value('subcriteria_score');
-                return $sub_score;
-            });
-            return $scores;
-        });
-        $normalizedData = [];
-        foreach ($normalize as $key => $item) {
-            $dividedData = $item->map(function ($score, $index) use ($nilaiMax) {
-                $maxValue = $nilaiMax[$index + 1];
-                $dividedScore = $score / $maxValue;
-                return $dividedScore;
-            });
-            $normalizedData[$key] = $dividedData;
-        }
-        $currentPage = request()->input('page', 1); // Mendapatkan nomor halaman saat ini dari URL
-
-        // Buat objek Paginator menggunakan $searchResults
-        $paginatedResults = new \Illuminate\Pagination\LengthAwarePaginator(
-            $scoresArray->forPage($currentPage, $this->paginate),
-            $scoresArray->count(),
-            $this->paginate,
-            $currentPage,
-            ['path' => request()->url()]
-        );
         return view('livewire.scores.score', [
             'scores' => $scoresArray,
-            'data_max' => $nilaiMax,
+            'scores_all' => $scores,
+            'max_scores' => $max_score,
             'students' => Students::all(),
             'criterias' => Criterias::get(['criteria_name', 'criteria_id']),
-            'count' => $scores->count(),
+            'count' => Scores::all()->count() / Criterias::all()->count(),
             'titles' => 'scores',
             'title' => 'score'
         ]);

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('score_id');
             $table->string('nisn');
             $table->unsignedBigInteger('criteria_id');
-            $table->float('score');
+            $table->string('score');
             $table->timestamps();
             
             $table->foreign('nisn')->references('nisn')->on('students')->onDelete('cascade')->onUpdate('cascade');
