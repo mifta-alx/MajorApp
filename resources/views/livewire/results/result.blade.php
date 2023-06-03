@@ -13,7 +13,7 @@
             </div>
 
             <div class="flex items-center mt-4 gap-x-3">
-                <button
+                <a href="{{ route('exportResults') }}"
                     class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-5 h-5">
@@ -22,7 +22,7 @@
                     </svg>
 
                     <span>Report</span>
-                </button>
+                </a>
             </div>
         </div>
 
@@ -42,7 +42,7 @@
                         aria-labelledby="dropdownRadioBgHoverButton">
                         <li>
                             <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <input id="default-radio-4" type="radio" value="5" wire:model="paginate"
+                                <input id="default-radio-4" type="radio" value="5" wire:model.defer="paginate"
                                     name="default-radio"
                                     class="w-4 h-4 text-secondary-600 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-2">
                                 <label for="default-radio-4"
@@ -51,8 +51,8 @@
                         </li>
                         <li>
                             <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <input checked id="default-radio-5" type="radio" value="10" wire:model="paginate"
-                                    name="default-radio"
+                                <input checked id="default-radio-5" type="radio" value="10"
+                                    wire:model.defer="paginate" name="default-radio"
                                     class="w-4 h-4 text-secondary-600 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-2">
                                 <label for="default-radio-5"
                                     class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">10</label>
@@ -60,7 +60,7 @@
                         </li>
                         <li>
                             <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <input id="default-radio-6" type="radio" value="15" wire:model="paginate"
+                                <input id="default-radio-6" type="radio" value="15" wire:model.defer="paginate"
                                     name="default-radio"
                                     class="w-4 h-4 text-secondary-600 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-2">
                                 <label for="default-radio-6"
@@ -81,75 +81,75 @@
                     </svg>
                 </span>
 
-                <input type="text" placeholder="Search" wire:model="search" id="searchData"
+                <input type="text" placeholder="Search" wire:model.defer="search" id="searchData"
                     class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-secondary-400 dark:focus:border-secondary-300 focus:ring-secondary-300 focus:outline-none focus:ring focus:ring-opacity-40">
             </div>
         </div>
 
-        @if ($results->count())
-        <div class="flex flex-col mt-6">
-            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                    <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-                        <table class="w-full divide-y divide-gray-200 dark:divide-gray-700">
-                            <thead class="bg-gray-50 dark:bg-gray-800">
-                                <tr>
-                                    <th scope="col"
-                                        class="py-4 px-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                        No
-                                    </th>
+        @if ($results_all->count())
+            <div class="flex flex-col mt-6">
+                <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                        <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+                            <table class="w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                <thead class="bg-gray-50 dark:bg-gray-800">
+                                    <tr>
+                                        <th scope="col"
+                                            class="py-4 px-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
+                                            No
+                                        </th>
 
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                        Nama Siswa
-                                    </th>
-
-                                    @foreach ($criterias as $item)
                                         <th scope="col"
                                             class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                            {{ $item->criteria_name }}
+                                            Nama Siswa
                                         </th>
-                                    @endforeach
 
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                        Hasil
-                                    </th>
+                                        @foreach ($criterias as $item)
+                                            <th scope="col"
+                                                class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
+                                                {{ $item->criteria_name }}
+                                            </th>
+                                        @endforeach
 
-                                    <th scope="col"
-                                        class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
-                                        Rekomendasi
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                                @foreach ($results as $result)  
-                                <tr>
-                                    <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                        {{ ($results->currentPage() - 1) * $results->perPage() + $loop->iteration }}
-                                    </td>
-                                    <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                        {{ $result->student->student_name }}
-                                    </td>
-                                    @foreach ($result->normalized_value as $value)
-                                    <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                        {{ $value }}
-                                    </td>
+                                        <th scope="col"
+                                            class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
+                                            Hasil
+                                        </th>
+
+                                        <th scope="col"
+                                            class="px-4 py-3.5 text-sm font-normal text-left text-gray-500 dark:text-gray-400">
+                                            Rekomendasi
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                                    @foreach ($results as $result)
+                                        <tr>
+                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                                {{ ($results_all->currentPage() - 1) * $results_all->perPage() + $loop->iteration }}
+                                            </td>
+                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                                {{ $result['student_name'] }}
+                                            </td>
+                                            @foreach ($result['dividedData'] as $value)
+                                                <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                                    {{ $value }}
+                                                </td>
+                                            @endforeach
+                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                                {{ $result['saw_result'] }}
+                                            </td>
+                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                                {{ $result['recomendation_result'] }}
+                                            </td>
+                                        </tr>
                                     @endforeach
-                                    <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                        {{ $result->saw_result }}
-                                    </td>
-                                    <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                        {{ $result->recomendation_result }}
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         @else
             <div class="flex items-center mt-6 text-center border rounded-lg h-96 dark:border-gray-700">
                 @if ($search)
@@ -189,7 +189,7 @@
         @endif
 
         <div class="mt-6">
-            {{ $results->links() }}
+            {{ $results_all->links() }}
         </div>
 
     </section>

@@ -44,17 +44,6 @@
             </div>
 
             <div class="flex items-center mt-4 gap-x-3">
-                {{-- <button
-                    class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-5 h-5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                    </svg>
-
-                    <span>Report</span>
-                </button> --}}
-
                 <button data-modal-target="CreateModal" data-modal-toggle="CreateModal"
                     class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-secondary-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-secondary-600 dark:hover:bg-secondary-500 dark:bg-secondary-600">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -84,7 +73,7 @@
                         aria-labelledby="dropdownRadioBgHoverButton">
                         <li>
                             <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <input id="default-radio-4" type="radio" value="5" wire:model="paginate"
+                                <input id="default-radio-4" type="radio" value="5" wire:model.defer="paginate"
                                     name="default-radio"
                                     class="w-4 h-4 text-secondary-600 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-2">
                                 <label for="default-radio-4"
@@ -93,8 +82,8 @@
                         </li>
                         <li>
                             <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <input checked id="default-radio-5" type="radio" value="10" wire:model="paginate"
-                                    name="default-radio"
+                                <input checked id="default-radio-5" type="radio" value="10"
+                                    wire:model.defer="paginate" name="default-radio"
                                     class="w-4 h-4 text-secondary-600 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-2">
                                 <label for="default-radio-5"
                                     class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">10</label>
@@ -102,7 +91,7 @@
                         </li>
                         <li>
                             <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <input id="default-radio-6" type="radio" value="15" wire:model="paginate"
+                                <input id="default-radio-6" type="radio" value="15" wire:model.defer="paginate"
                                     name="default-radio"
                                     class="w-4 h-4 text-secondary-600 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-2">
                                 <label for="default-radio-6"
@@ -123,7 +112,7 @@
                     </svg>
                 </span>
 
-                <input type="text" placeholder="Search" wire:model="search" id="searchData"
+                <input type="text" placeholder="Search" wire:model.defer="search" id="searchData"
                     class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-secondary-400 dark:focus:border-secondary-300 focus:ring-secondary-300 focus:outline-none focus:ring focus:ring-opacity-40">
             </div>
         </div>
@@ -175,7 +164,7 @@
                                                 {{ $criteria->criteria_name }}
                                             </td>
                                             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $criteria->weight }}
+                                                {{ $criteria->weight }}%
                                             </td>
                                             <td class="px-4 py-4 text-sm whitespace-nowrap">
                                                 <div class="flex flex-row space-x-2">

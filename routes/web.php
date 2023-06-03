@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CriteriasController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MajorsController;
 use App\Http\Controllers\ScoresController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SchoolsController;
@@ -10,7 +11,6 @@ use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ResultsController;
 use App\Http\Controllers\RankingsController;
-use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,27 +27,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pages.home');
 })->name('home');
-
 //new way to route
 Route::resource('dashboard', DashboardController::class);
 Route::resource('students', StudentsController::class);
 Route::resource('schools', SchoolsController::class);
 Route::resource('users', UsersController::class);
 Route::resource('roles', RolesController::class);
+Route::resource('majors', MajorsController::class);
 Route::resource('criterias', CriteriasController::class);
 Route::resource('subcriterias', SubcriteriasController::class);
 Route::resource('scores', ScoresController::class);
 Route::resource('results', ResultsController::class);
 Route::resource('rankings', RankingsController::class);
-Route::resource('report', PdfController::class);
-//
+//exportPDF route
+Route::get('report-students', [StudentsController::class, 'exportPdf'])->name('exportStudents');
+Route::get('report-schools', [SchoolsController::class, 'exportPdf'])->name('exportSchools');
+Route::get('report-scores', [ScoresController::class, 'exportPdf'])->name('exportScores');
+Route::get('report-results', [ResultsController::class, 'exportPdf'])->name('exportResults');
+Route::get('report-rankings', [RankingsController::class, 'exportPdf'])->name('exportRankings');
 
-// Route::get('admin/users', [UsersController::class, 'index'])->name('users.index');
-// Route::get('admin/users/add', [UsersController::class, 'create'])->name('users.create');
-// Route::post('admin/users', [UsersController::class, 'store'])->name('users.store');
-// Route::delete('admin/users', [UsersController::class, 'destroy'])->name('users');
-
-// Route::controller(UserController::class)->group(function (){
-//     Route::get('ad')
-// });
 

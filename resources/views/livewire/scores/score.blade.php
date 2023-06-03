@@ -1,5 +1,4 @@
 <div>
-    {{-- @dd($data_max) --}}
     @include('livewire.scores.scoremodal')
     @if (session()->has('success'))
         <div id="toast"
@@ -45,7 +44,7 @@
             </div>
 
             <div class="flex items-center mt-4 gap-x-3">
-                <button
+                <a href="{{ route('exportScores') }}"
                     class="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-5 h-5">
@@ -54,7 +53,7 @@
                     </svg>
 
                     <span>Report</span>
-                </button>
+                </a>
 
                 <button data-modal-target="CreateModal" data-modal-toggle="CreateModal"
                     class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-secondary-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-secondary-600 dark:hover:bg-secondary-500 dark:bg-secondary-600">
@@ -85,7 +84,7 @@
                         aria-labelledby="dropdownRadioBgHoverButton">
                         <li>
                             <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <input id="default-radio-4" type="radio" value="5" wire:model="paginate"
+                                <input id="default-radio-4" type="radio" value="5" wire:model.defer="paginate"
                                     name="default-radio"
                                     class="w-4 h-4 text-secondary-600 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-2">
                                 <label for="default-radio-4"
@@ -94,8 +93,8 @@
                         </li>
                         <li>
                             <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <input checked id="default-radio-5" type="radio" value="10" wire:model="paginate"
-                                    name="default-radio"
+                                <input checked id="default-radio-5" type="radio" value="10"
+                                    wire:model.defer="paginate" name="default-radio"
                                     class="w-4 h-4 text-secondary-600 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-2">
                                 <label for="default-radio-5"
                                     class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">10</label>
@@ -103,7 +102,7 @@
                         </li>
                         <li>
                             <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <input id="default-radio-6" type="radio" value="15" wire:model="paginate"
+                                <input id="default-radio-6" type="radio" value="15" wire:model.defer="paginate"
                                     name="default-radio"
                                     class="w-4 h-4 text-secondary-600 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-2">
                                 <label for="default-radio-6"
@@ -123,10 +122,9 @@
                                 d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                         </svg>
                     </span>
-                    <input type="text" placeholder="Search" wire:model="search" id="searchData"
+                    <input type="text" placeholder="Search" wire:model.defer="search" id="searchData"
                         class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-secondary-400 dark:focus:border-secondary-300 focus:ring-secondary-300 focus:outline-none focus:ring focus:ring-opacity-40">
                 </div>
-                {{-- <div class="mt-4 md:flex md:items-center md:justify-end"> --}}
                 <div class="flex flex-row space-x-2">
                     <button
                         class="{{ $currentStep == 1 ? 'text-white bg-secondary-400 hover:bg-secondary-500' : 'text-gray-500 bg-white hover:bg-gray-100 border-gray-200 hover:text-gray-900' }} focus:ring-0 focus:outline-none rounded-lg border text-xs font-pjs-medium px-5 py-2.5 focus:z-10"
@@ -139,7 +137,6 @@
                         Tabel Nilai Subcriteria
                     </button>
                 </div>
-                {{-- </div> --}}
             </div>
         </div>
 
@@ -180,7 +177,7 @@
                                         @foreach ($scores as $score)
                                             <tr>
                                                 <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                    {{ $loop->index + 1 }}
+                                                    {{ (($scores_all->currentPage() - 1) * $scores_all->perPage()) / $criterias->count() + $loop->iteration }}
                                                 </td>
                                                 <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                                                     {{ $score['nama'] }}
@@ -267,22 +264,20 @@
                                                 </td>
                                                 @foreach ($score['scores'] as $item)
                                                     <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                        {{ $item['sub_score'] }}
+                                                        {{ $item['alternative_score'] }}
                                                     </td>
                                                 @endforeach
                                             </tr>
                                         @endforeach
                                         <tr>
-                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-
-                                            </td>
-                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap text-center"
+                                                colspan="2">
                                                 Max
                                             </td>
-                                            @foreach ($data_max as $item)
-                                            <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $item }}
-                                            </td>
+                                            @foreach ($max_scores as $max_score)
+                                                <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                                    {{ $max_score }}
+                                                </td>
                                             @endforeach
                                         </tr>
                                     </tbody>
@@ -329,11 +324,11 @@
                 @endif
             </div>
         @endif
-
-        <div class="mt-6">
-            {{-- {{ $scores->links() }} --}}
-        </div>
-
+        @if ($currentStep == 1)
+            <div class="mt-6">
+                {{ $scores_all->links() }}
+            </div>
+        @endif
     </section>
 
 </div>
