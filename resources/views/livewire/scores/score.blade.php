@@ -84,7 +84,7 @@
                         aria-labelledby="dropdownRadioBgHoverButton">
                         <li>
                             <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <input id="default-radio-4" type="radio" value="5" wire:model.defer="paginate"
+                                <input id="default-radio-4" type="radio" value="5" wire:model="paginate"
                                     name="default-radio"
                                     class="w-4 h-4 text-secondary-600 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-2">
                                 <label for="default-radio-4"
@@ -93,8 +93,8 @@
                         </li>
                         <li>
                             <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <input checked id="default-radio-5" type="radio" value="10"
-                                    wire:model.defer="paginate" name="default-radio"
+                                <input checked id="default-radio-5" type="radio" value="10" wire:model="paginate"
+                                    name="default-radio"
                                     class="w-4 h-4 text-secondary-600 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-2">
                                 <label for="default-radio-5"
                                     class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">10</label>
@@ -102,7 +102,7 @@
                         </li>
                         <li>
                             <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <input id="default-radio-6" type="radio" value="15" wire:model.defer="paginate"
+                                <input id="default-radio-6" type="radio" value="15" wire:model="paginate"
                                     name="default-radio"
                                     class="w-4 h-4 text-secondary-600 bg-gray-100 border-gray-300 focus:ring-secondary-500 focus:ring-2">
                                 <label for="default-radio-6"
@@ -122,7 +122,7 @@
                                 d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                         </svg>
                     </span>
-                    <input type="text" placeholder="Search" wire:model.defer="search" id="searchData"
+                    <input type="text" placeholder="Search" wire:model="search" id="searchData"
                         class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-secondary-400 dark:focus:border-secondary-300 focus:ring-secondary-300 focus:outline-none focus:ring focus:ring-opacity-40">
                 </div>
                 <div class="flex flex-row space-x-2">

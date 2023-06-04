@@ -31,8 +31,7 @@
                             Kriteria</label>
                         <input type="text" name="criteria_name" id="criteria_name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('criteria_name') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                            placeholder="Nama Kriteria" value="{{ old('criteria_name') }}"
-                            wire:model.defer="criteria_name">
+                            placeholder="Nama Kriteria" value="{{ old('criteria_name') }}" wire:model="criteria_name">
                         @error('criteria_name')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -43,8 +42,7 @@
                             Kriteria</label>
                         <input type="text" name="criteria_code" id="criteria_code"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('criteria_code') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                            value="{{ old('criteria_code') }}" placeholder="Kode Kriteria"
-                            wire:model.defer="criteria_code">
+                            value="{{ old('criteria_code') }}" placeholder="Kode Kriteria" wire:model="criteria_code">
                         @error('criteria_code')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -54,7 +52,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('weight') text-red-700 @enderror">Bobot</label>
                         <input type="text" name="weight" id="weight"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('weight') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                            value="{{ old('weight') }}" placeholder="Bobot" wire:model.defer="weight">
+                            value="{{ old('weight') }}" placeholder="Bobot" wire:model="weight">
                         @error('weight')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -108,8 +106,7 @@
                             Kriteria</label>
                         <input type="text" name="criteria_name" id="criteria_name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('criteria_name') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                            placeholder="Nama Kriteria" value="{{ old('criteria_name') }}"
-                            wire:model.defer="criteria_name">
+                            placeholder="Nama Kriteria" value="{{ old('criteria_name') }}" wire:model="criteria_name">
                         @error('criteria_name')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -121,7 +118,7 @@
                         <input type="text" name="criteria_code" id="criteria_code"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('criteria_code') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
                             value="{{ old('criteria_code') }}" placeholder="Label Kriteria"
-                            wire:model.defer="criteria_code">
+                            wire:model="criteria_code">
                         @error('criteria_code')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -131,7 +128,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('weight') text-red-700 @enderror">Bobot</label>
                         <input type="text" name="weight" id="weight"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('weight') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                            value="{{ old('weight') }}" placeholder="Bobot" wire:model.defer="weight">
+                            value="{{ old('weight') }}" placeholder="Bobot" wire:model="weight">
                         @error('weight')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror

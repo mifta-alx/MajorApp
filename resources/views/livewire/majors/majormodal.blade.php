@@ -30,7 +30,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 @error('major') text-red-700 @enderror">Jurusan</label>
                         <input type="text" name="major" id="major"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('major') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                            placeholder="Jurusan" value="{{ old('major') }}" wire:model.defer="major">
+                            placeholder="Jurusan" value="{{ old('major') }}" wire:model="major">
                         @error('major')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -67,7 +67,7 @@
                                     @endforeach
                                 @endif
                                 <li class="inline-block whitespace-nowrap">
-                                    <input type="text" id="input-group-search" wire:model.defer="criteria_search"
+                                    <input type="text" id="input-group-search" wire:model="criteria_search"
                                         class="text-sm text-gray-900 border border-0 bg-gray-50 focus:ring-0 p-0 h-auto @error('selectedCriteria') bg-red-50 @enderror">
                                 </li>
                             </ul>
@@ -164,7 +164,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 @error('major') text-red-700 @enderror">Jurusan</label>
                         <input type="text" name="major" id="major"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-600 focus:border-secondary-600 block w-full p-2.5 @error('major') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror"
-                            placeholder="Jurusan" value="{{ old('major') }}" wire:model.defer="major">
+                            placeholder="Jurusan" value="{{ old('major') }}" wire:model="major">
                         @error('major')
                             <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                         @enderror
@@ -201,7 +201,7 @@
                                     @endforeach
                                 @endif
                                 <li class="inline-block whitespace-nowrap">
-                                    <input type="text" id="input-group-search" wire:model.defer="criteria_search"
+                                    <input type="text" id="input-group-search" wire:model="criteria_search"
                                         class="text-sm text-gray-900 border border-0 bg-gray-50 focus:ring-0 p-0 h-auto @error('selectedCriteria') bg-red-50 @enderror">
                                 </li>
                             </ul>

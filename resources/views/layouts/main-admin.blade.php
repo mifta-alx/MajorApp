@@ -13,7 +13,9 @@
 
 <body>
     @include('components.sidebar')
-    {{-- <script src="https://code.jquery.com/jquery-3.6.4.js"></script> --}}
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    @livewireScripts
+    @yield('script')
     <script type="module">
         $(document).ready(function() {
             setTimeout(() => {
@@ -21,8 +23,6 @@
             }, 1500);
         })
         </script>
-    @livewireScripts
-    @yield('script')
 </body>
 
 </html>

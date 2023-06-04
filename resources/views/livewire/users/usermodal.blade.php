@@ -30,7 +30,7 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('nama') text-red-700 @enderror">Nama</label>
                             <input type="text" name="nama" id="nama"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('nama') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                                value="{{ old('nama') }}" placeholder="Nama" wire:model.defer="nama">
+                                value="{{ old('nama') }}" placeholder="Nama" wire:model="nama">
                             @error('nama')
                                 <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                             @enderror
@@ -40,7 +40,7 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('username') text-red-700 @enderror">Username</label>
                             <input type="text" name="username" id="username"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('username') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                                value="{{ old('username') }}" placeholder="Username" wire:model.defer="username">
+                                value="{{ old('username') }}" placeholder="Username" wire:model="username">
                             @error('username')
                                 <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                             @enderror
@@ -50,7 +50,7 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('email') text-red-700 @enderror">Email</label>
                             <input type="text" name="email" id="email"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('email') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                                value="{{ old('email') }}" placeholder="name@company.com" wire:model.defer="email">
+                                value="{{ old('email') }}" placeholder="name@company.com" wire:model="email">
                             @error('email')
                                 <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                             @enderror
@@ -58,7 +58,7 @@
                         <div wire:ignore.self>
                             <label for="role_id"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('role_id') text-red-700 @enderror">Role</label>
-                            <select id="role_id" wire:model.defer="role_id" name="role_id"
+                            <select id="role_id" wire:model="role_id" name="role_id"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('role_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
                                 <option hidden>Pilih role</option>
                                 <option disabled="disabled" default="true">Pilih role</option>
@@ -79,7 +79,7 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('password') text-red-700 @enderror">Password</label>
                             <input type="password" name="password" id="password"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('password') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                                value="{{ old('password') }}" placeholder="••••••••" wire:model.defer="password">
+                                value="{{ old('password') }}" placeholder="••••••••" wire:model="password">
                             @error('password')
                                 <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                             @enderror
@@ -133,7 +133,7 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('nama') text-red-700 @enderror">Nama</label>
                             <input type="text" name="nama" id="nama"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('nama') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                                value="{{ old('nama') }}" placeholder="Nama" wire:model.defer="nama">
+                                value="{{ old('nama') }}" placeholder="Nama" wire:model="nama">
                             @error('nama')
                                 <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                             @enderror
@@ -143,7 +143,7 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('username') text-red-700 @enderror">Username</label>
                             <input type="text" name="username" id="username"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('username') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                                value="{{ old('username') }}" placeholder="Username" wire:model.defer="username">
+                                value="{{ old('username') }}" placeholder="Username" wire:model="username">
                             @error('username')
                                 <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                             @enderror
@@ -153,8 +153,7 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white @error('email') text-red-700 @enderror">Email</label>
                             <input type="text" name="email" id="email"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 @error('email') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror focus:ring-secondary-600 focus:border-secondary-600 "
-                                value="{{ old('email') }}" placeholder="name@company.com"
-                                wire:model.defer="email">
+                                value="{{ old('email') }}" placeholder="name@company.com" wire:model="email">
                             @error('email')
                                 <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
                             @enderror
@@ -162,7 +161,7 @@
                         <div wire:ignore.self>
                             <label for="role_id"
                                 class="block mb-2 text-sm font-medium text-gray-900 @error('role_id') text-red-700 @enderror">Role</label>
-                            <select id="role_id" wire:model.defer="role_id" name="role_id"
+                            <select id="role_id" wire:model="role_id" name="role_id"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-secondary-500 focus:border-secondary-500 block w-full p-2.5 @error('role_id') bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 @enderror">
                                 <option hidden>Pilih role</option>
                                 <option disabled="disabled" default="true">Pilih role</option>
