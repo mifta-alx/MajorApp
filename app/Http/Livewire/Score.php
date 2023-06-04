@@ -157,15 +157,19 @@ class Score extends Component
     }
     public function render()
     {
+        //mendapatkan data score dari database dan diberikan search dan pagination
         $scores = Scores::with(['student', 'criteria'])
             ->whereHas('student', function ($query) {
                 $query->where('student_name', 'like', '%' . $this->search . '%');
             })
             ->paginate($this->paginate * Criterias::all()->count());
+             //siapkan array groupedScores
         $groupedScores = [];
+        //memasukkan data scores ke dalam array groupedScores
         foreach ($scores as $score) {
-            $groupedScores[$score->nisn][] = $score;
+            $groupedScores[$score->nisn][] = $score; //hasilnya adalah semua data nilai dari semua alternatif dan dipisah berdasarkan nisn
         }
+        //melakukan proses cek nilai ke subcriteria 
         $scoresArray = collect($groupedScores)->map(function ($item) {
             $scores = collect($item)->map(function ($score) {
                 $alternative_score = Subcriterias::where('criteria_id', $score->criteria_id)
@@ -184,8 +188,9 @@ class Score extends Component
                 'scores' => $scores,
             ];
         });
-
+        //mendapatkan data scores dengan melakukan grouping data by criteria_id
         $scores_by_criteria = Scores::orderBy('nisn')->get()->groupBy('criteria_id');
+        //melakukan proses pencarian nilai max dari setiap criteria untuk ditampilkan
         $max_score = $scores_by_criteria->map(function ($item) {
             $score_by_criteria = $item->map(function ($data) {
                 $alternative_score = Subcriterias::where('criteria_id', $data->criteria_id)
@@ -196,13 +201,14 @@ class Score extends Component
             })->toArray();
             return max($score_by_criteria);
         });
+        $countdata = Scores::all()->count() / Criterias::all()->count();
         return view('livewire.scores.score', [
             'scores' => $scoresArray,
             'scores_all' => $scores,
             'max_scores' => $max_score,
             'students' => Students::all(),
             'criterias' => Criterias::get(['criteria_name', 'criteria_id']),
-            'count' => Scores::all()->count() / Criterias::all()->count(),
+            'count' => $countdata,
             'titles' => 'scores',
             'title' => 'score'
         ]);

@@ -61,41 +61,49 @@ class Result extends Component
             return $score_by_criteria_nisn->values();
         });
         foreach ($sub_score as $nisn => $item) {
-            //perhitungan angka nilai
+            //perhitungan angka score
             $dividedscoreArray = $item->mapWithKeys(function ($score, $index) use ($max_score) {
                 $criteria_id = $index + 1;
                 $weight = Criterias::where('criteria_id', $criteria_id)->value('weight'); //mendapatkan bobot
-                $maxValue = $max_score[$criteria_id]; //mendapatkan nilai max
-                $total = $maxValue != 0 ? ($score / $maxValue) * ($weight / 100) : 0; //perhitungan nilai normalisasi
+                $maxValue = $max_score[$criteria_id]; //mendapatkan score max
+                $total = $maxValue != 0 ? ($score / $maxValue) * ($weight / 100) : 0; //perhitungan score normalisasi
                 return [$criteria_id => $total];
             })->toArray();
             $dividedData[$nisn] = $dividedscoreArray;
-            $totalSumDivided[$nisn] = array_sum($dividedscoreArray); //menjumlahkan nilai normalisasi dan menjadikan nilai saw
+            $totalSumDivided[$nisn] = array_sum($dividedscoreArray); //menjumlahkan score normalisasi dan menjadikan score saw
         }
         $major = [];
+        //memecah data score dari hasil pembagian jadi data dengan memiliki key nisn
         foreach ($dividedData as $nisn => $values) {
             $majorResults = [];
+            //mencari score hasil pembagian berdasarkan criteria
             foreach ($majors as $criteria) {
+                //memecah data dari majors dengan bentuk json ke bentuk array
                 $criteriaId = json_decode($criteria['criteria_id'], true);
+                //cek apakah ada data kriteria dari array
                 $intersect = array_intersect($criteriaId, array_keys($values));
                 if (!empty($intersect)) {
                     $total = 0;
+                    //memecah data array intersect menjadi id yang digunakan untuk mencari nilai dengan criteria yang ada di majors
                     foreach ($intersect as $id) {
+                        //data dengan id criteria yang ada di intersect dijumlah dan dimasukkan kedala variable total
                         $total += $values[$id];
                     }
+                    //melakukan rekonstruksi array dengan memasukkan total ke setiap major
                     $majorResults[] = [
                         'major' => $criteria['major'],
                         'total' => $total
                     ];
                 }
             }
+            //memasukkan hasil ke dalam array dengan key nisn
             $major[$nisn] = $majorResults;
         }
         $finalMajor = [];
         foreach ($major as $nisn => $majorResults) {
             $maxTotal = 0;
             $maxMajor = '';
-
+            //membandingkan score dari yang paling besar dan ambil major nya
             foreach ($majorResults as $result) {
                 if ($result['total'] > $maxTotal) {
                     $maxTotal = $result['total'];
@@ -108,6 +116,7 @@ class Result extends Component
             }
         }
         $final_result = [];
+        //memecah data hasil perhitungan saw dan memasukkannya ke array
         foreach ($totalSumDivided as $nisn => $totalSum) {
             if (isset($finalMajor[$nisn])) {
                 $final_result[$nisn] = [
@@ -116,6 +125,7 @@ class Result extends Component
                 ];
             }
         }
+        //menyimpan final_result ke db dengan memecah data menjadi array yang sesuai struktur database
         foreach ($final_result as $nisn => $result) {
             Results::updateOrCreate(
                 [

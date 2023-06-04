@@ -35,15 +35,15 @@ class DatabaseSeeder extends Seeder
             'weight' => '10'
         ]);
         Criteria::create([
-            'criteria_name' => 'Matematika(IPA)',
+            'criteria_name' => 'Matematika',
             'criteria_code' => 'matematika ipa',
             'weight' => '40'
         ]);
-        Criteria::create([
-            'criteria_name' => 'Matematika(BAHASA)',
-            'criteria_code' => 'matematika bahasa',
-            'weight' => '30'
-        ]);
+        // Criteria::create([
+        //     'criteria_name' => 'Matematika(BAHASA)',
+        //     'criteria_code' => 'matematika bahasa',
+        //     'weight' => '30'
+        // ]);
         Criteria::create([
             'criteria_name' => 'Ekonomi',
             'criteria_code' => 'ekonomi',
@@ -64,21 +64,21 @@ class DatabaseSeeder extends Seeder
             'criteria_code' => 'sosiologi',
             'weight' => '10'
         ]);
-        Criteria::create([
-            'criteria_name' => 'Bahasa Indonesia',
-            'criteria_code' => 'bahasa Indonesia',
-            'weight' => '40'
-        ]);
-        Criteria::create([
-            'criteria_name' => 'Bahasa Inggris',
-            'criteria_code' => 'bahasa inggris',
-            'weight' => '40'
-        ]);
-        Criteria::create([
-            'criteria_name' => 'Bahasa Jepang',
-            'criteria_code' => 'bahasa jepang',
-            'weight' => '20'
-        ]);
+        // Criteria::create([
+        //     'criteria_name' => 'Bahasa Indonesia',
+        //     'criteria_code' => 'bahasa Indonesia',
+        //     'weight' => '40'
+        // ]);
+        // Criteria::create([
+        //     'criteria_name' => 'Bahasa Inggris',
+        //     'criteria_code' => 'bahasa inggris',
+        //     'weight' => '40'
+        // ]);
+        // Criteria::create([
+        //     'criteria_name' => 'Bahasa Jepang',
+        //     'criteria_code' => 'bahasa jepang',
+        //     'weight' => '20'
+        // ]);
         School::create([
             'uuid' => Str::uuid(),
             'npsn' => '20536841',
@@ -409,125 +409,125 @@ class DatabaseSeeder extends Seeder
             'subcriteria_end' => '100',
             'subcriteria_score' => '5'
         ]);
-        Subcriteria::create([
-            'criteria_id' => '9',
-            'subcriteria_start' => '0',
-            'subcriteria_end' => '50',
-            'subcriteria_score' => '1'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '9',
-            'subcriteria_start' => '51',
-            'subcriteria_end' => '65',
-            'subcriteria_score' => '2'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '9',
-            'subcriteria_start' => '66',
-            'subcriteria_end' => '75',
-            'subcriteria_score' => '3'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '9',
-            'subcriteria_start' => '76',
-            'subcriteria_end' => '85',
-            'subcriteria_score' => '4'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '9',
-            'subcriteria_start' => '86',
-            'subcriteria_end' => '100',
-            'subcriteria_score' => '5'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '10',
-            'subcriteria_start' => '0',
-            'subcriteria_end' => '50',
-            'subcriteria_score' => '1'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '10',
-            'subcriteria_start' => '51',
-            'subcriteria_end' => '65',
-            'subcriteria_score' => '2'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '10',
-            'subcriteria_start' => '66',
-            'subcriteria_end' => '75',
-            'subcriteria_score' => '3'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '10',
-            'subcriteria_start' => '76',
-            'subcriteria_end' => '85',
-            'subcriteria_score' => '4'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '10',
-            'subcriteria_start' => '86',
-            'subcriteria_end' => '100',
-            'subcriteria_score' => '5'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '11',
-            'subcriteria_start' => '0',
-            'subcriteria_end' => '50',
-            'subcriteria_score' => '1'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '11',
-            'subcriteria_start' => '51',
-            'subcriteria_end' => '65',
-            'subcriteria_score' => '2'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '11',
-            'subcriteria_start' => '66',
-            'subcriteria_end' => '75',
-            'subcriteria_score' => '3'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '11',
-            'subcriteria_start' => '76',
-            'subcriteria_end' => '85',
-            'subcriteria_score' => '4'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '11',
-            'subcriteria_start' => '86',
-            'subcriteria_end' => '100',
-            'subcriteria_score' => '5'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '12',
-            'subcriteria_start' => '0',
-            'subcriteria_end' => '50',
-            'subcriteria_score' => '1'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '12',
-            'subcriteria_start' => '51',
-            'subcriteria_end' => '65',
-            'subcriteria_score' => '2'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '12',
-            'subcriteria_start' => '66',
-            'subcriteria_end' => '75',
-            'subcriteria_score' => '3'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '12',
-            'subcriteria_start' => '76',
-            'subcriteria_end' => '85',
-            'subcriteria_score' => '4'
-        ]);
-        Subcriteria::create([
-            'criteria_id' => '12',
-            'subcriteria_start' => '86',
-            'subcriteria_end' => '100',
-            'subcriteria_score' => '5'
-        ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '9',
+        //     'subcriteria_start' => '0',
+        //     'subcriteria_end' => '50',
+        //     'subcriteria_score' => '1'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '9',
+        //     'subcriteria_start' => '51',
+        //     'subcriteria_end' => '65',
+        //     'subcriteria_score' => '2'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '9',
+        //     'subcriteria_start' => '66',
+        //     'subcriteria_end' => '75',
+        //     'subcriteria_score' => '3'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '9',
+        //     'subcriteria_start' => '76',
+        //     'subcriteria_end' => '85',
+        //     'subcriteria_score' => '4'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '9',
+        //     'subcriteria_start' => '86',
+        //     'subcriteria_end' => '100',
+        //     'subcriteria_score' => '5'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '10',
+        //     'subcriteria_start' => '0',
+        //     'subcriteria_end' => '50',
+        //     'subcriteria_score' => '1'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '10',
+        //     'subcriteria_start' => '51',
+        //     'subcriteria_end' => '65',
+        //     'subcriteria_score' => '2'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '10',
+        //     'subcriteria_start' => '66',
+        //     'subcriteria_end' => '75',
+        //     'subcriteria_score' => '3'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '10',
+        //     'subcriteria_start' => '76',
+        //     'subcriteria_end' => '85',
+        //     'subcriteria_score' => '4'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '10',
+        //     'subcriteria_start' => '86',
+        //     'subcriteria_end' => '100',
+        //     'subcriteria_score' => '5'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '11',
+        //     'subcriteria_start' => '0',
+        //     'subcriteria_end' => '50',
+        //     'subcriteria_score' => '1'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '11',
+        //     'subcriteria_start' => '51',
+        //     'subcriteria_end' => '65',
+        //     'subcriteria_score' => '2'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '11',
+        //     'subcriteria_start' => '66',
+        //     'subcriteria_end' => '75',
+        //     'subcriteria_score' => '3'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '11',
+        //     'subcriteria_start' => '76',
+        //     'subcriteria_end' => '85',
+        //     'subcriteria_score' => '4'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '11',
+        //     'subcriteria_start' => '86',
+        //     'subcriteria_end' => '100',
+        //     'subcriteria_score' => '5'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '12',
+        //     'subcriteria_start' => '0',
+        //     'subcriteria_end' => '50',
+        //     'subcriteria_score' => '1'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '12',
+        //     'subcriteria_start' => '51',
+        //     'subcriteria_end' => '65',
+        //     'subcriteria_score' => '2'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '12',
+        //     'subcriteria_start' => '66',
+        //     'subcriteria_end' => '75',
+        //     'subcriteria_score' => '3'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '12',
+        //     'subcriteria_start' => '76',
+        //     'subcriteria_end' => '85',
+        //     'subcriteria_score' => '4'
+        // ]);
+        // Subcriteria::create([
+        //     'criteria_id' => '12',
+        //     'subcriteria_start' => '86',
+        //     'subcriteria_end' => '100',
+        //     'subcriteria_score' => '5'
+        // ]);
     }
 }

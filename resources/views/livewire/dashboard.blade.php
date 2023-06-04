@@ -149,7 +149,7 @@
     </div> --}}
     <div class="grid md:grid-cols-6 gap-4">
         <div class="md:col-span-4">
-            <div class="grid grid-rows-2 gap-4">
+            <div class="flex flex-col space-y-4">
                 <div class="grid grid-cols-4 gap-4">
                     <div class="col-span-2 md:col-span-2">
                         <div class="relative overflow-hidden bg-secondary-400 rounded-xl">

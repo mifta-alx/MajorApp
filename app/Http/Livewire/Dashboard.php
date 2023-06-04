@@ -40,11 +40,11 @@ class Dashboard extends Component
             $maxScore['label'][] = $score->first()->criteria->first()->criteria_name;
             $maxScore['data'][] = $score->max('score');
         }
-        $this->nilaiMax = json_encode($maxScore);
+        $this->nilaiMax = json_encode($maxScore ?? []);
     }
     public function render()
     {
-        $students = Student::with(['school'])->latest()->take(5)->get();
+        $students = Student::with(['school'])->latest('created_at')->take(5)->get();
         foreach ($students as $student) {
             $data[$student->nisn] = [
                 'student_name' => $student->student_name,

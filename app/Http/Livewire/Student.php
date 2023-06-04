@@ -215,7 +215,7 @@ class Student extends Component
                 $query->where('student_name', 'like', '%' . $this->search . '%')
                     ->orWhere('nisn', 'like', '%' . $this->search . '%');
             })
-                ->paginate($this->paginate),
+            ->latest('nisn')->paginate($this->paginate),
             'months' => $this->months,
             'schools' => Schools::all(),
             'count' => Students::all()->count(),

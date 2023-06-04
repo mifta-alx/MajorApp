@@ -35,7 +35,6 @@ class Major extends Component
     {
         $this->resetErrorBag();
         $validated = $this->validate();
-        dd($validated);
         $major = Majors::create([
             'major' => $validated['major'],
             'criteria_id' => json_encode($validated['selectedCriteria']),
@@ -157,6 +156,7 @@ class Major extends Component
             'majors' => Majors::where('major', 'like', '%' . $this->search . '%')->paginate($this->paginate),
             'count' => Majors::all()->count(),
             'criterias' => Criterias::where('criteria_name', 'like', '%' . $this->criteria_search . '%')->get(),
+            'all_criterias' => Criterias::get(),
             'criteria_all' => Criterias::all(),
             'titles' => 'majors',
             'title' => 'major',
