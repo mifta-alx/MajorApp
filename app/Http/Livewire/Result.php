@@ -86,7 +86,7 @@ class Result extends Component
                     $total = 0;
                     //memecah data array intersect menjadi id yang digunakan untuk mencari nilai dengan criteria yang ada di majors
                     foreach ($intersect as $id) {
-                        //data dengan id criteria yang ada di intersect dijumlah dan dimasukkan kedala variable total
+                        //data dengan id criteria yang ada di intersect dijumlah dan dimasukkan kedalam variable total
                         $total += $values[$id];
                     }
                     //melakukan rekonstruksi array dengan memasukkan total ke setiap major

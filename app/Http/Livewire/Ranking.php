@@ -24,7 +24,7 @@ class Ranking extends Component
         $results = collect($results)->sortByDesc(function ($result) {
             return $result->saw_result;
         })->values()->all();
-        if($this->search == ''){
+        if ($this->search == '') {
             if (Rankings::all()->count() != count($results)) {
                 Rankings::truncate();
                 foreach ($results as $key => $data) {
@@ -34,11 +34,11 @@ class Ranking extends Component
                             'nisn' => $data->student->nisn,
                             'result_id' => $data->result_id,
                             'npsn' => $data->student->npsn,
-                            ]
-                        );
-                    }
-                };
+                        ]
+                    );
+                }
             };
+        };
         return view('livewire.rankings.ranking', [
             'titles' => 'Rankings',
             'title' => 'Ranking',

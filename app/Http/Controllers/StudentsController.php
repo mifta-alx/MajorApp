@@ -21,7 +21,6 @@ class StudentsController extends Controller
             'date' => $currentTime
         ]);
         $pdf->setPaper('A4', 'landscape');
-        // return $pdf->download('ReportStudent_'. $currentTime .'.pdf');
         return $pdf->stream('ReportStudent_'. $currentTime .'.pdf');
     }
 }

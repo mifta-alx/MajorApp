@@ -105,7 +105,6 @@ class Score extends Component
             'score.*.numeric' => 'Nilai harus berisi angka',
             'score.*.between' => 'Nilai harus berisi nilai antara 0 sampai 100',
         ]);
-        // $validated = $this->validate();
         foreach ($validated['score'] as $key => $value) {
             $data = [
                 'nisn' => $validated['nisn'],
